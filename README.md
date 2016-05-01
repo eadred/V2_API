@@ -1,6 +1,3 @@
-/**
- * Created by arik.blumin on 5/1/2016.
- */
 #DOME9 API#
 
 The Dome9 API enables developers to access Dome9 functonality by an API key.
