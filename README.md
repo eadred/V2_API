@@ -6,9 +6,9 @@ The Dome9 API enables developers to access Dome9 functonality by an API key.
 
 1. [AWS Security Groups](#aws-security-groups)
 
-2. [AWS Accounts](#anchors-in-markdown)
+2. [AWS Accounts](#aws-accounts)
 
-3. [IP Lists](#anchors-in-markdown)
+3. [IP Lists](#ip-lists)
 
 
 
@@ -17,6 +17,6 @@ The Dome9 API enables developers to access Dome9 functonality by an API key.
 
 #<a name="aws-security-groups">AWS Security Groups</a>
 
-#AWS Accounts
+#<a name="aws-accounts">AWS Accounts</a>
 
-#IP Lists
+#<a name="ip-lists">IP Lists</a>
