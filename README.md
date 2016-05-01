@@ -15,7 +15,7 @@ The Dome9 API enables developers to access Dome9 functonality by an API key.
 
 
 
-#AWS-Security-Groups(#AWS-Security-Groups)
+#AWS Security Groups <a id="AWS-Security-Groups"></a>
 
 #AWS Accounts
 
