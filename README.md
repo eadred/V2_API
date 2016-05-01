@@ -18,7 +18,8 @@ The Dome9 API enables developers to access Dome9 functonality by an API key.
 ##<a name="aws-security-groups">AWS Security Groups</a>
 
 ###GET 
-JSON```
+
+```json
  {
    "securityGroupId": 0,
    "externalId": "string",
