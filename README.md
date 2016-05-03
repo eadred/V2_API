@@ -9,7 +9,7 @@ The url to make the requests is https://api.dome9.com/
 
 ##Authorization
 
-The authorization make with an API key, which generate by an automatic tool, by inserting it as Basic Authentication.
+The authorization make with an API key, which generate by an [automatic tool](docs/more_words.md), by inserting it as Basic Authentication.
  the "id" is the username and the "API Key Secret" is the password.
 
 ##Supported features
@@ -29,20 +29,114 @@ The authorization make with an API key, which generate by an automatic tool, by 
 
 ###GET 
 
+The get request pull the entire cloud security groups which attached to Dome9.
+ID the request is made without the security group id then the entire security which attached to dome9 will return.
+
+URL: https://api.dome9.com/CloudSecurityGroup/{id}
+METHOD: GET
+
+####Response:
+
 ```json
  {
-   "securityGroupId": 0,
+   "securityGroupId": int,
    "externalId": "string",
-   "isProtected": true,
+   "isProtected": boolean,
    "securityGroupName": "string",
    "vpcId": "string",
-   "regionId": "us_east_1",
+   "regionId": "string",
    "cloudAccountId": "string",
    "cloudAccountName": "string",
    "services": {},
    "tags": {}
  }
 ```
+
+* securityGroupId (integer): The Security Group ID in dome9.
+* externalId (string): The Security Group ID in AWS.
+* isProtected (boolean, optional): set if it will be in Full Protection or Read Only mode.
+* securityGroupName (string, optional): The name of the Security Group.
+* description (string, optional): The description of the Security Group.
+* vpcId (string, optional): The VPC of the Security Group.
+* regionId (string, optional): Can be one of the next regions - 'us_east_1', 'us_west_1', 'eu_west_1', 'ap_southeast_1', 'ap_northeast_1', 'us_west_2', 'sa_east_1', 'az_1_region_a_geo_1', 'az_2_region_a_geo_1', 'az_3_region_a_geo_1', 'ap_southeast_2', 'mellanox_region', 'us_gov_west_1', 'eu_central_1', 'ap_northeast_2'
+* cloudAccountId (string, optional): Dome9 Cloud Account ID.
+* services (object, optional) - The inbound and outbound services.
+* tags (object, optional) - The security groups tags.
+
+###Create Security Groups
+Create a new Security Group on AWS.
+
+URL: https://api.dome9.com/CloudSecurityGroup
+METHOD: POST
+BODY:
+```json
+{
+  "isProtected": boolean,
+  "securityGroupName": "string",
+  "description": "string",
+  "vpcId": "string",
+  "regionId": "us_east_1",
+  "cloudAccountId": "string",
+  "cloudAccountName": "string",
+  "tags": {}
+}
+```
+
+####Request parameters
+
+* isProtected (boolean, optional): set if it will be in Full Protection or Read Only mode.
+* securityGroupName (string, optional): The name of the Security Group.
+* description (string, optional): The description of the Security Group.
+* vpcId (string, optional): The VPC of the Security Group.
+* regionId (string, optional): Can be one of the next regions - 'us_east_1', 'us_west_1', 'eu_west_1', 'ap_southeast_1', 'ap_northeast_1', 'us_west_2', 'sa_east_1', 'az_1_region_a_geo_1', 'az_2_region_a_geo_1', 'az_3_region_a_geo_1', 'ap_southeast_2', 'mellanox_region', 'us_gov_west_1', 'eu_central_1', 'ap_northeast_2'
+* cloudAccountId (string, optional): Dome9 Cloud Account ID.
+* services (object, optional)
+* tags (object, optional)
+
+###Create Service
+
+Create a new Security Group on AWS.
+
+URL: https://api.dome9.com/cloudsecuritygroup/{groupid}/services
+METHOD: POST
+
+note: The groupid in the url can be eithe the internal id or the external id.
+
+BODY:
+```json
+{
+  "name": "string",
+  "description": "string",
+  "protocolType": "string",
+  "port": "string",
+  "openForAll": boolean,
+  "scope": [
+    {
+      "type": "string",
+      "data": object
+    }
+  ],
+  "inbound": boolean,
+  "icmpType": "string"
+}
+```
+
+####Request parameters
+
+* name (string),
+description (string, optional),
+protocolType (string) = ['HOPOPT', 'ICMP', 'IGMP', 'GGP', 'IPV4', 'ST', 'TCP', 'CBT', 'EGP', 'IGP', 'BBN_RCC_MON', 'NVP2', 'PUP', 'ARGUS', 'EMCON', 'XNET', 'CHAOS', 'UDP', 'MUX', 'DCN_MEAS', 'HMP', 'PRM', 'XNS_IDP', 'TRUNK1', 'TRUNK2', 'LEAF1', 'LEAF2', 'RDP', 'IRTP', 'ISO_TP4', 'NETBLT', 'MFE_NSP', 'MERIT_INP', 'DCCP', 'ThreePC', 'IDPR', 'XTP', 'DDP', 'IDPR_CMTP', 'TPplusplus', 'IL', 'IPV6', 'SDRP', 'IPV6_ROUTE', 'IPV6_FRAG', 'IDRP', 'RSVP', 'GRE', 'DSR', 'BNA', 'ESP', 'AH', 'I_NLSP', 'SWIPE', 'NARP', 'MOBILE', 'TLSP', 'SKIP', 'IPV6_ICMP', 'IPV6_NONXT', 'IPV6_OPTS', 'CFTP', 'SAT_EXPAK', 'KRYPTOLAN', 'RVD', 'IPPC', 'SAT_MON', 'VISA', 'IPCV', 'CPNX', 'CPHB', 'WSN', 'PVP', 'BR_SAT_MON', 'SUN_ND', 'WB_MON', 'WB_EXPAK', 'ISO_IP', 'VMTP', 'SECURE_VMTP', 'VINES', 'TTP', 'NSFNET_IGP', 'DGP', 'TCF', 'EIGRP', 'OSPFIGP', 'SPRITE_RPC', 'LARP', 'MTP', 'AX25', 'IPIP', 'MICP', 'SCC_SP', 'ETHERIP', 'ENCAP', 'GMTP', 'IFMP', 'PNNI', 'PIM', 'ARIS', 'SCPS', 'QNX', 'AN', 'IPCOMP', 'SNP', 'COMPAQ_PEER', 'IPX_IN_IP', 'VRRP', 'PGM', 'L2TP', 'DDX', 'IATP', 'STP', 'SRP', 'UTI', 'SMP', 'SM', 'PTP', 'ISIS', 'FIRE', 'CRTP', 'CRUDP', 'SSCOPMCE', 'IPLT', 'SPS', 'PIPE', 'SCTP', 'FC', 'RSVP_E2E_IGNORE', 'MOBILITY_HEADER', 'UDPLITE', 'MPLS_IN_IP', 'MANET', 'HIP', 'SHIM6', 'WESP', 'ROHC', 'ALL'],
+port (string, optional),
+openForAll (boolean),
+scope (Array[ScopeElementViewModel], optional),
+inbound (boolean, optional),
+icmpType (string, optional) = ['EchoReply', 'DestinationUnreachable', 'SourceQuench', 'Redirect', 'AlternateHostAddress', 'Echo', 'RouterAdvertisement', 'RouterSelection', 'TimeExceeded', 'ParameterProblem', 'Timestamp', 'TimestampReply', 'InformationRequest', 'InformationReply', 'AddressMaskRequest', 'AddressMaskReply', 'Traceroute', 'DatagramConversionError', 'MobileHostRedirect', 'IPv6WhereAreYou', 'IPv6IAmHere', 'MobileRegistrationRequest', 'MobileRegistrationReply', 'DomainNameRequest', 'DomainNameReply', 'SKIP', 'Photuris', 'All']
+}
+ScopeElementViewModel {
+type (string, optional) = ['CIDR', 'DNS', 'IPList', 'MagicIP', 'AWS'],
+data (object, optional)
+}
+
 
 ###addoutboundservice
 
