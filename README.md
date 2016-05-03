@@ -176,6 +176,17 @@ BODY:
 * inbound (boolean): If true the rule will be add to the inbound, if false it will be add to outbound.
 * icmpType (string, optional): In case of ICMP - 'EchoReply', 'DestinationUnreachable', 'SourceQuench', 'Redirect', 'AlternateHostAddress', 'Echo', 'RouterAdvertisement', 'RouterSelection', 'TimeExceeded', 'ParameterProblem', 'Timestamp', 'TimestampReply', 'InformationRequest', 'InformationReply', 'AddressMaskRequest', 'AddressMaskReply', 'Traceroute', 'DatagramConversionError', 'MobileHostRedirect', 'IPv6WhereAreYou', 'IPv6IAmHere', 'MobileRegistrationRequest', 'MobileRegistrationReply', 'DomainNameRequest', 'DomainNameReply', 'SKIP', 'Photuris', 'All'
 
+###Overwrite service
+
+Delete an existing service.
+
+URL: https://api.dome9.com/cloudsecuritygroup/{groupid}/services/{serviceid}?inbound={boolean}
+METHOD: DELETE
+
+* serviceid: compose from the port and protocol type with the next structure "{port}-{protocol type}",for example in ssh case it will be "6-22".
+* groupid: The groupid in the url can be eithe the internal id or the external id.
+* inbound: If true it will delete in the inbound and if false in the oubound.
+
 
 
 
