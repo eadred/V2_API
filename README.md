@@ -1,9 +1,19 @@
 #DOME9 API#
 
-The Dome9 API enables developers to access Dome9 functonality by an API key.
+The Dome9 API enables developers to access Dome9 functionality by an API key.
   This describes resourses are currently in a beta version:
 
+##URL
 
+The url to make the requests is https://api.dome9.com/
+
+##Authorization
+
+The authorization make with an API key, which generate by an automatic tool, by inserting it as Basic Authentication.
+ the "id" is the username and the "API Key Secret" is the password.
+
+##Supported features
+ 
 1. [AWS Security Groups](#aws-security-groups)
 
 2. [AWS Accounts](#aws-accounts)
