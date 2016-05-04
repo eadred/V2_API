@@ -9,8 +9,7 @@ The url to make the requests is https://api.dome9.com/
 
 ##Authorization
 
-The authorization make with an API key, which generate by an [automatic tool](docs/more_words.md), by inserting it as Basic Authentication.
- the "id" is the username and the "API Key Secret" is the password.
+The authorization make with an API key, which generate by an [automatic tool](docs/more_words.md), by inserting it as Basic Authentication, while the "id" is the username and the "API Key Secret" is the password.
 
 ##Supported features
  
