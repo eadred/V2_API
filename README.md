@@ -30,6 +30,7 @@ The authorization make with an API key, which generate by an [automatic tool](do
 3. [Create Service](#aws-security-groups-create-service)
 4. [Overwrite service](#aws-security-groups-overwrite-service)
 5. [Delete service](#aws-security-groups-delete-service)
+6. [Delete Security Groups](#aws-security-groups-delete-security-groups)
 
 <h3><a name="aws-security-groups-get">GET</a></h3>
 
@@ -191,7 +192,7 @@ METHOD: DELETE
 * groupid: The groupid in the url can be eithe the internal id or the external id.
 * inbound: If true it will delete in the inbound and if false in the oubound.
 
-###Delete Security Group
+<h3><a name="aws-security-groups-delete-security-groups">Delete Security Groups</a></h3>
 
 Delete an existing security group.
 
