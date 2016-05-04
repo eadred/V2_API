@@ -259,3 +259,35 @@ BODY:
 * items (Array[IPDescriptor]): An array with the Ips.
   * ip (string): IP address.
   * comment (string): A comment on the ip if exist.
+
+
+###Update IP List
+Update an existing IP LIst.
+The Updaate is relevant for the data and the description.
+It will overwrite the existing IP List.
+
+URL: https://api.dome9.com/IpList/{id}
+METHOD: PUT
+BODY:
+```json
+{
+  "name": "string",
+  "description": "string",
+  "items": [
+    {
+      "ip": "string",
+      "comment": "string"
+    }
+  ]
+}
+```
+
+####Request parameters
+* id (in the url): is the IP List ID
+* name (string): The IP List name.
+* description (string): The IP List description.
+* items (Array[IPDescriptor]): An array with the Ips.
+  * ip (string): IP address.
+  * comment (string): A comment on the ip if exist.
+ 
+  
