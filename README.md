@@ -187,7 +187,14 @@ METHOD: DELETE
 * groupid: The groupid in the url can be eithe the internal id or the external id.
 * inbound: If true it will delete in the inbound and if false in the oubound.
 
+###Delete Security Group
 
+Delete an existing security group.
+
+URL: https://api.dome9.com/cloudsecuritygroup/{groupid}
+METHOD: DELETE
+
+* groupid: The groupid in the url can be eithe the internal id or the external id.
 
 
 
