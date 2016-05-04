@@ -267,7 +267,9 @@ The Updaate is relevant for the data and the description.
 It will overwrite the existing IP List.
 
 URL: https://api.dome9.com/IpList/{id}
+
 METHOD: PUT
+
 BODY:
 ```json
 {
@@ -290,4 +292,12 @@ BODY:
   * ip (string): IP address.
   * comment (string): A comment on the ip if exist.
  
+###Delete IP List
+
+Delete an existing IP List.
+
+URL: https://api.dome9.com/IpList/{id}
+METHOD: DELETE
+
+* id: The IP List Id.
   
