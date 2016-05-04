@@ -232,3 +232,30 @@ METHOD: GET
 * items (Array[IPDescriptor]): An array with the Ips.
   * ip (string): IP address.
   * comment (string): A comment on the ip if exist.
+
+###Create IP List
+Create a new IP List.
+
+URL: https://api.dome9.com/IpList
+METHOD: POST
+BODY:
+```json
+{
+  "name": "string", /* required */
+  "description": "string",
+  "items": [
+    {
+      "ip": "string", /* required */
+      "comment": "string"
+    }
+  ]
+}
+```
+
+####Request parameters
+
+* name (string): The IP List name.
+* description (string): The IP List description.
+* items (Array[IPDescriptor]): An array with the Ips.
+  * ip (string): IP address.
+  * comment (string): A comment on the ip if exist.
