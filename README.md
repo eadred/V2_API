@@ -199,6 +199,89 @@ METHOD: DELETE
 
 ##<a name="aws-accounts">AWS Accounts</a>
 
+###Add AWS Account.
+
+Add a new AWS account to your Dome9 account.
+
+URL: https://api.dome9.com/CloudAccounts <br \>
+METHOD: POST
+BODY:
+```json
+{
+  "name": "string",
+  "credentials": {
+    "arn": "string" /*required*/, 
+    "secret": "string" /*required*/,
+    "type": "RoleBased" /*required*/,
+    "isReadOnly": boolean
+  },
+  "fullProtection": true
+}
+```
+
+####Request parameters
+
+* name (string, optional): The account name on Dome9.
+* credentials (object, required): AWS account credentials.
+  * arn (string, required): The predefine AWS role for Dome9.
+  * secret (string, required): The role External ID.
+  * type (string, required): 'RoleBased'.
+  * isReadOnly (boolean, optional): The attached policy type.
+* fullProtection (boolean, optional): True if to import the security groups in full protection or false in read only mode.
+
+###Update AWS Account.
+
+Update an existing attached AWS account.
+
+URL: https://api.dome9.com/CloudAccounts/{id} <br \>
+METHOD: PATCH
+id: The Dome9 cloud account ID
+BODY:
+```json
+{
+  "name": "string",
+  "credentials": {
+    "arn": "string" , 
+    "secret": "string" ,
+    "type": "RoleBased" ,
+    "isReadOnly": boolean
+  },
+  "fullProtection": boolean,
+  "netSec": {
+      "regions": [
+        {
+          "region": "string",
+          "hidden": boolean,
+          "newGroupBehavior": boolean
+        }
+      ]
+    }
+}
+```
+
+####Request parameters
+
+* name (string, optional): The account name on Dome9.
+* credentials (object, required): AWS account credentials.
+  * arn (string, required): The predefine AWS role for Dome9.
+  * secret (string, required): The role External ID.
+  * type (string, required): 'RoleBased'.
+  * isReadOnly (boolean, optional): The attached policy type.
+* fullProtection (boolean, optional): True if to import the security groups in full protection or false in read only mode.
+* regions: The region data, it possible to insert only one region on each request.
+  * region (string, optional): Can be one of the next options - 'us_east_1', 'us_west_1', 'eu_west_1', 'ap_southeast_1', 'ap_northeast_1', 'us_west_2', 'sa_east_1', 'az_1_region_a_geo_1', 'az_2_region_a_geo_1', 'az_3_region_a_geo_1', 'ap_southeast_2', 'mellanox_region', 'us_gov_west_1', 'eu_central_1', 'ap_northeast_2'
+  * hidden (boolean, optional): True if the security groups in region will be displayed or false to hide them. 
+  * newGroupBehavior (string, optional): Can be one of the next options - 'ReadOnly', 'FullManage', 'Reset'.
+
+###Delete AWS Account
+
+Delete an existing AWS Account.
+
+URL: https://api.dome9.com/CloudAccounts/{cloudAccountId} <br \>
+METHOD: DELETE
+
+* cloudAccountId: The Dome9 cloudAccountId.
+
 ##<a name="ip-lists">IP Lists</a>
 
 ###GET 
