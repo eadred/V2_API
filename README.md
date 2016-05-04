@@ -24,13 +24,12 @@ The authorization make with an API key, which generate by an [automatic tool](do
 
 
 
-
 ##<a name="aws-security-groups">AWS Security Groups</a>
 
 ###GET 
 
 The get request pull the entire cloud security groups which attached to Dome9.
-ID the request is made without the security group id then the entire security which attached to dome9 will return.
+ID: if the request is made without the security group id then the entire security groups which attached to dome9 will return.
 
 URL: https://api.dome9.com/CloudSecurityGroup/{id}
 METHOD: GET
@@ -201,3 +200,35 @@ METHOD: DELETE
 ##<a name="aws-accounts">AWS Accounts</a>
 
 ##<a name="ip-lists">IP Lists</a>
+
+###GET 
+
+The get request pull the entire IP Lists which attached to the Dome9 account.
+ID: If the request is made without the IP List id then the entire IP Lists will return.
+
+URL: https://api.dome9.com/IpList/{id}
+METHOD: GET
+
+####Response
+```json
+[
+  {
+    "id": 0,
+    "name": "string",
+    "description": "string",
+    "items": [
+      {
+        "ip": "string",
+        "comment": "string"
+      }
+    ]
+  }
+]
+```
+
+* id (integer): The IP List Id.
+* name (string): The IP List name.
+* description (string): The IP List description.
+* items (Array[IPDescriptor]): An array with the Ips.
+  * ip (string): IP address.
+  * comment (string): A comment on the ip if exist.
