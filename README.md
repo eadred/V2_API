@@ -25,8 +25,13 @@ The authorization make with an API key, which generate by an [automatic tool](do
 
 
 ##<a name="aws-security-groups">AWS Security Groups</a>
+1. [GET](#aws-security-groups-get)
+2. [Create Security Groups](#aws-security-groups-create)
+3. [Create Service](#aws-security-groups-create-service)
+4. [Overwrite service](#aws-security-groups-overwrite-service)
+5. [Delete service](#aws-security-groups-delete-service)
 
-###GET 
+<h3><a name="aws-security-groups-get">GET</a></h3>
 
 The get request pull the entire cloud security groups which attached to Dome9.
 ID: if the request is made without the security group id then the entire security groups which attached to dome9 will return.
@@ -62,7 +67,7 @@ METHOD: GET
 * services (object, optional) - The inbound and outbound services.
 * tags (object, optional) - The security groups tags.
 
-###Create Security Groups
+<h3><a name="aws-security-groups-create">Create Security Groups</a></h3>
 Create a new Security Group on AWS.
 
 URL: https://api.dome9.com/CloudSecurityGroup <br \>
@@ -92,9 +97,9 @@ BODY:
 * services (object, optional)
 * tags (object, optional)
 
-###Create Service
+<h3><a name="aws-security-groups-create-service">Create Service</a></h3>
 
-Create a new Security Group on AWS.
+Create a new service for Security Group on AWS.
 
 URL: https://api.dome9.com/cloudsecuritygroup/{groupid}/services <br \>
 METHOD: POST
@@ -134,7 +139,7 @@ BODY:
 * icmpType (string, optional): In case of ICMP - 'EchoReply', 'DestinationUnreachable', 'SourceQuench', 'Redirect', 'AlternateHostAddress', 'Echo', 'RouterAdvertisement', 'RouterSelection', 'TimeExceeded', 'ParameterProblem', 'Timestamp', 'TimestampReply', 'InformationRequest', 'InformationReply', 'AddressMaskRequest', 'AddressMaskReply', 'Traceroute', 'DatagramConversionError', 'MobileHostRedirect', 'IPv6WhereAreYou', 'IPv6IAmHere', 'MobileRegistrationRequest', 'MobileRegistrationReply', 'DomainNameRequest', 'DomainNameReply', 'SKIP', 'Photuris', 'All'
 
 
-###Overwrite service
+<h3><a name="aws-security-groups-overwrite-service">Overwrite service</a></h3>
 
 Update an existing service, the service will be fully overwrite.
 
@@ -175,7 +180,7 @@ BODY:
 * inbound (boolean): If true the rule will be add to the inbound, if false it will be add to outbound.
 * icmpType (string, optional): In case of ICMP - 'EchoReply', 'DestinationUnreachable', 'SourceQuench', 'Redirect', 'AlternateHostAddress', 'Echo', 'RouterAdvertisement', 'RouterSelection', 'TimeExceeded', 'ParameterProblem', 'Timestamp', 'TimestampReply', 'InformationRequest', 'InformationReply', 'AddressMaskRequest', 'AddressMaskReply', 'Traceroute', 'DatagramConversionError', 'MobileHostRedirect', 'IPv6WhereAreYou', 'IPv6IAmHere', 'MobileRegistrationRequest', 'MobileRegistrationReply', 'DomainNameRequest', 'DomainNameReply', 'SKIP', 'Photuris', 'All'
 
-###Delete service
+<h3><a name="aws-security-groups-delete-service">Delete service</a></h3>
 
 Delete an existing service.
 
