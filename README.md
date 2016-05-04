@@ -31,7 +31,7 @@ The authorization make with an API key, which generate by an [automatic tool](do
 The get request pull the entire cloud security groups which attached to Dome9.
 ID: if the request is made without the security group id then the entire security groups which attached to dome9 will return.
 
-URL: https://api.dome9.com/CloudSecurityGroup/{id}
+URL: https://api.dome9.com/CloudSecurityGroup/{id} <br \>
 METHOD: GET
 
 ####Response:
@@ -65,7 +65,7 @@ METHOD: GET
 ###Create Security Groups
 Create a new Security Group on AWS.
 
-URL: https://api.dome9.com/CloudSecurityGroup
+URL: https://api.dome9.com/CloudSecurityGroup <br \>
 METHOD: POST
 BODY:
 ```json
@@ -96,7 +96,7 @@ BODY:
 
 Create a new Security Group on AWS.
 
-URL: https://api.dome9.com/cloudsecuritygroup/{groupid}/services
+URL: https://api.dome9.com/cloudsecuritygroup/{groupid}/services <br \>
 METHOD: POST
 
 note: The groupid in the url can be eithe the internal id or the external id.
@@ -138,7 +138,7 @@ BODY:
 
 Update an existing service, the service will be fully overwrite.
 
-URL: https://api.dome9.com/cloudsecuritygroup/{groupid}/services
+URL: https://api.dome9.com/cloudsecuritygroup/{groupid}/services <br \>
 METHOD: PUT
 
 note: The groupid in the url can be eithe the internal id or the external id.
@@ -179,7 +179,7 @@ BODY:
 
 Delete an existing service.
 
-URL: https://api.dome9.com/cloudsecuritygroup/{groupid}/services/{serviceid}?inbound={boolean}
+URL: https://api.dome9.com/cloudsecuritygroup/{groupid}/services/{serviceid}?inbound={boolean} <br \>
 METHOD: DELETE
 
 * serviceid: compose from the port and protocol type with the next structure "{port}-{protocol type}",for example in ssh case it will be "6-22".
@@ -190,7 +190,7 @@ METHOD: DELETE
 
 Delete an existing security group.
 
-URL: https://api.dome9.com/cloudsecuritygroup/{groupid}
+URL: https://api.dome9.com/cloudsecuritygroup/{groupid} <br \>
 METHOD: DELETE
 
 * groupid: The groupid in the url can be eithe the internal id or the external id.
@@ -206,7 +206,7 @@ METHOD: DELETE
 The get request pull the entire IP Lists which attached to the Dome9 account.
 ID: If the request is made without the IP List id then the entire IP Lists will return.
 
-URL: https://api.dome9.com/IpList/{id}
+URL: https://api.dome9.com/IpList/{id} <br \>
 METHOD: GET
 
 ####Response
@@ -236,7 +236,7 @@ METHOD: GET
 ###Create IP List
 Create a new IP List.
 
-URL: https://api.dome9.com/IpList
+URL: https://api.dome9.com/IpList <br \>
 METHOD: POST
 BODY:
 ```json
@@ -266,8 +266,7 @@ Update an existing IP LIst.
 The Updaate is relevant for the data and the description.
 It will overwrite the existing IP List.
 
-URL: https://api.dome9.com/IpList/{id}
-
+URL: https://api.dome9.com/IpList/{id} <br \>
 METHOD: PUT
 
 BODY:
@@ -296,7 +295,7 @@ BODY:
 
 Delete an existing IP List.
 
-URL: https://api.dome9.com/IpList/{id}
+URL: https://api.dome9.com/IpList/{id} <br \>
 METHOD: DELETE
 
 * id: The IP List Id.
