@@ -93,6 +93,20 @@ BODY:
 * services (object, optional)
 * tags (object, optional)
 
+####Response 
+
+
+* securityGroupId (integer): The Security Group ID in dome9.
+* externalId (string): The Security Group ID in AWS.
+* isProtected (boolean, optional): will appear as "true" if it is in Full Protection or will appear as "false" if it is in Read Only mode.
+* securityGroupName (string, optional): The name of the Security Group.
+* description (string, optional): The description of the Security Group.
+* vpcId (string, optional): The VPC of the Security Group.
+* regionId (string, optional): Can be one of the following regions - 'us_east_1', 'us_west_1', 'eu_west_1', 'ap_southeast_1', 'ap_northeast_1', 'us_west_2', 'sa_east_1', 'az_1_region_a_geo_1', 'az_2_region_a_geo_1', 'az_3_region_a_geo_1', 'ap_southeast_2', 'mellanox_region', 'us_gov_west_1', 'eu_central_1', 'ap_northeast_2'
+* cloudAccountId (string, optional): Dome9 Cloud Account ID.
+* services (object, optional) - The inbound and outbound services.
+* tags (object, optional) - The security groups tags.
+
 <h3><a name="aws-security-groups-create-service">Create Service</a></h3>
 
 Create a new service for Security Group on AWS.
@@ -134,6 +148,9 @@ BODY:
 * inbound (boolean): If it is "true" it will be added to the "inbound rules" and if it is "false" it will be added to the "outbound rules".
 * icmpType (string, optional): In case of ICMP - 'EchoReply', 'DestinationUnreachable', 'SourceQuench', 'Redirect', 'AlternateHostAddress', 'Echo', 'RouterAdvertisement', 'RouterSelection', 'TimeExceeded', 'ParameterProblem', 'Timestamp', 'TimestampReply', 'InformationRequest', 'InformationReply', 'AddressMaskRequest', 'AddressMaskReply', 'Traceroute', 'DatagramConversionError', 'MobileHostRedirect', 'IPv6WhereAreYou', 'IPv6IAmHere', 'MobileRegistrationRequest', 'MobileRegistrationReply', 'DomainNameRequest', 'DomainNameReply', 'SKIP', 'Photuris', 'All'
 
+####Response
+
+It is similar to the request parameters.
 
 <h3><a name="aws-security-groups-overwrite-service">Overwrite Service - </a></h3>
 
@@ -177,6 +194,10 @@ BODY:
 * inbound (boolean): If set as "true" then the rule will be added to the inbound, and if set as "false" then the rule will be added to the outbound.
 * icmpType (string, optional): in case of ICMP - 'EchoReply', 'DestinationUnreachable', 'SourceQuench', 'Redirect', 'AlternateHostAddress', 'Echo', 'RouterAdvertisement', 'RouterSelection', 'TimeExceeded', 'ParameterProblem', 'Timestamp', 'TimestampReply', 'InformationRequest', 'InformationReply', 'AddressMaskRequest', 'AddressMaskReply', 'Traceroute', 'DatagramConversionError', 'MobileHostRedirect', 'IPv6WhereAreYou', 'IPv6IAmHere', 'MobileRegistrationRequest', 'MobileRegistrationReply', 'DomainNameRequest', 'DomainNameReply', 'SKIP', 'Photuris', 'All'
 
+####Response
+
+It is similar to the request parameters.
+
 <h3><a name="aws-security-groups-delete-service">Delete Service - </a></h3>
 
 Deletion an existing service.
@@ -188,6 +209,10 @@ METHOD: DELETE
 * groupid: The groupid in the URL can be either the internal id or the external id.
 * inbound: if set as "true" it will delete in the inbound and if set as "false" it will delete in the oubound.
 
+####Response
+
+When successful the response is null.
+
 <h3><a name="aws-security-groups-delete-security-groups">Delete Security Groups - </a></h3>
 
 Delete an existing security group.
@@ -197,7 +222,9 @@ METHOD: DELETE
 
 * groupid: The groupid in the URL can be either the internal id or the external id.
 
+####Response
 
+When successful the response is null.
 
 ##<a name="aws-accounts">AWS Accounts - </a>
 
