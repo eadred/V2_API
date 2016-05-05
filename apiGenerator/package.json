@@ -1,0 +1,21 @@
+{
+  "name": "api-generator",
+  "version": "1.0.0",
+  "description": "create, get and delete dome9 API key",
+  "main": "dome9Api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Arikb Blumin",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "cookie": "^0.2.3",
+    "q": "^1.4.1",
+    "request": "^2.72.0",
+    "request-promise": "^3.0.0",
+    "winston": "^2.2.0"
+  },
+  "bin": {
+    "dome9": "./dome9Api.js"
+  }
+}

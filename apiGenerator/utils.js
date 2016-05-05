@@ -3,23 +3,15 @@
  */
 var cookieParser = require('cookie');
 var Q = require("q");
+var winston = require('winston');
 var request = require('request');
-var rp = require('request-promise');
-var globals = require('./globals');
+
 var _ = require('lodash');
 var collectedCookies, parameters, logger;
 var proxy = process.env.http_proxy ? process.env.http_proxy : undefined;
-//var conf = JSON.parse(loadFromFile('./configuration/conf.json'));
-var dome9ReqList = [];
-var env = globals.env;
-var env = _.find(process.argv, function (argument) {
-  return _.startsWith(argument, '--env=');
-});
-var async = require("async");
-console.log(env)
 
-env = env && env.split('--env=')[1];
-console.log(env)
+
+var async = require("async");
 
 function addCookie(collectedCookies, cookie) {
   var cookieFlag = false;
@@ -61,7 +53,7 @@ function doFirstRequest(collectedCookies, parameters, logger) {
   var deferred = Q.defer();
 
   var reqOpts = {
-    url: localConf.baseUrl + '/account/logon',
+    url: 'https://secure.dome9.com/account/logon',
     proxy: proxy,
     method: 'GET',
     headers: {
@@ -91,7 +83,6 @@ function doFirstRequest(collectedCookies, parameters, logger) {
         addCookie(collectedCookies, res.headers['Set-cookie']);
       }
 
-      globals.dome9AuthenticationCookies = collectedCookies;
       deferred.resolve();
     }
 
@@ -100,21 +91,22 @@ function doFirstRequest(collectedCookies, parameters, logger) {
   return deferred.promise;
 }
 
-function doSecondRequest(collectedCookies, parameters, logger, username, password) {
+function doSecondRequest(collectedCookies, parameters, logger, username, password,mfa) {
   var deferred = Q.defer();
   var reqOpts = {
-    url: localConf.baseUrl + '/account/logon',
+    url: 'https://secure.dome9.com/account/logon',
     proxy: proxy,
     method: 'POST',
     headers: {
       'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36',
       'Content-Type': "application/x-www-form-urlencoded",
-      'Referer': localConf.baseUrl + '/account/logon'
+      'Referer': 'https://secure.dome9.com/account/logon'
     }
   };
 
   reqOpts = addCookies(reqOpts, collectedCookies, logger);
-  reqOpts.body = 'UserName=' + encodeURIComponent(username) + '&Password=' + encodeURIComponent(password);
+  if (mfa) reqOpts.body = 'UserName=' + encodeURIComponent(username) + '&Password=' + encodeURIComponent(password) + '&mfa=on&MfaToken=' + mfa;
+  else reqOpts.body = 'UserName=' + encodeURIComponent(username) + '&Password=' + encodeURIComponent(password);
   request(reqOpts, function (err, res, body) {
     if (err) {
       logger.error('request on url %s error %s %s', reqOpts.method, reqOpts.url, JSON.stringify(err));
@@ -144,16 +136,14 @@ function doSecondRequest(collectedCookies, parameters, logger, username, passwor
   return deferred.promise;
 }
 
-function doLogin(collectedCookies, parameters, logger, username, password) {
+function doLogin(collectedCookies, parameters, logger, username, password,mfa) {
   // doing logon
   return doFirstRequest(collectedCookies, parameters, logger).then(function () {
-    return doSecondRequest(collectedCookies, parameters, logger, username, password);
+    return doSecondRequest(collectedCookies, parameters, logger, username, password,mfa);
   });
 }
 
-exports.doLogin = function (collectedCookies, parameters, logger, username, password) {
-  return doLogin(collectedCookies, parameters, logger, username, password);
-};
+exports.doLogin = doLogin;
 
 function basicRequestProcess(err, res, body, collectedCookies, parameters, logger, reqOpts) {
 
@@ -186,4 +176,25 @@ exports.basicRequestProcess = function (err, res, body, collectedCookies, parame
   return basicRequestProcess(err, res, body, collectedCookies, parameters, logger, reqOpts);
 }
 
+function RequestOptions(url, method, body,xsrf) {
+  this.reqOpts = {
+    //url: 'https://' + utils.getConfiguration().username + ':' + utils.getConfiguration().APIKey +
+    //'@'+  utils.getConfiguration().baseAPIUrl + 'titan-leases/f7b335e1-82bf-4166-a94e-8f8eb4a4e6c8?format=json;',
+    url: url,
+    proxy: proxy,
+    method: method,
+    json: body,
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36',
+      'Accept': 'application/json, text/plain, */*',
+      'X-XSRF-TOKEN': xsrf
+    }
+  }
+}
+exports.RequestOptions = RequestOptions;
 
+exports.logger = new (winston.Logger)({
+  transports: [
+    new (winston.transports.Console)({stderrLevels: ['error', 'debug', 'info', 'warn'], level: 'debug'}) // in this CLI tool - we'll write all logs to STDERR except the resutl of the tool.
+  ]
+})

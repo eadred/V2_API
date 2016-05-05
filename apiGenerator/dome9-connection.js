@@ -6,11 +6,11 @@ var utils = require('./utils');
 var rp = require('request-promise');
 var Q = require('q');
 var _ = require('lodash');
-var globals = require('./../../globals');
 
-function Dome9Connection(username, password){
+function Dome9Connection(username, password,mfa){
   this.username = username;
   this.password = password;
+  this.mfa = mfa;
   this.loginPromise = null;
   this.authenticationCookie = [];
   this.xsrfToken = null;
@@ -19,12 +19,12 @@ function Dome9Connection(username, password){
 Dome9Connection.prototype.login = function(){
   var self = this;
 
-  this.loginPromise = utils.doLogin(self.authenticationCookie, {}, logger, this.username, this.password).then(function () {
+  this.loginPromise = utils.doLogin(self.authenticationCookie, {}, logger, this.username, this.password,this.mfa).then(function () {
   }, function (error) {
     throw 'Failed to login\n' + 'original massage: \n' + error;
   }).then(function(){
     var v2AppRequestOptions = {
-      url: 'https://api.dome9.com/cloudaccounts' ,
+      url: 'https://secure.dome9.com/api/cloudaccounts' ,
       method: 'GET',
       headers: {
         'Accept': 'application/json'
@@ -36,17 +36,18 @@ Dome9Connection.prototype.login = function(){
     v2AppRequestOptions = utils.addCookies(v2AppRequestOptions, self.authenticationCookie, logger);
 
 
-    return this.requestV2WebApi(v2AppRequestOptions)
+    return rp(v2AppRequestOptions)
       .then(function(v2App){
         var re = /XSRF-TOKEN=(.*); path=\//;
 
         var xsrfToken = _.find(v2App.headers['set-cookie'], function(item){
           return re.test(item);
         });
-        if(v2App.body[0]) globals.accountId=v2App.body[0].id;
         if(xsrfToken){
           self.xsrfToken = re.exec(xsrfToken)[1];
         }
+      },function(err){
+        logger.info(err);
       })
 
   });
