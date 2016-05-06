@@ -39,9 +39,9 @@ ID: if the request is made without the security group id, then the entire securi
 
 ```json
  {
-   "securityGroupId": int,
+   "securityGroupId": "integer",
    "externalId": "string",
-   "isProtected": boolean,
+   "isProtected": "boolean",
    "securityGroupName": "string",
    "vpcId": "string",
    "regionId": "string",
@@ -71,11 +71,11 @@ METHOD: POST
 BODY:
 ```json
 {
-  "isProtected": boolean,
+  "isProtected": "boolean",
   "securityGroupName": "string",
   "description": "string",
   "vpcId": "string",
-  "regionId": "us_east_1",
+  "regionId": "string",
   "cloudAccountId": "string",
   "cloudAccountName": "string",
   "tags": {}
@@ -123,14 +123,14 @@ BODY:
   "description": "string",
   "protocolType": "string",
   "port": "string",
-  "openForAll": boolean,
+  "openForAll": "boolean",
   "scope": [
     {
       "type": "string",
-      "data": object
+      "data": "object"
     }
   ],
-  "inbound": boolean,
+  "inbound": "boolean",
   "icmpType": "string"
 }
 ```
@@ -169,14 +169,14 @@ BODY:
   "description": "string",
   "protocolType": "string",
   "port": "string",
-  "openForAll": boolean,
+  "openForAll": "boolean",
   "scope": [
     {
       "type": "string",
-      "data": object
+      "data": "object"
     }
   ],
-  "inbound": boolean,
+  "inbound": "boolean",
   "icmpType": "string"
 }
 ```
@@ -242,7 +242,7 @@ BODY:
     "arn": "string" /*required*/, 
     "secret": "string" /*required*/,
     "type": "RoleBased" /*required*/,
-    "isReadOnly": boolean
+    "isReadOnly": "boolean"
   },
   "fullProtection": true
 }
@@ -273,15 +273,15 @@ BODY:
     "arn": "string" , 
     "secret": "string" ,
     "type": "RoleBased" ,
-    "isReadOnly": boolean
+    "isReadOnly": "boolean"
   },
-  "fullProtection": boolean,
+  "fullProtection": "boolean",
   "netSec": {
       "regions": [
         {
           "region": "string",
-          "hidden": boolean,
-          "newGroupBehavior": boolean
+          "hidden": "boolean",
+          "newGroupBehavior": "boolean"
         }
       ]
     }
