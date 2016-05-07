@@ -20,19 +20,22 @@
 
 1. Using console, navigate to  apiGenerator directory.
 
-2. run the command ```apiGenerator --help``` to understand the command line parameters
+2. run the command ```apiGenerator --help``` to understand the command line commands, and for each command run the command ```apiGenerator <command> --help``` for example - ```apiGenerator create --help```
 
 
-### Command Line options ###
+### Command Line commands ###
 
 * get : get your current API keys.
 * create : create new API key.
 * delete : delete the API key.
-* -u or --username USERNAME : your Dome9 username (email)
-* -p or --password PASSWORD : your Dome9 password
+
+#### Command Line commands ####
+* -u or --username USERNAME : your Dome9 username (email,required)
+* -p or --password PASSWORD : your Dome9 password (required)
 * -m or --mfa MFA : For users with MFA. 
+* -i or --id : The API Key ID, relevant for the 'delete' command (required).
 
 
 An example of how to generate API key:
-```apiGenerator  create-u me@acme.com -p mypass```
+```apiGenerator  create -u me@acme.com -p mypass```
 
