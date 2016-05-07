@@ -9,7 +9,9 @@
   "author": "Arikb Blumin",
   "license": "BSD-3-Clause",
   "dependencies": {
+    "commander": "^2.9.0",
     "cookie": "^0.2.3",
+    "lodash": "^4.11.2",
     "q": "^1.4.1",
     "request": "^2.72.0",
     "request-promise": "^3.0.0",

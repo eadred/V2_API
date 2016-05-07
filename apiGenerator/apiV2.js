@@ -12,7 +12,7 @@ var xsrf = null;
 
 V2Api.prototype.create = function (userId) {
 
-  var urlC = 'https://api.dome9.com/v2/user/'+userId+'/api-key'
+  var urlC = utils.v2Url+'user/'+userId+'/api-key'
   var requestOptions =new utils.RequestOptions(urlC,'POST',null,xsrf);
 
   return this.connection.requestV2WebApi(requestOptions.reqOpts)
@@ -21,7 +21,7 @@ V2Api.prototype.create = function (userId) {
 };
 V2Api.prototype.get = function (userId) {
 
-  var urlC = 'https://api.dome9.com/v2/user/'+userId+'/api-key'
+  var urlC = utils.v2Url+'user/'+userId+'/api-key'
   var requestOptions =new utils.RequestOptions(urlC,'GET',null,xsrf);
 
   return this.connection.requestV2WebApi(requestOptions.reqOpts)
@@ -31,7 +31,7 @@ V2Api.prototype.get = function (userId) {
 
 V2Api.prototype.delete = function (userId,keyId) {
 
-  var urlC = 'https://api.dome9.com/v2/user/'+userId+'/api-key/'+keyId;
+  var urlC = utils.v2Url+'user/'+userId+'/api-key/'+keyId;
   var requestOptions =new utils.RequestOptions(urlC,'DELETE',null,xsrf);
 
   return this.connection.requestV2WebApi(requestOptions.reqOpts)

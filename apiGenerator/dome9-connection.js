@@ -24,7 +24,7 @@ Dome9Connection.prototype.login = function(){
     throw 'Failed to login\n' + 'original massage: \n' + error;
   }).then(function(){
     var v2AppRequestOptions = {
-      url: 'https://secure.dome9.com/api/cloudaccounts' ,
+      url: utils.url+'api/cloudaccounts' ,
       method: 'GET',
       headers: {
         'Accept': 'application/json'

@@ -5,13 +5,11 @@ var cookieParser = require('cookie');
 var Q = require("q");
 var winston = require('winston');
 var request = require('request');
+var utils = require('./utils');
 
 var _ = require('lodash');
 var collectedCookies, parameters, logger;
 var proxy = process.env.http_proxy ? process.env.http_proxy : undefined;
-
-
-var async = require("async");
 
 function addCookie(collectedCookies, cookie) {
   var cookieFlag = false;
@@ -53,7 +51,7 @@ function doFirstRequest(collectedCookies, parameters, logger) {
   var deferred = Q.defer();
 
   var reqOpts = {
-    url: 'https://secure.dome9.com/account/logon',
+    url: utils.url+'account/logon',
     proxy: proxy,
     method: 'GET',
     headers: {
@@ -94,13 +92,13 @@ function doFirstRequest(collectedCookies, parameters, logger) {
 function doSecondRequest(collectedCookies, parameters, logger, username, password,mfa) {
   var deferred = Q.defer();
   var reqOpts = {
-    url: 'https://secure.dome9.com/account/logon',
+    url: utils.url+'account/logon',
     proxy: proxy,
     method: 'POST',
     headers: {
       'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36',
       'Content-Type': "application/x-www-form-urlencoded",
-      'Referer': 'https://secure.dome9.com/account/logon'
+      'Referer': utils.url+'account/logon'
     }
   };
 
@@ -198,3 +196,7 @@ exports.logger = new (winston.Logger)({
     new (winston.transports.Console)({stderrLevels: ['error', 'debug', 'info', 'warn'], level: 'debug'}) // in this CLI tool - we'll write all logs to STDERR except the resutl of the tool.
   ]
 })
+
+exports.v2Url = "https://secure.dome9.com/api/";
+
+exports.url = "https://secure.dome9.com/";
