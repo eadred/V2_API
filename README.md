@@ -112,8 +112,9 @@ BODY:
 
 Create a new service for Security Group on AWS.
 
-URL: https://api.dome9.com/cloudsecuritygroup/{groupid}/services <br \>
+URL: https://api.dome9.com/cloudsecuritygroup/{groupid}/services/{policyType} <br \>
 METHOD: POST <br \>
+policyType: if set as "Inbound" it will create in the inbound and if set as "Outbound" it will create in the oubound.
 
 note: The groupid in the URL can be either the internal id or the external id. <br \>
 
@@ -222,8 +223,9 @@ It is similar to the request parameters.
 Update an existing service.
 note: the service will be fully overwritten.
 
-URL: https://api.dome9.com/cloudsecuritygroup/{groupid}/services <br \>
+URL: https://api.dome9.com/cloudsecuritygroup/{groupid}/services/{policyType} <br \>
 METHOD: PUT <br \>
+policyType: if set as "Inbound" it will overwrite in the inbound and if set as "Outbound" it will overwrite in the oubound.
 
 note: The groupid in the URL can be either the internal id or the external id. <br \>
 
@@ -267,12 +269,12 @@ It is similar to the request parameters.
 
 Deletion an existing service.
 
-URL: https://api.dome9.com/cloudsecuritygroup/{groupid}/services/{serviceid}?inbound={boolean} <br \>
+URL: https://api.dome9.com/cloudsecuritygroup/{groupid}/services/{policyType}/{serviceid} <br \>
 METHOD: DELETE <br \>
 
 * serviceid: composed of the port and protocol type with the following structure "{port}-{protocol type}",for example in ssh case it will be "6-22".
 * groupid: The groupid in the URL can be either the internal id or the external id.
-* inbound: if set as "true" it will delete in the inbound and if set as "false" it will delete in the oubound.
+policyType: if set as "Inbound" it will delete in the inbound and if set as "Outbound" it will delete in the oubound.
 
 ####Response
 
