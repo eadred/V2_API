@@ -154,7 +154,7 @@ BODY:
 
 It is similar to the request parameters.
 <h3><a name="aws-security-groups-overwrite-security-group">Overwrite Security Group</a></h3> 
-Overwrite an existing Security Group, change protection mode, overwrite tags and services.
+Overwrite an existing Security Group, overwrite tags and services.
 
 URL: https://api.dome9.com/CloudSecurityGroup/{groupid} <br \>
 METHOD: PUT <br \>
@@ -162,7 +162,6 @@ groupid: the security group id, can be both of AWS and Dome9. <br \>
 BODY:
 ```json
 {
-  "isProtected": "boolean",
   "services": {
     "inbound": [{
         "name": "string",
