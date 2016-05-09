@@ -68,7 +68,7 @@ ID: if the request is made without the security group id, then the entire securi
 Create a new Security Group on AWS.
 
 URL: https://api.dome9.com/CloudSecurityGroup <br \>
-METHOD: POST
+METHOD: POST <br \>
 BODY:
 ```json
 {
@@ -113,9 +113,9 @@ BODY:
 Create a new service for Security Group on AWS.
 
 URL: https://api.dome9.com/cloudsecuritygroup/{groupid}/services <br \>
-METHOD: POST
+METHOD: POST <br \>
 
-note: The groupid in the URL can be either the internal id or the external id.
+note: The groupid in the URL can be either the internal id or the external id. <br \>
 
 BODY:
 ```json
@@ -157,7 +157,7 @@ Overwrite an existing Security Group, change protection mode, overwrite tags and
 
 URL: https://api.dome9.com/CloudSecurityGroup/{groupid} <br \>
 METHOD: PUT <br \>
-groupid: the security group id, can be both of AWS and Dome9.
+groupid: the security group id, can be both of AWS and Dome9. <br \>
 BODY:
 ```json
 {
@@ -222,9 +222,9 @@ Update an existing service.
 note: the service will be fully overwritten.
 
 URL: https://api.dome9.com/cloudsecuritygroup/{groupid}/services <br \>
-METHOD: PUT
+METHOD: PUT <br \>
 
-note: The groupid in the URL can be either the internal id or the external id.
+note: The groupid in the URL can be either the internal id or the external id. <br \>
 
 BODY:
 ```json
@@ -267,7 +267,7 @@ It is similar to the request parameters.
 Deletion an existing service.
 
 URL: https://api.dome9.com/cloudsecuritygroup/{groupid}/services/{serviceid}?inbound={boolean} <br \>
-METHOD: DELETE
+METHOD: DELETE <br \>
 
 * serviceid: composed of the port and protocol type with the following structure "{port}-{protocol type}",for example in ssh case it will be "6-22".
 * groupid: The groupid in the URL can be either the internal id or the external id.
@@ -282,9 +282,9 @@ When successful the response is null.
 Delete an existing security group.
 
 URL: https://api.dome9.com/cloudsecuritygroup/{groupid} <br \>
-METHOD: DELETE
+METHOD: DELETE <br \>
 
-* groupid: The groupid in the URL can be either the internal id or the external id.
+* groupid: The groupid in the URL can be either the internal id or the external id. <br \>
 
 ####Response
 
@@ -297,7 +297,7 @@ When successful the response is null.
 Adding a new AWS account to your Dome9 account.
 
 URL: https://api.dome9.com/CloudAccounts <br \>
-METHOD: POST
+METHOD: POST <br \>
 BODY:
 ```json
 {
@@ -328,7 +328,7 @@ Updating an existing attached AWS account.
 
 URL: https://api.dome9.com/CloudAccounts/{id} <br \>
 METHOD: PATCH <br \>
-id: The Dome9 cloud account ID
+id: The Dome9 cloud account ID <br \>
 BODY:
 ```json
 {
@@ -371,9 +371,9 @@ BODY:
 Deletion of an existing AWS Account.
 
 URL: https://api.dome9.com/CloudAccounts/{cloudAccountId} <br \>
-METHOD: DELETE
+METHOD: DELETE <br \>
 
-* cloudAccountId: The Dome9 cloudAccountId.
+cloudAccountId: The Dome9 cloudAccountId. 
 
 ##<a name="ip-lists">IP Lists </a>
 
@@ -383,7 +383,7 @@ The get request "pulls" all IP Lists, which are attached to the Dome9 account.
 ID: If the request is made without the IP List id then all IP Lists will return.
 
 URL: https://api.dome9.com/IpList/{id} <br \>
-METHOD: GET
+METHOD: GET <br \>
 
 ####Response
 ```json
@@ -413,7 +413,7 @@ METHOD: GET
 Creating a new IP List.
 
 URL: https://api.dome9.com/IpList <br \>
-METHOD: POST
+METHOD: POST <br \>
 BODY:
 ```json
 {
@@ -444,7 +444,7 @@ The Update is relevant for the data and the description.
 It will overwrite the existing IP List.
 
 URL: https://api.dome9.com/IpList/{id} <br \>
-METHOD: PUT
+METHOD: PUT <br \>
 
 BODY:
 ```json
@@ -473,7 +473,7 @@ BODY:
 Deletion of an existing IP List.
 
 URL: https://api.dome9.com/IpList/{id} <br \>
-METHOD: DELETE
+METHOD: DELETE <br \>
 
 * id: The IP List Id.
   
