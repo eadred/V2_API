@@ -294,13 +294,13 @@ It is similar to the request parameters.
 
 <h3><a name="aws-security-groups-overwrite-service">Overwrite Service</a></h3>
 
-Update an existing service.
+Update an existing security group's service.
 note: the service will be fully overwritten.
 
 URL: https://api.dome9.com/cloudsecuritygroup/{groupid}/services/{policyType} <br \>
 METHOD: PUT <br \>
-policyType: if set as "Inbound" it will overwrite in the inbound and if set as "Outbound" it will overwrite in the oubound.
-groupid: The groupid in the URL can be either the internal id or the external id. <br \>
+policyType: if set as "Inbound" it will overwrite the service in the group's inbound policy, and if set as "Outbound" it will overwrite the service in the group's outbound policy.
+groupid: The groupid in the URL can be either the group's Dome9 internal id or the group's AWS external id. <br \>
 
 BODY:
 ```json
@@ -325,8 +325,8 @@ BODY:
 * name (string): The service name.
 * description (string, optional): The service description.
 * protocolType (string): Can be one of the following protocols - 'HOPOPT', 'ICMP', 'IGMP', 'GGP', 'IPV4', 'ST', 'TCP', 'CBT', 'EGP', 'IGP', 'BBN_RCC_MON', 'NVP2', 'PUP', 'ARGUS', 'EMCON', 'XNET', 'CHAOS', 'UDP', 'MUX', 'DCN_MEAS', 'HMP', 'PRM', 'XNS_IDP', 'TRUNK1', 'TRUNK2', 'LEAF1', 'LEAF2', 'RDP', 'IRTP', 'ISO_TP4', 'NETBLT', 'MFE_NSP', 'MERIT_INP', 'DCCP', 'ThreePC', 'IDPR', 'XTP', 'DDP', 'IDPR_CMTP', 'TPplusplus', 'IL', 'IPV6', 'SDRP', 'IPV6_ROUTE', 'IPV6_FRAG', 'IDRP', 'RSVP', 'GRE', 'DSR', 'BNA', 'ESP', 'AH', 'I_NLSP', 'SWIPE', 'NARP', 'MOBILE', 'TLSP', 'SKIP', 'IPV6_ICMP', 'IPV6_NONXT', 'IPV6_OPTS', 'CFTP', 'SAT_EXPAK', 'KRYPTOLAN', 'RVD', 'IPPC', 'SAT_MON', 'VISA', 'IPCV', 'CPNX', 'CPHB', 'WSN', 'PVP', 'BR_SAT_MON', 'SUN_ND', 'WB_MON', 'WB_EXPAK', 'ISO_IP', 'VMTP', 'SECURE_VMTP', 'VINES', 'TTP', 'NSFNET_IGP', 'DGP', 'TCF', 'EIGRP', 'OSPFIGP', 'SPRITE_RPC', 'LARP', 'MTP', 'AX25', 'IPIP', 'MICP', 'SCC_SP', 'ETHERIP', 'ENCAP', 'GMTP', 'IFMP', 'PNNI', 'PIM', 'ARIS', 'SCPS', 'QNX', 'AN', 'IPCOMP', 'SNP', 'COMPAQ_PEER', 'IPX_IN_IP', 'VRRP', 'PGM', 'L2TP', 'DDX', 'IATP', 'STP', 'SRP', 'UTI', 'SMP', 'SM', 'PTP', 'ISIS', 'FIRE', 'CRTP', 'CRUDP', 'SSCOPMCE', 'IPLT', 'SPS', 'PIPE', 'SCTP', 'FC', 'RSVP_E2E_IGNORE', 'MOBILITY_HEADER', 'UDPLITE', 'MPLS_IN_IP', 'MANET', 'HIP', 'SHIM6', 'WESP', 'ROHC', 'ALL'.
-* port (string, optional): The port (can be port range).
-* openForAll (boolean): if set as "true" it will be open for the entire internet, and if set as "false" it will be open for the internet according to scope parameter.
+* port (string, optional): The port (can be a  port range).
+* openForAll (boolean): if set as "true" the service will be open to the entire internet, and if set as "false" the service will be open according to the given scope parameter.
 * scope (Array[ScopeElementViewModel], optional): The service scope. If the service is "closed" then the scope isn't necessary.
   * type (string): can be one of the following - ['CIDR', 'DNS', 'IPList', 'MagicIP', 'AWS'],
   * data (object): for CIDR - "cidr":'IP', For IP-List - "id":"IP-LIST ID","name":"IP-LIST NAME"}
@@ -334,7 +334,7 @@ BODY:
 
 ####Response
 
-It is similar to the request parameters.
+Similar to the request parameters.
 
 <h3><a name="aws-security-groups-delete-service">Delete Service</a></h3>
 
