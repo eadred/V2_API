@@ -205,11 +205,11 @@ BODY:
 
 <h3><a name="aws-security-groups-create-service">Create Service</a></h3>
 
-Create a new service for Security Group on AWS.
+Create a new service for an AWS security group.
 
 URL: https://api.dome9.com/cloudsecuritygroup/{groupid}/services/{policyType} <br \>
 METHOD: POST <br \>
-policyType: if set as "Inbound" it will create in the inbound and if set as "Outbound" it will create in the oubound.
+policyType: if set as "Inbound" the service will be created in the group's inbound services and if set as "Outbound" it will be created in the group's outbound services.
 groupid: The groupid in the URL can be either the internal id or the external id. <br \>
 
 BODY:
@@ -236,7 +236,7 @@ BODY:
 * description (string, optional): The service description.
 * protocolType (string): Can be one of the following protocols - 'HOPOPT', 'ICMP', 'IGMP', 'GGP', 'IPV4', 'ST', 'TCP', 'CBT', 'EGP', 'IGP', 'BBN_RCC_MON', 'NVP2', 'PUP', 'ARGUS', 'EMCON', 'XNET', 'CHAOS', 'UDP', 'MUX', 'DCN_MEAS', 'HMP', 'PRM', 'XNS_IDP', 'TRUNK1', 'TRUNK2', 'LEAF1', 'LEAF2', 'RDP', 'IRTP', 'ISO_TP4', 'NETBLT', 'MFE_NSP', 'MERIT_INP', 'DCCP', 'ThreePC', 'IDPR', 'XTP', 'DDP', 'IDPR_CMTP', 'TPplusplus', 'IL', 'IPV6', 'SDRP', 'IPV6_ROUTE', 'IPV6_FRAG', 'IDRP', 'RSVP', 'GRE', 'DSR', 'BNA', 'ESP', 'AH', 'I_NLSP', 'SWIPE', 'NARP', 'MOBILE', 'TLSP', 'SKIP', 'IPV6_ICMP', 'IPV6_NONXT', 'IPV6_OPTS', 'CFTP', 'SAT_EXPAK', 'KRYPTOLAN', 'RVD', 'IPPC', 'SAT_MON', 'VISA', 'IPCV', 'CPNX', 'CPHB', 'WSN', 'PVP', 'BR_SAT_MON', 'SUN_ND', 'WB_MON', 'WB_EXPAK', 'ISO_IP', 'VMTP', 'SECURE_VMTP', 'VINES', 'TTP', 'NSFNET_IGP', 'DGP', 'TCF', 'EIGRP', 'OSPFIGP', 'SPRITE_RPC', 'LARP', 'MTP', 'AX25', 'IPIP', 'MICP', 'SCC_SP', 'ETHERIP', 'ENCAP', 'GMTP', 'IFMP', 'PNNI', 'PIM', 'ARIS', 'SCPS', 'QNX', 'AN', 'IPCOMP', 'SNP', 'COMPAQ_PEER', 'IPX_IN_IP', 'VRRP', 'PGM', 'L2TP', 'DDX', 'IATP', 'STP', 'SRP', 'UTI', 'SMP', 'SM', 'PTP', 'ISIS', 'FIRE', 'CRTP', 'CRUDP', 'SSCOPMCE', 'IPLT', 'SPS', 'PIPE', 'SCTP', 'FC', 'RSVP_E2E_IGNORE', 'MOBILITY_HEADER', 'UDPLITE', 'MPLS_IN_IP', 'MANET', 'HIP', 'SHIM6', 'WESP', 'ROHC', 'ALL'.
 * port (string, optional): The port (can be a port range).
-* openForAll (boolean): if it is "true" it will be open for the entrie internet, and if it is "flase" it will be open for the internet according to the scope parameter. 
+* openForAll (boolean): if "true", the service will be open for the entire internet, otherwise it will be open according to the given scope parameter. 
 * scope (Array[ScopeElementViewModel], optional): The service scope. If the service is "closed" then the scope isn't necessary.
   * type (string): Can be one of the following - ['CIDR', 'DNS', 'IPList', 'MagicIP', 'AWS'],
   * data (object): For CIDR - "cidr":'IP', For IP-List - "id":"IP-LIST ID","name":"IP-LIST NAME"}
@@ -244,7 +244,7 @@ BODY:
 
 ####Response
 
-It is similar to the request parameters.
+Similar to the request parameters.
 
 <h3><a name="aws-security-groups-overwrite-security-group">Overwrite Security Group</a></h3> 
 
