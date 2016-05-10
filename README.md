@@ -257,7 +257,30 @@ policyType: if set as "Inbound" it will overwrite in the inbound and if set as "
 BODY:
 ```json
 {
-  "name": "string" /*required*/,
+  "description": "string",
+  "services": {
+    "inbound": [
+      {
+        "name": "string" /*required*/,
+        "description": null,
+        "protocolType": "string" /*required*/,
+        "port": "string" /*required*/,
+        "openForAll": "boolean" /*required*/,
+        "scope": [
+          {
+            "type": "string",
+            "data": {
+              "cidr": "string",
+              "note": null
+            }
+          }
+        ],
+        "icmpType": "string",
+      }
+    ],
+    "outbound": [
+      {
+        "name": "string" /*required*/,
         "description": "string",
         "protocolType": "string" /*required*/,
         "port": "string" /*required*/,
@@ -267,10 +290,14 @@ BODY:
             "type": "string",
             "data": {
               "cidr": "string",
-              "note": "string"
+              "note": "string",
             }
           }
         ],
+        "icmpType": "string",
+      }
+    ]
+  }
   "tags": {}
 }
 ```
