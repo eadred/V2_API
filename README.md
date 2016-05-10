@@ -250,10 +250,9 @@ Similar to the request parameters.
 
 Overwrite an existing Security Group, overwrite tags and services.
 
-URL: https://api.dome9.com/CloudSecurityGroup/{groupid}/services/{policyType} <br \>
+URL: https://api.dome9.com/CloudSecurityGroup/{groupid} <br \>
 METHOD: PUT <br \>
 groupid: the security group id, can be both of AWS and Dome9. <br \>
-policyType: if set as "Inbound" it will overwrite in the inbound and if set as "Outbound" it will overwrite in the outbound.
 BODY:
 ```json
 {
@@ -308,7 +307,7 @@ BODY:
 * description (string, optional): The service description.
 * protocolType (string): Can be one of the following protocols - 'HOPOPT', 'ICMP', 'IGMP', 'GGP', 'IPV4', 'ST', 'TCP', 'CBT', 'EGP', 'IGP', 'BBN_RCC_MON', 'NVP2', 'PUP', 'ARGUS', 'EMCON', 'XNET', 'CHAOS', 'UDP', 'MUX', 'DCN_MEAS', 'HMP', 'PRM', 'XNS_IDP', 'TRUNK1', 'TRUNK2', 'LEAF1', 'LEAF2', 'RDP', 'IRTP', 'ISO_TP4', 'NETBLT', 'MFE_NSP', 'MERIT_INP', 'DCCP', 'ThreePC', 'IDPR', 'XTP', 'DDP', 'IDPR_CMTP', 'TPplusplus', 'IL', 'IPV6', 'SDRP', 'IPV6_ROUTE', 'IPV6_FRAG', 'IDRP', 'RSVP', 'GRE', 'DSR', 'BNA', 'ESP', 'AH', 'I_NLSP', 'SWIPE', 'NARP', 'MOBILE', 'TLSP', 'SKIP', 'IPV6_ICMP', 'IPV6_NONXT', 'IPV6_OPTS', 'CFTP', 'SAT_EXPAK', 'KRYPTOLAN', 'RVD', 'IPPC', 'SAT_MON', 'VISA', 'IPCV', 'CPNX', 'CPHB', 'WSN', 'PVP', 'BR_SAT_MON', 'SUN_ND', 'WB_MON', 'WB_EXPAK', 'ISO_IP', 'VMTP', 'SECURE_VMTP', 'VINES', 'TTP', 'NSFNET_IGP', 'DGP', 'TCF', 'EIGRP', 'OSPFIGP', 'SPRITE_RPC', 'LARP', 'MTP', 'AX25', 'IPIP', 'MICP', 'SCC_SP', 'ETHERIP', 'ENCAP', 'GMTP', 'IFMP', 'PNNI', 'PIM', 'ARIS', 'SCPS', 'QNX', 'AN', 'IPCOMP', 'SNP', 'COMPAQ_PEER', 'IPX_IN_IP', 'VRRP', 'PGM', 'L2TP', 'DDX', 'IATP', 'STP', 'SRP', 'UTI', 'SMP', 'SM', 'PTP', 'ISIS', 'FIRE', 'CRTP', 'CRUDP', 'SSCOPMCE', 'IPLT', 'SPS', 'PIPE', 'SCTP', 'FC', 'RSVP_E2E_IGNORE', 'MOBILITY_HEADER', 'UDPLITE', 'MPLS_IN_IP', 'MANET', 'HIP', 'SHIM6', 'WESP', 'ROHC', 'ALL'.
 * port (string, optional): The port (can be port range).
-* openForAll (boolean): if set as "true" it will be open for the entire internet, and if set as "false" it will be open for the internet according to scope parameter.
+* openForAll (boolean): if  "true" the service will be open to the entire internet, and if set to "false" the service will be open  according to the given scope parameter.
 * scope (Array[ScopeElementViewModel], optional): The service scope. If the service is "closed" then the scope isn't necessary.
   * type (string): can be one of the following - ['CIDR', 'DNS', 'IPList', 'MagicIP', 'AWS'],
   * data (object): for CIDR - "cidr":'IP', For IP-List - "id":"IP-LIST ID","name":"IP-LIST NAME"}
@@ -317,7 +316,7 @@ BODY:
 
 ####Response
 
-It is similar to the request parameters.
+Similar to the request parameters.
 
 <h3><a name="aws-security-groups-overwrite-service">Overwrite Service</a></h3>
 
@@ -365,17 +364,17 @@ Similar to the request parameters.
 
 <h3><a name="aws-security-groups-delete-service">Delete Service</a></h3>
 
-Deletion an existing service.
+Delete an existing service from a security group's policy.
 
 URL: https://api.dome9.com/cloudsecuritygroup/{groupid}/services/{policyType}/{serviceid} <br \>
 METHOD: DELETE <br \>
 * serviceid: composed of the port and protocol type with the following structure "{port}-{protocol type}",for example in ssh case it will be "6-22".
 * groupid: The groupid in the URL can be either the internal id or the external id.
-policyType: if set as "Inbound" it will delete in the inbound and if set as "Outbound" it will delete in the oubound.
+policyType: if set as "Inbound" it will delete the service in the security group's inbound policy and if set as "Outbound" it will delete the service in the security group's outbound policy.
 
 ####Response
 
-When successful the response is null.
+If successful the response is null.
 
 <h3><a name="aws-security-groups-delete-security-groups">Delete Security Groups</a></h3>
 
@@ -384,7 +383,7 @@ Delete an existing security group.
 URL: https://api.dome9.com/cloudsecuritygroup/{groupid} <br \>
 METHOD: DELETE <br \>
 
-* groupid: The groupid in the URL can be either the internal id or the external id. <br \>
+* groupid: The groupid in the URL can be either the security group's Dome9 internal Id or the AWS external Id. <br \>
 
 ####Response
 
@@ -414,13 +413,13 @@ BODY:
 
 ####Request Parameters
 
-* name (string, optional): the account name on Dome9.
+* name (string, optional): the account name in Dome9.
 * credentials (object, required): AWS account credentials.
-  * arn (string, required): the predefine AWS role for Dome9.
-  * secret (string, required): the role External ID.
+  * arn (string, required): the AWS role's ARN to be used by Dome9.
+  * secret (string, required): the role's External ID.
   * type (string, required): 'RoleBased'.
   * isReadOnly (boolean, optional): the attached policy type.
-* fullProtection (boolean, optional): if set as "true" it will import the security groups in full protection, and if set as "false" it will appear in "read only" mode.
+* fullProtection (boolean, optional): if "true", all security groups will be imported in "Full Protection" mode, otherwise all groups will be imported in "Read Only" mode.
 
 ###Update AWS Account
 
@@ -457,19 +456,19 @@ BODY:
 
 * name (string, optional): the account name on Dome9.
 * credentials (object, required): AWS account credentials.
-  * arn (string, required): the predefine AWS role for Dome9.
-  * secret (string, required): the role External ID.
+  * arn (string, required): the AWS role's ARN to be used by Dome9.
+  * secret (string, required): the role's external ID.
   * type (string, required): 'RoleBased'.
   * isReadOnly (boolean, optional): the attached policy type.
-* fullProtection (boolean, optional): if set as "true" it will import the security groups in full protection, and if set as "false" it will appear in "read only" mode.
-* regions: the region data. It is only possible to insert one region in each request.
+* fullProtection (boolean, optional): if "true", all security groups will be imported in "Full Protection" mode, otherwise all groups will be imported in "Read Only" mode.
+* regions: the region data. It is only possible to update one region configuration on a single request.
   * region (string, optional): can be one of the following options - 'us_east_1', 'us_west_1', 'eu_west_1', 'ap_southeast_1', 'ap_northeast_1', 'us_west_2', 'sa_east_1', 'az_1_region_a_geo_1', 'az_2_region_a_geo_1', 'az_3_region_a_geo_1', 'ap_southeast_2', 'mellanox_region', 'us_gov_west_1', 'eu_central_1', 'ap_northeast_2'
-  * hidden (boolean, optional): if set as "true" then the security groups in the region will be displayed, and if set as "false" then the security groups in the region will be hidden. 
-  * newGroupBehavior (string, optional): can be one of the following options - 'ReadOnly', 'FullManage', 'Reset'.
+  * hidden (boolean, optional): if set as "true" then the security groups in the region won't be displayed, and if set as "false" then the security groups in the region will be shown. 
+  * newGroupBehavior (string, optional): can be one of the following: 'ReadOnly', 'FullManage', 'Reset'.
 
 ###Delete AWS Account -
 
-Deletion of an existing AWS Account.
+Delete an existing AWS Account.
 
 URL: https://api.dome9.com/CloudAccounts/{cloudAccountId} <br \>
 METHOD: DELETE <br \>
@@ -480,8 +479,8 @@ cloudAccountId: The Dome9 cloudAccountId.
 
 ###GET
 
-The get request "pulls" all IP Lists, which are attached to the Dome9 account.
-ID: If the request is made without the IP List id then all IP Lists will return.
+The get request fetches all IP Lists, which are configured in the Dome9 account.
+ID: If the request is made without the IP List id then all IP Lists will be fetched.
 
 URL: https://api.dome9.com/IpList/{id} <br \>
 METHOD: GET <br \>
@@ -503,15 +502,15 @@ METHOD: GET <br \>
 ]
 ```
 
-* id (integer): the IP List Id.
-* name (string): the IP List name.
-* description (string): the IP List description.
-* items (Array[IPDescriptor]): an array with the Ips.
+* id (integer): the IP List's Id.
+* name (string): the IP List's name.
+* description (string): the IP List's description.
+* items (Array[IPDescriptor]): an array of Ips.
   * ip (string): IP address.
-  * comment (string): a comment on the ip if exist.
+  * comment (string): a comment on the IP address, if exists.
 
 ###Create IP List
-Creating a new IP List.
+Create a new IP List.
 
 URL: https://api.dome9.com/IpList <br \>
 METHOD: POST <br \>
@@ -531,16 +530,16 @@ BODY:
 
 ####Request Parameters 
 
-* name (string): the IP List name.
-* description (string): the IP List description.
+* name (string): the IP List's name.
+* description (string): the IP List's description.
 * items (Array[IPDescriptor]): an array of IPs.
   * ip (string): IP address.
-  * comment (string): a comment on the IP.
+  * comment (string): a comment on the IP address.
 
 
 ###Update IP List
 
-Updating an existing IP List.
+Update an existing IP List.
 The Update is relevant for the data and the description.
 It will overwrite the existing IP List.
 
@@ -562,19 +561,19 @@ BODY:
 ```
 
 ####Request Parameters
-* id (in the URL): the IP List ID.
-* name (string): the IP List name.
-* description (string): the IP List description.
+* id (in the URL): the IP List's ID.
+* name (string): the IP List's name.
+* description (string): the IP List's description.
 * items (Array[IPDescriptor]): an array of IPs.
   * ip (string): IP address.
-  * comment (string): a comment on the IP.
+  * comment (string): a comment on the IP address.
  
 ###Delete IP List
 
-Deletion of an existing IP List.
+Delete an existing IP List.
 
 URL: https://api.dome9.com/IpList/{id} <br \>
 METHOD: DELETE <br \>
 
-* id: The IP List Id.
+* id: The IP List's Id.
   
