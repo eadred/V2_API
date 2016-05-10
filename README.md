@@ -119,7 +119,6 @@ METHOD: POST <br \>
 BODY:
 ```json
 {
-  "isProtected": "boolean",
   "securityGroupName": "string",
   "description": "string",
   "vpcId": "string",
@@ -172,7 +171,6 @@ BODY:
 
 ####Request Parameters
 
-* isProtected (boolean, optional): if set as "true" it will be in Full Protection or if set as "false" it will be in Read Only mode.
 * securityGroupName (string, optional): The name of the Security Group.
 * description (string, optional): The description of the Security Group.
 * vpcId (string, optional): The VPC of the Security Group.
