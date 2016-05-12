@@ -7,16 +7,16 @@ If there are any other api use-case - *please contact us* at support@dome9.com. 
 
 ## Getting Started
 V2 api keys management is done using using [Dome9 api key management cli tool](apiGenerator/README.md). Once the V2 api is GA this functionality will be included in the Dome9 portal as well.  
-1. This repository contains the [cli tool](apiGenerator/README.md) so follow that readme file and get the tool.
-2. Now, use the tool to generate an api key
+* This repository contains the [cli tool](apiGenerator/README.md) so follow that readme file and get the tool.
+* Now, use the tool to generate an api key
 ```bash
-me$ d9-api -u me@acme.com  -p XXXXXXX create | jq
+me$ d9-api -u me@acme.com -p XXXXXXX create
 {
   "id": "4ded0c7a-224b-4bc3-9094-bb9fd0591c9a",
   "apiKeySecret": "3bmf8a5a3bx4ss3g5mbhrezt"
 }
 ```
-3. Once you have the api key, you are ready to work with the Dome9 V2 api...
+* Once you have the api key, you are ready to work with the Dome9 V2 api...
 
 ## API End Point 
 
