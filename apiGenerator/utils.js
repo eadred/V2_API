@@ -12,7 +12,7 @@ var _ = require('lodash');
 
 var logger = new (winston.Logger)({
   transports: [
-    new (winston.transports.Console)({stderrLevels: ['error', 'debug', 'info', 'warn'], level: 'debug'}) // in this CLI tool - we'll write all logs to STDERR except the resutl of the tool.
+    new (winston.transports.Console)({stderrLevels: ['error', 'debug', 'info', 'warn'], level: 'error'}) // in this CLI tool - we'll write all logs to STDERR except the resutl of the tool.
   ]
 });
 
