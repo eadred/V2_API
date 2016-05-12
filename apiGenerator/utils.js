@@ -1,6 +1,7 @@
 // CHANGE HERE IF GENERATING API KEY FOR OTHER DOME9 SYSTEMS / ENVIRONMENTS
 // ************************************************************************
 var SYSTEM_URL = "https://secure.dome9.com/";
+var LOG_LEVEL = 'error';
 // ************************************************************************
 
 var cookieParser = require('cookie');
@@ -12,7 +13,7 @@ var _ = require('lodash');
 
 var logger = new (winston.Logger)({
   transports: [
-    new (winston.transports.Console)({stderrLevels: ['error', 'debug', 'info', 'warn'], level: 'error'}) // in this CLI tool - we'll write all logs to STDERR except the resutl of the tool.
+    new (winston.transports.Console)({stderrLevels: ['error', 'debug', 'info', 'warn'], level: LOG_LEVEL}) // in this CLI tool - we'll write all logs to STDERR except the resutl of the tool.
   ]
 });
 
