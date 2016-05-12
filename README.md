@@ -1,9 +1,9 @@
-#DOME9 API#
+#DOME9 API V2#
 
-The Dome9 API enables developers to access Dome9 functionality by using an API key.
-This is a ***private preview** of the next generation Dome9 V2 api.
-While there are many more resources implemented these are the resources which are documented and validated for external usage.
-If there are any other api use-case - please feel free to discuss it with us (support@dome9.com). We'll then verify and document these resources / actions.
+The Dome9 API enables developers to access Dome9 functionality by using an API key.  
+This is a **private preview** of the next generation Dome9 V2 api.  
+While there are many more resources already implemented, the resources below are documented and validated for external usage.  
+If there are any other api use-case - *please contact us* at support@dome9.com. We'll then verify and document these resources / actions.
 
 ## Getting Started
 V2 api keys management is done using using [Dome9 api key management cli tool](apiGenerator/README.md). Once the V2 api is GA this functionality will be included in the Dome9 portal as well.  
@@ -44,7 +44,7 @@ me$ curl -u 4ded0c7a-224b-4bc3-9094-bb9fd0591c9a:3bmf8a5a3bx4ss3g5mbhrezt https:
 
 ```
 
-##Supported Features 
+##Supported Resources / Actions 
  
 1. [AWS Security Groups](#aws-security-groups)
 
