@@ -50,7 +50,7 @@ program
 
 program
     .command('create')
-    .description('Add new AWC account')
+    .description('Create a new Dome9 V2 API key')
     .option('-u, --username <username>', 'Dome9 username')
     .option('-p, --password <password>', 'Dome9 password')
     .option('-m, --mfa <mfa>', 'mfa')
@@ -81,7 +81,7 @@ program
 
 program
     .command('delete')
-    .description('Add new AWC account')
+    .description('Delete existing Dome9 V2 api key')
     .option('-i, --id <id>', 'The API Key ID')
     .option('-u, --username <username>', 'Dome9 username')
     .option('-p, --password <password>', 'Dome9 password')

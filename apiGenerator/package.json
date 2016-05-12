@@ -1,8 +1,8 @@
 {
-  "name": "api-generator",
+  "name": "d9-api",
   "version": "1.0.0",
-  "description": "create, get and delete dome9 API key",
-  "main": "dome9Api.js",
+  "description": "create, get and delete dome9 V2 API keys",
+  "main": "d9-api.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,6 +18,6 @@
     "winston": "^2.2.0"
   },
   "bin": {
-    "apiGenerator": "./dome9Api.js"
+    "d9-api": "./d9-api.js"
   }
 }

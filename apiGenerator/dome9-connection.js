@@ -1,11 +1,12 @@
 /**
  * Created by arik.blumin on 5/4/2016.
  */
-var logger = require('winston');
+
 var utils = require('./utils');
 var rp = require('request-promise');
 var Q = require('q');
 var _ = require('lodash');
+var logger = utils.logger;
 
 function Dome9Connection(username, password,mfa){
   this.username = username;
@@ -19,7 +20,7 @@ function Dome9Connection(username, password,mfa){
 Dome9Connection.prototype.login = function(){
   var self = this;
 
-  this.loginPromise = utils.doLogin(self.authenticationCookie, {}, logger, this.username, this.password,this.mfa).then(function () {
+  this.loginPromise = utils.doLogin(self.authenticationCookie, {}, this.username, this.password,this.mfa).then(function () {
   }, function (error) {
     throw 'Failed to login\n' + 'original massage: \n' + error;
   }).then(function(){
@@ -33,7 +34,7 @@ Dome9Connection.prototype.login = function(){
       resolveWithFullResponse: true
     };
 
-    v2AppRequestOptions = utils.addCookies(v2AppRequestOptions, self.authenticationCookie, logger);
+    v2AppRequestOptions = utils.addCookies(v2AppRequestOptions, self.authenticationCookie);
 
 
     return rp(v2AppRequestOptions)
@@ -61,7 +62,7 @@ Dome9Connection.prototype.requestV2WebApi = function(requestOptions){
   }
 
   return this.loginPromise.then(function(){
-    requestOptions = utils.addCookies(requestOptions, this.authenticationCookie, logger);
+    requestOptions = utils.addCookies(requestOptions, this.authenticationCookie);
     requestOptions.headers = requestOptions.headers || {};
     requestOptions.headers['X-XSRF-TOKEN'] = this.xsrfToken;
     requestOptions.resolveWithFullResponse = true;

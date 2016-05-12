@@ -1,14 +1,22 @@
-/**
- * Created by arik.blumin on 5/4/2016.
- */
+// CHANGE HERE IF GENERATING API KEY FOR OTHER DOME9 SYSTEMS / ENVIRONMENTS
+// ************************************************************************
+var SYSTEM_URL = "https://secure.dome9.com/";
+// ************************************************************************
+
 var cookieParser = require('cookie');
 var Q = require("q");
 var winston = require('winston');
 var request = require('request');
 var utils = require('./utils');
-
 var _ = require('lodash');
-var collectedCookies, parameters, logger;
+
+var logger = new (winston.Logger)({
+  transports: [
+    new (winston.transports.Console)({stderrLevels: ['error', 'debug', 'info', 'warn'], level: 'debug'}) // in this CLI tool - we'll write all logs to STDERR except the resutl of the tool.
+  ]
+});
+
+var collectedCookies, parameters;
 var proxy = process.env.http_proxy ? process.env.http_proxy : undefined;
 
 function addCookie(collectedCookies, cookie) {
@@ -25,11 +33,9 @@ function addCookie(collectedCookies, cookie) {
   }
 }
 
-exports.addCookie = function (collectedCookies, cookie) {
-  return addCookie(collectedCookies, cookie);
-}
+exports.addCookie = addCookie;
 
-function addCookies(reqOpts, collectedCookies, logger) {
+function addCookies(reqOpts, collectedCookies) {
   for (var cookieIdx = 0; cookieIdx < collectedCookies.length; cookieIdx++) {
     var cookieDomain = cookieParser.parse(collectedCookies[cookieIdx][0]).Domain;
     if ((undefined === cookieDomain) || (("" === cookieDomain)) || (reqOpts.url.indexOf(cookieDomain) >= 0)) {
@@ -43,11 +49,9 @@ function addCookies(reqOpts, collectedCookies, logger) {
   return reqOpts;
 }
 
-exports.addCookies = function (reqOpts, collectedCookies, logger) {
-  return addCookies(reqOpts, collectedCookies, logger);
-}
+exports.addCookies = addCookies;
 
-function doFirstRequest(collectedCookies, parameters, logger) {
+function doFirstRequest(collectedCookies, parameters) {
   var deferred = Q.defer();
 
   var reqOpts = {
@@ -83,13 +87,11 @@ function doFirstRequest(collectedCookies, parameters, logger) {
 
       deferred.resolve();
     }
-
   });
-
   return deferred.promise;
 }
 
-function doSecondRequest(collectedCookies, parameters, logger, username, password,mfa) {
+function doSecondRequest(collectedCookies, parameters, username, password,mfa) {
   var deferred = Q.defer();
   var reqOpts = {
     url: utils.url+'account/logon',
@@ -102,7 +104,7 @@ function doSecondRequest(collectedCookies, parameters, logger, username, passwor
     }
   };
 
-  reqOpts = addCookies(reqOpts, collectedCookies, logger);
+  reqOpts = addCookies(reqOpts, collectedCookies);
   if (mfa) reqOpts.body = 'UserName=' + encodeURIComponent(username) + '&Password=' + encodeURIComponent(password) + '&mfa=on&MfaToken=' + mfa;
   else reqOpts.body = 'UserName=' + encodeURIComponent(username) + '&Password=' + encodeURIComponent(password);
   request(reqOpts, function (err, res, body) {
@@ -111,7 +113,7 @@ function doSecondRequest(collectedCookies, parameters, logger, username, passwor
       deferred.reject(err);
     }
     else if (undefined !== res) {
-      logger.info('Processing request for tokens in Cookies...%s %s', reqOpts.method, reqOpts.url);
+      logger.debug('Processing request for tokens in Cookies...%s %s', reqOpts.method, reqOpts.url);
 
       if ((res.statusCode === 304) || (res.statusCode === 302) || (res.statusCode === 200)) {
         logger.info('status Response ok:', res.statusCode);
@@ -126,7 +128,6 @@ function doSecondRequest(collectedCookies, parameters, logger, username, passwor
       if ((undefined !== res.headers) && (undefined !== res.headers['Set-Cookie'] )) {
         addCookie(collectedCookies, res.headers['Set-cookie']);
       }
-      logger.info("log-in is done");
       deferred.resolve();
     }
 
@@ -134,23 +135,23 @@ function doSecondRequest(collectedCookies, parameters, logger, username, passwor
   return deferred.promise;
 }
 
-function doLogin(collectedCookies, parameters, logger, username, password,mfa) {
+function doLogin(collectedCookies, parameters, username, password,mfa) {
   // doing logon
-  return doFirstRequest(collectedCookies, parameters, logger).then(function () {
-    return doSecondRequest(collectedCookies, parameters, logger, username, password,mfa);
+  return doFirstRequest(collectedCookies, parameters).then(function () {
+    return doSecondRequest(collectedCookies, parameters, username, password,mfa);
   });
 }
 
 exports.doLogin = doLogin;
 
-function basicRequestProcess(err, res, body, collectedCookies, parameters, logger, reqOpts) {
+function basicRequestProcess(err, res, body, collectedCookies, parameters, reqOpts) {
 
   if (err) {
     logger.error('request on url %s error %s %s', reqOpts.method, reqOpts.url, JSON.stringify(err));
     return err;
   }
   else if (undefined !== res) {
-    logger.info('Processing request...%s %s', reqOpts.method, reqOpts.url);
+    logger.debug('Processing request...%s %s', reqOpts.method, reqOpts.url);
 
     if ((res.statusCode === 304) || (res.statusCode === 302) || (res.statusCode === 200)) {
       logger.info('status Response  ok');
@@ -169,10 +170,7 @@ function basicRequestProcess(err, res, body, collectedCookies, parameters, logge
   return;
 }
 
-
-exports.basicRequestProcess = function (err, res, body, collectedCookies, parameters, logger, reqOpts) {
-  return basicRequestProcess(err, res, body, collectedCookies, parameters, logger, reqOpts);
-}
+exports.basicRequestProcess = basicRequestProcess;
 
 function RequestOptions(url, method, body,xsrf) {
   this.reqOpts = {
@@ -191,12 +189,6 @@ function RequestOptions(url, method, body,xsrf) {
 }
 exports.RequestOptions = RequestOptions;
 
-exports.logger = new (winston.Logger)({
-  transports: [
-    new (winston.transports.Console)({stderrLevels: ['error', 'debug', 'info', 'warn'], level: 'debug'}) // in this CLI tool - we'll write all logs to STDERR except the resutl of the tool.
-  ]
-})
-
-exports.v2Url = "https://secure.dome9.com/api/";
-
-exports.url = "https://secure.dome9.com/";
+exports.logger = logger;
+exports.v2Url = SYSTEM_URL + "api/";
+exports.url = SYSTEM_URL;
