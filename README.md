@@ -167,7 +167,7 @@ BODY:
     "inbound": [
       {
         "name": "string" /*required*/,
-		"id": "string",
+        "id": "string",
         "description": null,
         "protocolType": "string" /*required*/,
         "port": "string" /*required*/,
@@ -187,7 +187,7 @@ BODY:
     "outbound": [
       {
         "name": "string" /*required*/,
-		"id": "string",
+        "id": "string",
         "description": "string",
         "protocolType": "string" /*required*/,
         "port": "string" /*required*/,
@@ -305,7 +305,7 @@ BODY:
     "inbound": [
       {
         "name": "string" /*required*/,
-		"id": "string",
+        "id": "string",
         "description": null,
         "protocolType": "string" /*required*/,
         "port": "string" /*required*/,
@@ -325,7 +325,7 @@ BODY:
     "outbound": [
       {
         "name": "string" /*required*/,
-		"id": "string",
+        "id": "string",
         "description": "string",
         "protocolType": "string" /*required*/,
         "port": "string" /*required*/,
