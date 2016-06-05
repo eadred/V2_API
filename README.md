@@ -79,7 +79,7 @@ groupid: if the request is made without the security group id, then all security
    "isProtected": "boolean",
    "securityGroupName": "string",
    "vpcId": "string",
-   "VpcName": "string",
+   "vpcName": "string",
    "regionId": "string",
    "cloudAccountId": "string",
    "cloudAccountName": "string",
@@ -127,7 +127,6 @@ BODY:
    "isProtected": "boolean",
    "securityGroupName": "string",
    "vpcId": "string",
-   "vpcName": "string",
    "regionId": "string",
    "cloudAccountId": "string",
    "cloudAccountName": "string",
@@ -142,7 +141,6 @@ BODY:
 * securityGroupName (string, optional): The name of the Security Group.
 * description (string, optional): The description of the Security Group.
 * vpcId (string, optional): The VPC id of the Security Group.
-* vpcName (string, optional): The VPC name of the Security Group.
 * regionId (string, optional): Can be one of the following regions - 'us_east_1', 'us_west_1', 'eu_west_1', 'ap_southeast_1', 'ap_northeast_1', 'us_west_2', 'sa_east_1', 'az_1_region_a_geo_1', 'az_2_region_a_geo_1', 'az_3_region_a_geo_1', 'ap_southeast_2', 'mellanox_region', 'us_gov_west_1', 'eu_central_1', 'ap_northeast_2'
 * cloudAccountId (string, optional): Dome9 Cloud Account ID.
 * services (object, optional) - The security group's inbound and outbound services.
@@ -159,7 +157,6 @@ BODY:
   "securityGroupName": "string",
   "description": "string",
   "vpcId": "string",
-  "vpcName": "string",
   "regionId": "string",
   "cloudAccountId": "string",
   "cloudAccountName": "string",
@@ -239,7 +236,6 @@ BODY:
 * securityGroupName (string, optional): The name of the Security Group.
 * description (string, optional): The description of the Security Group.
 * vpcId (string, optional): The VPC id of the Security Group.
-* vpcName (string, optional): The VPC name of the Security Group.
 * regionId (string, optional): Can be one of the following regions - 'us_east_1', 'us_west_1', 'eu_west_1', 'ap_southeast_1', 'ap_northeast_1', 'us_west_2', 'sa_east_1', 'az_1_region_a_geo_1', 'az_2_region_a_geo_1', 'az_3_region_a_geo_1', 'ap_southeast_2', 'mellanox_region', 'us_gov_west_1', 'eu_central_1', 'ap_northeast_2'
 * cloudAccountId (string, optional): Dome9 Cloud Account ID.
 * services (object, optional) - The group's inbound and outbound services.
