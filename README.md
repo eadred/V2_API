@@ -612,4 +612,29 @@ METHOD: DELETE <br \>
 
 * id: The IP List's Id.
   
-##<h3><a name="msp">MSP (Manage Service Provider</a></h3>
+##<h3><a name="msp">MSP (Manage Services Provider)</a></h3>
+
+To use MSP  it require to generate a token and to provide it in the authentication header.
+
+###Create Token
+The token creation is based on JSON Web Token (JWT), you can read more about it in https://jwt.io/introduction/.
+
+URL: /auth/assume-role/jwt <br \>
+METHOD: POST <br \>
+
+BODY:
+```json
+{
+  "accountId": "string",
+  "roleName": "string",
+  "expirationInMin": "integer"
+}
+```
+
+####Request Parameters
+* accountId (in the URL): the manged DOME9 account ID.
+* roleName (string): the type of role you are login with (such as Super User, Auditor etc.) .
+* expirationInMin (string): the token experation minutes.
+
+###Authentication
+
