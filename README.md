@@ -52,6 +52,8 @@ me$ curl -u 4ded0c7a-224b-4bc3-9094-bb9fd0591c9a:3bmf8a5a3bx4ss3g5mbhrezt https:
 
 3. [IP Lists](#ip-lists)
 
+4. [MSP](#msp)
+
 ##<a name="aws-security-groups">AWS Security Groups</a>
 1. [GET](#aws-security-groups-get)
 2. [Change Protection Mode](#aws-security-groups-protection-mode)
@@ -61,7 +63,6 @@ me$ curl -u 4ded0c7a-224b-4bc3-9094-bb9fd0591c9a:3bmf8a5a3bx4ss3g5mbhrezt https:
 6. [Overwrite service](#aws-security-groups-overwrite-service)
 7. [Delete service](#aws-security-groups-delete-service)
 8. [Delete Security Groups](#aws-security-groups-delete-security-groups)
-9. [MSP](#msp)
 
 <h3><a name="aws-security-groups-get">GET</a></h3> 
 
@@ -611,4 +612,4 @@ METHOD: DELETE <br \>
 
 * id: The IP List's Id.
   
-<h3><a name="msp">MSP (Manage Service Provider</a></h3>
+##<h3><a name="msp">MSP (Manage Service Provider</a></h3>
