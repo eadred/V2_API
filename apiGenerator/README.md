@@ -28,10 +28,10 @@ This tool will be integrated in the future into Dome9 Web console once the V2 AP
 ## How to run ##
 ### If the tool is *not* globally installed ###
 1.  Using console, navigate to  apiGenerator directory.
-2. run the command ```node d9-api --help``` to understand the command line arguments, and for each command run ```node d9-api <command> --help``` for example - ```node d9-api create --help```
+2. run the command ```node d9-api --help``` to understand the command line arguments, and for each command run ```node d9-api <command> --help``` for example - ```node d9-api create -u me@acme.com -p mypass```
 
 ### If the tool is globally installed ###
-run the command ```d9-api --help``` to understand the command line arguments, and for each command run ```d9-api <command> --help``` for example - ```d9-api create --help```
+run the command ```d9-api --help``` to understand the command line arguments, and for each command run ```d9-api <command> --help``` for example - ```d9-api create -u me@acme.com -p mypass```
 
 
 ### Available commands ###
@@ -46,7 +46,12 @@ run the command ```d9-api --help``` to understand the command line arguments, an
 * -m or --mfa MFA : For users with MFA. 
 * -i or --id : The API Key ID  (**required for the 'delete' command**).
 
-
+##Examples##
 An example of how to generate API key:
-```d9-api -u me@acme.com -p mypass create```
-
+  ```d9-api -u me@acme.com -p mypass create```
+  
+An example of how to remove API key:
+  ```d9-api -u me@acme.com -p mypass --id apiKeyID delete```
+  
+An example of how to get your existing API keys:
+  ```d9-api -u me@acme.com -p mypass get```
