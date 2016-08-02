@@ -9,20 +9,20 @@ This tool will be integrated in the future into Dome9 Web console once the V2 AP
 ## Installation ##
 1. Clone this repo into your local machine
 
-```git clone https://github.com/Dome9/V2_API.git```
+  ```git clone https://github.com/Dome9/V2_API.git```
 
 2. Navigate to the apiGenerator folder:
 
-```cd apiGenerator``` 
+  ```cd apiGenerator``` 
 
 3. Install the tool's dependencies and register it:
 
-```npm install -g```
+  ```npm install -g```
 
-NOTE: This will also register the tool so it is accessible globally.  
-it is possible to run the tool without globally registering it.  
-In this case just omit the ```-g``` param and run the tool with ```node```:   
-```node d9-api --help```
+  NOTE: This will also register the tool so it is accessible globally.  
+  it is possible to run the tool without globally registering it.  
+  In this case just omit the ```-g``` param and run the tool with ```node```:   
+  ```node d9-api --help```
 
 
 ## How to run ##
