@@ -7,15 +7,15 @@ This tool will be integrated in the future into Dome9 Web console once the V2 AP
 ( Can be Download <a href="https://nodejs.org">here</a> )
 
 ## Installation ##
-1 Clone this repo into your local machine
+1. Clone this repo into your local machine
 
 ```git clone https://github.com/Dome9/V2_API.git```
 
-2 Navigate to the apiGenerator folder:
+2. Navigate to the apiGenerator folder:
 
 ```cd apiGenerator``` 
 
-3 Install the tool's dependencies and register it:
+3. Install the tool's dependencies and register it:
 
 ```npm install -g```
 
