@@ -39,7 +39,7 @@ program
                     process.stdout.write(data);
                     process.exit(0);
                 }, function (err) {
-                    logger.info(err);
+                  console.error(err.error);
                     process.exit(1);
                 }, function (err) {
                     logger.info(err);
