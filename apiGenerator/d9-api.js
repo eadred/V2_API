@@ -42,7 +42,7 @@ program
                   console.error(err.error);
                     process.exit(1);
                 }, function (err) {
-                    logger.info(err);
+                    console.log(err);
                 })
         }
 
