@@ -34,7 +34,7 @@ The base URL for Dome9 API V2 is:  ```https://api.dome9.com/v2/```
 The API is using HTTP Basic Authentication scheme.  
 You'll use the api key *id* as the user name and the *apiKeySecret* as the password. 
 
-Example:
+**Example:
 ```bash
 
 me$ curl -u 4ded0c7a-224b-4bc3-9094-bb9fd0591c9a:3bmf8a5a3bx4ss3g5mbhrezt https://api.dome9.com/v2/CloudAccounts 
@@ -68,6 +68,11 @@ The GET request returns all cloud security groups, which are protected by Dome9.
 URL: /CloudSecurityGroup/{groupid} <br \>
 METHOD: GET <br \> <br \>
 groupid: if the request is made without the security group id, then all security groups protected by Dome9 will be returned.
+
+**Example:
+```bash
+curl -X GET --header 'Accept: application/json' 'https://secure.dome9.com/api/cloudsecuritygroup/529900'
+```
 
 ####Response:
 
@@ -116,6 +121,15 @@ BODY:
 
 ####Request Parameters
 * protectionMode(string):  can be either 'FullManage' or 'ReadOnly'
+
+**Example:
+```bash
+
+curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+  "protectionMode": "ReadOnly"
+}' 'https://secure.dome9.com/api/cloudsecuritygroup/429618/protection-mode'
+
+```
 
 ####Response:
 
@@ -226,6 +240,21 @@ BODY:
  * icmpType (string, optional): In case of ICMP - 'EchoReply', 'DestinationUnreachable', 'SourceQuench', 'Redirect', 'AlternateHostAddress', 'Echo', 'RouterAdvertisement', 'RouterSelection', 'TimeExceeded', 'ParameterProblem', 'Timestamp', 'TimestampReply', 'InformationRequest', 'InformationReply', 'AddressMaskRequest', 'AddressMaskReply', 'Traceroute', 'DatagramConversionError', 'MobileHostRedirect', 'IPv6WhereAreYou', 'IPv6IAmHere', 'MobileRegistrationRequest', 'MobileRegistrationReply', 'DomainNameRequest', 'DomainNameReply', 'SKIP', 'Photuris', 'All'
 * tags (object, optional)
 
+**Example:
+```bash
+curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+
+
+  "isProtected": true,
+  "securityGroupName": "string",
+  "description": "string",
+  "vpcId": "vpc-*******",
+  "regionId": "us_east_1",
+  "cloudAccountId": "*******-****-****-****-***********",
+  "tags": {}
+}' 'https://secure.dome9.com/api/CloudSecurityGroup'
+```
+
 ####Response 
 
 
@@ -281,6 +310,28 @@ BODY:
   * data (object): For CIDR - "cidr":'IP', For IP-List - "id":"IP-LIST ID","name":"IP-LIST NAME"}, For SG reference - {"extid": "AWS SG ID", "name": "SG NAME"}, for Magic IP - {"type": "MagicIP","data": {"name": "Magic IP Name"}, for DNS - {"type": "DNS","data": {"dns": "DNS ADDRESS","note": 'optional comment'}}
 * icmpType (string, optional): In case of ICMP - 'EchoReply', 'DestinationUnreachable', 'SourceQuench', 'Redirect', 'AlternateHostAddress', 'Echo', 'RouterAdvertisement', 'RouterSelection', 'TimeExceeded', 'ParameterProblem', 'Timestamp', 'TimestampReply', 'InformationRequest', 'InformationReply', 'AddressMaskRequest', 'AddressMaskReply', 'Traceroute', 'DatagramConversionError', 'MobileHostRedirect', 'IPv6WhereAreYou', 'IPv6IAmHere', 'MobileRegistrationRequest', 'MobileRegistrationReply', 'DomainNameRequest', 'DomainNameReply', 'SKIP', 'Photuris', 'All'
 
+**Example:
+```bash
+curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+"id":"6-22",
+"name":"SSH",
+"description":"Secure Shell access",
+"protocolType":"TCP",
+"port":"22",
+"openForAll":false,
+"scope":[
+{
+"type":"CIDR",
+"data":{
+"cidr":"10.0.0.1/32",
+"note":null
+}
+}
+],
+"inbound":true,
+"icmpType":null
+}' 'https://secure.dome9.com/api/cloudsecuritygroup/543921/services/Inbound'
+```
 ####Response
 
 Similar to the request parameters.
@@ -356,9 +407,71 @@ BODY:
 * icmpType (string, optional): in case of ICMP - 'EchoReply', 'DestinationUnreachable', 'SourceQuench', 'Redirect', 'AlternateHostAddress', 'Echo', 'RouterAdvertisement', 'RouterSelection', 'TimeExceeded', 'ParameterProblem', 'Timestamp', 'TimestampReply', 'InformationRequest', 'InformationReply', 'AddressMaskRequest', 'AddressMaskReply', 'Traceroute', 'DatagramConversionError', 'MobileHostRedirect', 'IPv6WhereAreYou', 'IPv6IAmHere', 'MobileRegistrationRequest', 'MobileRegistrationReply', 'DomainNameRequest', 'DomainNameReply', 'SKIP', 'Photuris', 'All'
 * tags (object): the format is "key":"value".
 
+**Example:
+```bash
+curl -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+  "securityGroupId": ******,
+  "externalId": "sg-******",
+  "isProtected": true,
+  "securityGroupName": "string",
+  "description": "string",
+  "vpcId": "vpc-*******",
+  "vpcName": "testt",
+  "regionId": "us_east_1",
+  "cloudAccountId": "*****************************",
+  "cloudAccountName": "Staging Automation",
+  "services": {
+    "inbound": [
+      {
+        "id": "6-22",
+        "name": "SSH",
+        "description": "Secure Shell access",
+        "protocolType": "TCP",
+        "port": "22",
+        "openForAll": false,
+        "scope": [
+          {
+            "type": "CIDR",
+            "data": {
+              "cidr": "10.0.0.1/32",
+              "note": null
+            }
+          }
+        ],
+        "inbound": true,
+        "icmpType": null
+      }
+    ],
+    "outbound": [
+      {
+        "id": "-1",
+        "name": "All Traffic",
+        "description": "Allow all outbound traffic",
+        "protocolType": "ALL",
+        "port": "",
+        "openForAll": true,
+        "scope": [
+          {
+            "type": "CIDR",
+            "data": {
+              "cidr": "0.0.0.0/0",
+              "note": "Allow All Traffic"
+            }
+          }
+        ],
+        "inbound": false,
+        "icmpType": null
+      }
+    ]
+  },
+  "tags": {}
+}' 'https://secure.dome9.com/api/cloudsecuritygroup/543921'
+```
+
 ####Response
 
 Similar to the request parameters.
+
 
 <h3><a name="aws-security-groups-overwrite-service">Overwrite Service</a></h3>
 
@@ -402,6 +515,31 @@ BODY:
   * data (object): for CIDR - "cidr":'IP', For IP-List - "id":"IP-LIST ID","name":"IP-LIST NAME"}, For SG reference - {"extid": "AWS SG ID", "name": "SG NAME"}, for Magic IP - {"type": "MagicIP","data": {"name": "Magic IP Name"}, for DNS - {"type": "DNS","data": {"dns": "DNS ADDRESS","note": 'optional comment'}}
 * icmpType (string, optional): in case of ICMP - 'EchoReply', 'DestinationUnreachable', 'SourceQuench', 'Redirect', 'AlternateHostAddress', 'Echo', 'RouterAdvertisement', 'RouterSelection', 'TimeExceeded', 'ParameterProblem', 'Timestamp', 'TimestampReply', 'InformationRequest', 'InformationReply', 'AddressMaskRequest', 'AddressMaskReply', 'Traceroute', 'DatagramConversionError', 'MobileHostRedirect', 'IPv6WhereAreYou', 'IPv6IAmHere', 'MobileRegistrationRequest', 'MobileRegistrationReply', 'DomainNameRequest', 'DomainNameReply', 'SKIP', 'Photuris', 'All'
 
+**Example:
+```bash
+
+curl -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+        "id": "6-22",
+        "name": "SSH",
+        "description": "Secure Shell access",
+        "protocolType": "TCP",
+        "port": "22",
+        "openForAll": false,
+        "scope": [
+          {
+            "type": "CIDR",
+            "data": {
+              "cidr": "10.0.0.2/32",
+              "note": null
+            }
+          }
+        ],
+        "inbound": true,
+        "icmpType": null
+      }' 'https://secure.dome9.com/api/cloudsecuritygroup/******/services/Inbound'
+
+```
+
 ####Response
 
 Similar to the request parameters.
@@ -416,6 +554,11 @@ METHOD: DELETE <br \>
 * groupid: The groupid in the URL can be either the internal id or the external id.
 policyType: if set as "Inbound" it will delete the service in the security group's inbound policy and if set as "Outbound" it will delete the service in the security group's outbound policy.
 
+**Example:
+```bash
+https://secure.dome9.com/api/cloudsecuritygroup/*****/services/Inbound/6-22
+```
+
 ####Response
 
 If successful the response is null.
@@ -428,6 +571,12 @@ URL: /cloudsecuritygroup/{groupid} <br \>
 METHOD: DELETE <br \>
 
 * groupid: The groupid in the URL can be either the security group's Dome9 internal Id or the AWS external Id. <br \>
+
+**Example:
+```bash
+curl -X DELETE 'https://secure.dome9.com/api/cloudsecuritygroup/******'
+
+```
 
 ####Response
 
@@ -464,6 +613,20 @@ BODY:
   * type (string, required): 'RoleBased'.
   * isReadOnly (boolean, optional): the attached policy type.
 * fullProtection (boolean, optional): if "true", all security groups will be imported in "Full Protection" mode, otherwise all groups will be imported in "Read Only" mode.
+
+**Example:
+```bash
+curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+  "name": "string",
+  "credentials": {
+    "arn": "arn:aws:iam::***********:role/dome9-connect-staging",
+    "secret": "********" ,
+    "type": "RoleBased" ,
+    "isReadOnly": "false"
+  },
+  "fullProtection": "false"
+}' 'https://secure.dome9.com/api/CloudAccounts'
+```
 
 ###Update AWS Account
 
@@ -510,6 +673,35 @@ BODY:
   * hidden (boolean, optional): if set as "true" then the security groups in the region won't be displayed, and if set as "false" then the security groups in the region will be shown. 
   * newGroupBehavior (string, optional): can be one of the following: 'ReadOnly', 'FullManage', 'Reset'.
 
+**Example:
+  ```bash
+
+  curl -X PATCH --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+    "id": "******************************",
+    "vendor": "aws",
+    "name": "string",
+    "externalAccountNumber": "**********",
+    "error": null,
+    "credentials": {
+      "arn": "arn:aws:iam::88888888888888:role/dome9-connect",
+      "secret": ***********,
+      "type": "RoleBased",
+      "isReadOnly": false
+    },
+    "netSec": {
+      "regions": [
+        {
+          "region": "us_east_1",
+          "name": "N. Virginia",
+          "hidden": false,
+          "newGroupBehavior": "ReadOnly"
+        }
+      ]
+    },
+    "fullProtection": false,
+    "allowReadOnly": false
+  }' 'https://secure.dome9.com/api/CloudAccounts/*****************************'
+```
 ###Delete AWS Account -
 
 Delete an existing AWS Account. (Disconnect it from the Dome9 system)
@@ -518,6 +710,11 @@ URL: /CloudAccounts/{cloudAccountId} <br \>
 METHOD: DELETE <br \>
 
 cloudAccountId: The Dome9 cloudAccountId. 
+
+**Example:
+```bash
+curl -X DELETE 'https://secure.dome9.com/api/CloudAccounts/**************************'
+```
 
 ##<a name="ip-lists">IP Lists </a>
 
@@ -553,6 +750,12 @@ METHOD: GET <br \>
   * ip (string): IP address.
   * comment (string): a comment on the IP address, if exists.
 
+**Example:
+```bash
+curl -X GET --header 'Accept: application/json' 'https://secure.dome9.com/api/IpList'
+```
+
+
 ###Create IP List
 Create a new IP List.
 
@@ -570,6 +773,20 @@ BODY:
     }
   ]
 }
+```
+
+**Example:
+```bash
+curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+  "name": "string",
+  "description": "string",
+  "items": [
+    {
+      "ip": "10.0.0.1/32",
+      "comment": "string"
+    }
+  ]
+}' 'https://secure.dome9.com/api/IpList'
 ```
 
 ####Request Parameters 
@@ -611,7 +828,22 @@ BODY:
 * items (Array[IPDescriptor]): an array of IPs.
   * ip (string): IP address.
   * comment (string): a comment on the IP address.
- 
+
+**Example:
+ ```bash
+ curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+   "id":121
+   "name": "string",
+   "description": "string",
+   "items": [
+     {
+       "ip": "10.0.0.1/32",
+       "comment": "string"
+     }
+   ]
+ }' 'https://secure.dome9.com/api/IpList'
+ ```
+
 ###Delete IP List
 
 Delete an existing IP List.
@@ -620,3 +852,8 @@ URL: /IpList/{id} <br \>
 METHOD: DELETE <br \>
 
 * id: The IP List's Id.
+
+**Example:
+```bash
+curl -X DELETE 'https://secure.dome9.com/api/IpList/2841'
+```
