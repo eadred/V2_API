@@ -7,7 +7,7 @@ If there are any other api use-case - *please contact us* at support@dome9.com. 
 
 ## Getting Started
 
-For creating a new API key please navigate to <a href="https://secure.falconetix.com/v2/settings/credentials"> Credentials tab in My setting</a> page
+For creating a new API key please navigate to <a href="https://secure.dome9.com/v2/settings/credentials"> Credentials tab in My setting</a> page
 
 as you can see in the screen shot below, you have a tab of **V2 API**, you can manage here your API keys.
 
