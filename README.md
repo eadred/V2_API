@@ -71,7 +71,7 @@ groupid: if the request is made without the security group id, then all security
 
 **Example:**
 ```bash
-curl -X GET --header 'Accept: application/json' 'https://secure.dome9.com/api/cloudsecuritygroup/529900'
+curl -X GET --header 'Accept: application/json' 'https://api.dome9.com/v2/cloudsecuritygroup/529900'
 ```
 
 ####Response:
@@ -127,7 +127,7 @@ BODY:
 
 curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
   "protectionMode": "ReadOnly"
-}' 'https://secure.dome9.com/api/cloudsecuritygroup/429618/protection-mode'
+}' 'https://api.dome9.com/v2/cloudsecuritygroup/429618/protection-mode'
 
 ```
 
@@ -252,7 +252,7 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
   "regionId": "us_east_1",
   "cloudAccountId": "*******-****-****-****-***********",
   "tags": {}
-}' 'https://secure.dome9.com/api/CloudSecurityGroup'
+}' 'https://api.dome9.com/v2/CloudSecurityGroup'
 ```
 
 ####Response 
@@ -330,7 +330,7 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
 ],
 "inbound":true,
 "icmpType":null
-}' 'https://secure.dome9.com/api/cloudsecuritygroup/543921/services/Inbound'
+}' 'https://api.dome9.com/v2/cloudsecuritygroup/543921/services/Inbound'
 ```
 ####Response
 
@@ -409,7 +409,7 @@ BODY:
 
 **Example:**
 ```bash
-curl -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
   "securityGroupId": ******,
   "externalId": "sg-******",
   "isProtected": true,
@@ -465,7 +465,7 @@ curl -X PUT --header 'Content-Type: application/json' --header 'Accept: applicat
     ]
   },
   "tags": {}
-}' 'https://secure.dome9.com/api/cloudsecuritygroup/543921'
+}' 'https://api.dome9.com/v2/cloudsecuritygroup/543921'
 ```
 
 ####Response
@@ -518,7 +518,7 @@ BODY:
 **Example:**
 ```bash
 
-curl -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
         "id": "6-22",
         "name": "SSH",
         "description": "Secure Shell access",
@@ -536,7 +536,7 @@ curl -X PUT --header 'Content-Type: application/json' --header 'Accept: applicat
         ],
         "inbound": true,
         "icmpType": null
-      }' 'https://secure.dome9.com/api/cloudsecuritygroup/******/services/Inbound'
+      }' 'https://api.dome9.com/v2/cloudsecuritygroup/******/services/Inbound'
 
 ```
 
@@ -556,7 +556,7 @@ policyType: if set as "Inbound" it will delete the service in the security group
 
 **Example:**
 ```bash
-https://secure.dome9.com/api/cloudsecuritygroup/*****/services/Inbound/6-22
+https://api.dome9.com/v2/cloudsecuritygroup/*****/services/Inbound/6-22
 ```
 
 ####Response
@@ -574,7 +574,7 @@ METHOD: DELETE <br \>
 
 **Example:**
 ```bash
-curl -X DELETE 'https://secure.dome9.com/api/cloudsecuritygroup/******'
+curl -u id:secret -X DELETE 'https://api.dome9.com/v2/cloudsecuritygroup/******'
 
 ```
 
@@ -616,7 +616,7 @@ BODY:
 
 **Example:**
 ```bash
-curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
   "name": "string",
   "credentials": {
     "arn": "arn:aws:iam::***********:role/dome9-connect-staging",
@@ -625,7 +625,7 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
     "isReadOnly": "false"
   },
   "fullProtection": "false"
-}' 'https://secure.dome9.com/api/CloudAccounts'
+}' 'https://api.dome9.com/v2/CloudAccounts'
 ```
 
 ###Update AWS Account
@@ -676,7 +676,7 @@ BODY:
 **Example:**
   ```bash
 
-  curl -X PATCH --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+  curl -u id:secret -X PATCH --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
     "id": "******************************",
     "vendor": "aws",
     "name": "string",
@@ -700,7 +700,7 @@ BODY:
     },
     "fullProtection": false,
     "allowReadOnly": false
-  }' 'https://secure.dome9.com/api/CloudAccounts/*****************************'
+  }' 'https://api.dome9.com/v2/CloudAccounts/*****************************'
 ```
 ###Delete AWS Account -
 
@@ -713,7 +713,7 @@ cloudAccountId: The Dome9 cloudAccountId.
 
 **Example:**
 ```bash
-curl -X DELETE 'https://secure.dome9.com/api/CloudAccounts/**************************'
+curl -u id:secret -X DELETE 'https://api.dome9.com/v2/CloudAccounts/**************************'
 ```
 
 ##<a name="ip-lists">IP Lists </a>
@@ -752,7 +752,7 @@ METHOD: GET <br \>
 
 **Example:**
 ```bash
-curl -X GET --header 'Accept: application/json' 'https://secure.dome9.com/api/IpList'
+curl -u id:secret -X GET --header 'Accept: application/json' 'https://api.dome9.com/v2/IpList'
 ```
 
 
@@ -777,7 +777,7 @@ BODY:
 
 **Example:**
 ```bash
-curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
   "name": "string",
   "description": "string",
   "items": [
@@ -786,7 +786,7 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
       "comment": "string"
     }
   ]
-}' 'https://secure.dome9.com/api/IpList'
+}' 'https://api.dome9.com/v2/IpList'
 ```
 
 ####Request Parameters 
@@ -831,7 +831,7 @@ BODY:
 
 **Example:**
  ```bash
- curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
    "id":121
    "name": "string",
    "description": "string",
@@ -841,7 +841,7 @@ BODY:
        "comment": "string"
      }
    ]
- }' 'https://secure.dome9.com/api/IpList'
+ }' 'https://api.dome9.com/v2/IpList'
  ```
 
 ###Delete IP List
@@ -855,5 +855,5 @@ METHOD: DELETE <br \>
 
 **Example:**
 ```bash
-curl -X DELETE 'https://secure.dome9.com/api/IpList/2841'
+curl -u id:secret -X DELETE 'https://api.dome9.com/v2/IpList/2841'
 ```
