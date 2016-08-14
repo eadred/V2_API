@@ -37,7 +37,7 @@ You'll use the api key *id* as the user name and the *apiKeySecret* as the passw
 **Example:**
 ```bash
 
-me$ curl -u 4ded0c7a-224b-4bc3-9094-bb9fd0591c9a:3bmf8a5a3bx4ss3g5mbhrezt https://api.dome9.com/v2/CloudAccounts 
+me$ curl -u 4ded0c7a-224b-4bc3-9094-bb9fd0591c9a:3bmf8a5a3bx4ss3g5mbhrezt https://api.dome9.com/v2/CloudAccounts
 [{"id":"1eeab7ac-8443-4d18-aa0b-e3201ff1d731","vendor":"aws","name":"aws prod","externalAccountNumber":"1111111111","error":null,"credentials":{"apikey":"AKIAIMLTZZXXXXXX","arn":null,"secret":null,"iamUser":null,"type":"UserBased","isReadOnly":null},"iamSafe":null,"netSec":{"regions":[...
 ... redacted ...
 
@@ -71,7 +71,7 @@ groupid: if the request is made without the security group id, then all security
 
 **Example:**
 ```bash
-curl -X GET --header 'Accept: application/json' 'https://api.dome9.com/v2/cloudsecuritygroup/529900'
+curl -u id:secret -X GET --header 'Accept: application/json' 'https://api.dome9.com/v2/cloudsecuritygroup/529900'
 ```
 
 ####Response:
@@ -125,7 +125,7 @@ BODY:
 **Example:**
 ```bash
 
-curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
   "protectionMode": "ReadOnly"
 }' 'https://api.dome9.com/v2/cloudsecuritygroup/429618/protection-mode'
 
@@ -242,7 +242,7 @@ BODY:
 
 **Example:**
 ```bash
-curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
 
 
   "isProtected": true,
@@ -312,7 +312,7 @@ BODY:
 
 **Example**:
 ```bash
-curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
 "id":"6-22",
 "name":"SSH",
 "description":"Secure Shell access",
