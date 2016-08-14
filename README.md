@@ -34,7 +34,7 @@ The base URL for Dome9 API V2 is:  ```https://api.dome9.com/v2/```
 The API is using HTTP Basic Authentication scheme.  
 You'll use the api key *id* as the user name and the *apiKeySecret* as the password. 
 
-**Example:
+**Example:**
 ```bash
 
 me$ curl -u 4ded0c7a-224b-4bc3-9094-bb9fd0591c9a:3bmf8a5a3bx4ss3g5mbhrezt https://api.dome9.com/v2/CloudAccounts 
@@ -69,7 +69,7 @@ URL: /CloudSecurityGroup/{groupid} <br \>
 METHOD: GET <br \> <br \>
 groupid: if the request is made without the security group id, then all security groups protected by Dome9 will be returned.
 
-**Example:
+**Example:**
 ```bash
 curl -X GET --header 'Accept: application/json' 'https://secure.dome9.com/api/cloudsecuritygroup/529900'
 ```
@@ -122,7 +122,7 @@ BODY:
 ####Request Parameters
 * protectionMode(string):  can be either 'FullManage' or 'ReadOnly'
 
-**Example:
+**Example:**
 ```bash
 
 curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
@@ -240,7 +240,7 @@ BODY:
  * icmpType (string, optional): In case of ICMP - 'EchoReply', 'DestinationUnreachable', 'SourceQuench', 'Redirect', 'AlternateHostAddress', 'Echo', 'RouterAdvertisement', 'RouterSelection', 'TimeExceeded', 'ParameterProblem', 'Timestamp', 'TimestampReply', 'InformationRequest', 'InformationReply', 'AddressMaskRequest', 'AddressMaskReply', 'Traceroute', 'DatagramConversionError', 'MobileHostRedirect', 'IPv6WhereAreYou', 'IPv6IAmHere', 'MobileRegistrationRequest', 'MobileRegistrationReply', 'DomainNameRequest', 'DomainNameReply', 'SKIP', 'Photuris', 'All'
 * tags (object, optional)
 
-**Example:
+**Example:**
 ```bash
 curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
 
@@ -310,7 +310,7 @@ BODY:
   * data (object): For CIDR - "cidr":'IP', For IP-List - "id":"IP-LIST ID","name":"IP-LIST NAME"}, For SG reference - {"extid": "AWS SG ID", "name": "SG NAME"}, for Magic IP - {"type": "MagicIP","data": {"name": "Magic IP Name"}, for DNS - {"type": "DNS","data": {"dns": "DNS ADDRESS","note": 'optional comment'}}
 * icmpType (string, optional): In case of ICMP - 'EchoReply', 'DestinationUnreachable', 'SourceQuench', 'Redirect', 'AlternateHostAddress', 'Echo', 'RouterAdvertisement', 'RouterSelection', 'TimeExceeded', 'ParameterProblem', 'Timestamp', 'TimestampReply', 'InformationRequest', 'InformationReply', 'AddressMaskRequest', 'AddressMaskReply', 'Traceroute', 'DatagramConversionError', 'MobileHostRedirect', 'IPv6WhereAreYou', 'IPv6IAmHere', 'MobileRegistrationRequest', 'MobileRegistrationReply', 'DomainNameRequest', 'DomainNameReply', 'SKIP', 'Photuris', 'All'
 
-**Example:
+**Example**:
 ```bash
 curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
 "id":"6-22",
@@ -407,7 +407,7 @@ BODY:
 * icmpType (string, optional): in case of ICMP - 'EchoReply', 'DestinationUnreachable', 'SourceQuench', 'Redirect', 'AlternateHostAddress', 'Echo', 'RouterAdvertisement', 'RouterSelection', 'TimeExceeded', 'ParameterProblem', 'Timestamp', 'TimestampReply', 'InformationRequest', 'InformationReply', 'AddressMaskRequest', 'AddressMaskReply', 'Traceroute', 'DatagramConversionError', 'MobileHostRedirect', 'IPv6WhereAreYou', 'IPv6IAmHere', 'MobileRegistrationRequest', 'MobileRegistrationReply', 'DomainNameRequest', 'DomainNameReply', 'SKIP', 'Photuris', 'All'
 * tags (object): the format is "key":"value".
 
-**Example:
+**Example:**
 ```bash
 curl -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
   "securityGroupId": ******,
@@ -515,7 +515,7 @@ BODY:
   * data (object): for CIDR - "cidr":'IP', For IP-List - "id":"IP-LIST ID","name":"IP-LIST NAME"}, For SG reference - {"extid": "AWS SG ID", "name": "SG NAME"}, for Magic IP - {"type": "MagicIP","data": {"name": "Magic IP Name"}, for DNS - {"type": "DNS","data": {"dns": "DNS ADDRESS","note": 'optional comment'}}
 * icmpType (string, optional): in case of ICMP - 'EchoReply', 'DestinationUnreachable', 'SourceQuench', 'Redirect', 'AlternateHostAddress', 'Echo', 'RouterAdvertisement', 'RouterSelection', 'TimeExceeded', 'ParameterProblem', 'Timestamp', 'TimestampReply', 'InformationRequest', 'InformationReply', 'AddressMaskRequest', 'AddressMaskReply', 'Traceroute', 'DatagramConversionError', 'MobileHostRedirect', 'IPv6WhereAreYou', 'IPv6IAmHere', 'MobileRegistrationRequest', 'MobileRegistrationReply', 'DomainNameRequest', 'DomainNameReply', 'SKIP', 'Photuris', 'All'
 
-**Example:
+**Example:**
 ```bash
 
 curl -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
@@ -554,7 +554,7 @@ METHOD: DELETE <br \>
 * groupid: The groupid in the URL can be either the internal id or the external id.
 policyType: if set as "Inbound" it will delete the service in the security group's inbound policy and if set as "Outbound" it will delete the service in the security group's outbound policy.
 
-**Example:
+**Example:**
 ```bash
 https://secure.dome9.com/api/cloudsecuritygroup/*****/services/Inbound/6-22
 ```
@@ -572,7 +572,7 @@ METHOD: DELETE <br \>
 
 * groupid: The groupid in the URL can be either the security group's Dome9 internal Id or the AWS external Id. <br \>
 
-**Example:
+**Example:**
 ```bash
 curl -X DELETE 'https://secure.dome9.com/api/cloudsecuritygroup/******'
 
@@ -614,7 +614,7 @@ BODY:
   * isReadOnly (boolean, optional): the attached policy type.
 * fullProtection (boolean, optional): if "true", all security groups will be imported in "Full Protection" mode, otherwise all groups will be imported in "Read Only" mode.
 
-**Example:
+**Example:**
 ```bash
 curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
   "name": "string",
@@ -673,7 +673,7 @@ BODY:
   * hidden (boolean, optional): if set as "true" then the security groups in the region won't be displayed, and if set as "false" then the security groups in the region will be shown. 
   * newGroupBehavior (string, optional): can be one of the following: 'ReadOnly', 'FullManage', 'Reset'.
 
-**Example:
+**Example:**
   ```bash
 
   curl -X PATCH --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
@@ -711,7 +711,7 @@ METHOD: DELETE <br \>
 
 cloudAccountId: The Dome9 cloudAccountId. 
 
-**Example:
+**Example:**
 ```bash
 curl -X DELETE 'https://secure.dome9.com/api/CloudAccounts/**************************'
 ```
@@ -750,7 +750,7 @@ METHOD: GET <br \>
   * ip (string): IP address.
   * comment (string): a comment on the IP address, if exists.
 
-**Example:
+**Example:**
 ```bash
 curl -X GET --header 'Accept: application/json' 'https://secure.dome9.com/api/IpList'
 ```
@@ -775,7 +775,7 @@ BODY:
 }
 ```
 
-**Example:
+**Example:**
 ```bash
 curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
   "name": "string",
@@ -829,7 +829,7 @@ BODY:
   * ip (string): IP address.
   * comment (string): a comment on the IP address.
 
-**Example:
+**Example:**
  ```bash
  curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
    "id":121
@@ -853,7 +853,7 @@ METHOD: DELETE <br \>
 
 * id: The IP List's Id.
 
-**Example:
+**Example:**
 ```bash
 curl -X DELETE 'https://secure.dome9.com/api/IpList/2841'
 ```
