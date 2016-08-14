@@ -9,13 +9,19 @@ If there are any other api use-case - *please contact us* at support@dome9.com. 
 
 For creating a new API key please navigate to <a href="https://secure.dome9.com/v2/settings/credentials"> Credentials tab in My setting</a> page
 
-as you can see in the screen shot below, you have a tab of **V2 API**, you can manage here your API keys.
+as you can see in the screen shot below, you have a box of **V2 API**, where you can manage your API keys.
 
  ![Alt text](/screenshots/box.png "API V2 page")
 
+ By clicking on **CREATE API KEY**, you will see the next popup:
+
+  ![Alt text](/screenshots/popup.png "API V2 popup")
+
+  Save your new API key, ID and Secret, because there is no way to recover the secret number.
+
 * Once you have the api key, you are ready to work with the Dome9 V2 api...
 
-* note: The maximum number of API keys is 7
+* Note: The maximum number of API keys is 7.
 
 ## API End Point 
 
