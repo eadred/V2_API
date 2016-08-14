@@ -11,8 +11,8 @@ For creating a new API key please navigate to <a href="https://secure.falconetix
 
 as you can see in the screen shot below, you have a tab of **V2 API**, you can manage here your API keys.
 
- ![Alt text](/screenshots/settings.png "API V2 page")
- 
+ ![Alt text](/screenshots/box.png "API V2 page")
+
 * Once you have the api key, you are ready to work with the Dome9 V2 api...
 
 * note: The maximum number of API keys is 7
