@@ -1,4 +1,4 @@
-#DOME9 API V2#
+#DOME9 V2 API#
 
 The Dome9 API enables developers to access Dome9 functionality by using an API key.  
 This is a **public preview** of the next generation Dome9 V2 api.  
@@ -6,17 +6,16 @@ While there are many more resources already implemented, the resources below are
 If there are any other api use-case - *please contact us* at support@dome9.com. We'll then verify and document these resources / actions.
 
 ## Getting Started
-V2 api keys management is done using using [Dome9 api key management cli tool](apiGenerator/README.md). Once the V2 api is GA this functionality will be included in the Dome9 portal as well.  
-* This repository contains the [cli tool](apiGenerator/README.md) so follow that readme file and get the tool.
-* Now, use the tool to generate an api key
-```bash
-me$ d9-api -u me@acme.com -p XXXXXXX create
-{
-  "id": "4ded0c7a-224b-4bc3-9094-bb9fd0591c9a",
-  "apiKeySecret": "3bmf8a5a3bx4ss3g5mbhrezt"
-}
-```
+
+For creating a new API key please navigate to <a href="https://secure.falconetix.com/v2/settings/credentials"> Credentials tab in My setting</a> page
+
+as you can see in the screen shot below, you have a tab of **V2 API**, you can manage here your API keys.
+
+ ![Alt text](/screenshots/settings.png "API V2 page")
+ 
 * Once you have the api key, you are ready to work with the Dome9 V2 api...
+
+* note: The maximum number of API keys is 7
 
 ## API End Point 
 
