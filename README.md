@@ -9,7 +9,7 @@ If there are any other api use-case - *please contact us* at support@dome9.com. 
 
 ### Create and Manage V2 API keys
 
-For creating a new API key please navigate to <a href="https://secure.dome9.com/v2/settings/credentials"> Credentials tab in My setting</a> page.
+For creating a new API key please navigate to <a href="https://secure.dome9.com/v2/settings/credentials"> Credentials tab in My Settings</a> page.
 
 As you can see in the screen shot below, you have a box of **V2 API**, where you can manage your API keys.
 
