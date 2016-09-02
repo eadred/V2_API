@@ -49,9 +49,9 @@ me$ curl -u 4ded0c7a-224b-4bc3-9094-bb9fd0591c9a:3bmf8a5a3bx4ss3g5mbhrezt https:
 
 2. [AWS Accounts](#aws-accounts)
 
-3. [IP Lists] (#ip-lists)
+3. [IP Lists](#ip-lists)
 
-3. [Dome9 Agents] (#dome9-agents)
+3. [Dome9 Agents](#dome9-agents)
 
 ##<a name="aws-security-groups">AWS Security Groups</a>
 1. [GET](#aws-security-groups-get)
