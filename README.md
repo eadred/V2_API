@@ -49,7 +49,9 @@ me$ curl -u 4ded0c7a-224b-4bc3-9094-bb9fd0591c9a:3bmf8a5a3bx4ss3g5mbhrezt https:
 
 2. [AWS Accounts](#aws-accounts)
 
-3. [IP Lists](#ip-lists)
+3. [IP Lists] (#ip-lists)
+
+3. [Dome9 Agents] (#dome9-agents)
 
 ##<a name="aws-security-groups">AWS Security Groups</a>
 1. [GET](#aws-security-groups-get)
@@ -857,3 +859,26 @@ METHOD: DELETE <br \>
 ```bash
 curl -u id:secret -X DELETE 'https://api.dome9.com/v2/IpList/2841'
 ```
+
+##<a name="dome9-agents">Dome9 Agents</a>
+
+1. [Delete Dome9 agent](#dome9-agent-delete)
+
+<h3><a name=“dome9-agent-delete”>DELETE</a></h3>
+
+Delete an existing Dome9 Agent.
+
+URL: /api/Agent/{id} <br \>
+METHOD: DELETE <br \>
+
+* id: The id in the URL is the Dome9 internal Id of the agent (server) in question. <br \>
+
+**Example:**
+```bash
+curl -u id:secret -X DELETE 'https://api.dome9.com/v2/api/Agent/******'
+
+```
+
+####Response
+
+When successful the response is null.
