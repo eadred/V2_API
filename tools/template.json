@@ -1,0 +1,12 @@
+{
+  "apiKey":{
+    "id":"***********************",
+    "secret":"**************************"
+  },
+  "message":"",
+  "sgId":"sg-118ff579",
+  "serviceId":"6-21",
+  "experation":"1h",
+  "duration": "4:47:0",
+  "users":["email@example.com","email@example1.com","email@example2.com","email@example3.com"]
+}
