@@ -7,14 +7,17 @@ var program = require('commander');
 var moment = require('moment');
 var Q = require('q');
 var executed = false;
+
 moment().format();
+global.logger = require('winston');
+
+
 
 
 // Redirect all console log messages into the standard error. in order to use the standard out for the tools result.
 // Note - this is also implemented in the winston logging - but implemented here too since there are occurences of console.log in the code.
-console.log = console.error;
-console.info = console.error;
-console.warn = console.error;
+
+
 
 program
   .command('invite')
@@ -23,27 +26,23 @@ program
   .action(function (commands) {
     executed = true;
     if (!commands.json) {
-      console.error('missing -j, --json, a required option');
+      logger.error('missing -j, --json, a required option');
       process.exit(1);
     }
     else {
       global.template = JSON.parse(utils.loadFromFile(commands.json));
       buildInvetantion(commands.json)
         .then(function (data) {
-          console.log(data);
+          logger.info(data);
           process.exit(0);
         }, function (err) {
-          console.error(err)
+          logger.error(err)
           process.exit(1);
         })
     }
 
   });
 
-program
-  .on('*',function(){
-    console.log('dddd')
-  })
 
 
 program.parse(process.argv);
