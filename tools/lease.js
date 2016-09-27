@@ -9,10 +9,9 @@ var Q = require('q');
 var executed = false;
 
 moment().format();
-global.logger = require('winston');
-
-
-
+logger = require('winston');
+logger.add(logger.transports.File, { filename: 'lease.log' });
+logger.info('init...')
 
 // Redirect all console log messages into the standard error. in order to use the standard out for the tools result.
 // Note - this is also implemented in the winston logging - but implemented here too since there are occurences of console.log in the code.
