@@ -1,0 +1,20 @@
+{
+  "name": "tools",
+  "version": "1.0.0",
+  "description": "Tools for Dome9 V2 API",
+  "main": "''",
+  "author": "Arik Blumin",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "lodash": "^4.16.2",
+    "moment": "^2.15.1",
+    "q": "^1.4.1",
+    "request": "^2.75.0",
+    "request-promise": "^4.1.1",
+    "winston": "^2.2.0"
+  },
+  "bin": {
+    "snippet": "./lease.js"
+  }
+}
