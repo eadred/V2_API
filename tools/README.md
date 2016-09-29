@@ -49,7 +49,7 @@ run the command ```lease --help``` to understand the command line arguments, and
       "serviceId":"string",
       "experation":"string",
       "duration": "string",
-      "users":"array:
+      "users":"array"
     }
     ```
     * apiKey(object): ```{
@@ -60,9 +60,9 @@ run the command ```lease --help``` to understand the command line arguments, and
     * message(string): A message in the email body.
     * sgId(string): AWS Security Group id.
     * serviceId(string): The service ID is composed of the protocol and the port by the next structure "protocol-port" ,for example the service ID of ssh is "6-22" (TCP-6 and port 22), you can check <a href="https://en.wikipedia.org/wiki/List_of_IP_protocol_numbers">here</a> the protocol numbers.
-    * expiration(string): Expiration time of the invitation.
-    * duration(string): Lease duration time.
-    * users(array): Array of emails address to send the invitations
+    * expiration(string): Expiration time of the invitation "1h" for 1 hour, "1d" for 1 day and "1w" for 1 week.
+    * duration(string): Lease duration time in the next format "hh:mm:ss".
+    * users(array): Array of emails address to send the invitations (such as [userMail@gmail.com, userMail1@gmail.com, userMail2@gmail.com])
     
 
 
