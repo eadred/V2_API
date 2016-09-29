@@ -887,6 +887,9 @@ When successful the response is null.
 
 ##<a name="users">Users</a>
 
+1. [Create User](#users-create)
+2. [Delete User](#users-delete)
+3. [Get Users](#users-get)
 
 <h3><a name="users-create">Create User</a></h3>
 
@@ -913,13 +916,12 @@ BODY:
 
 **Example:**
 ```bash
-
-curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{ \ 
-   "email": "MyName%%40gmail.com", \ 
-   "firstName": "string", \ 
-   "lastName": "string", \ 
-   "ssoEnabled": true \ 
- }' 'https://api.dome9.com/v2/user'
+curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+  "email": "MyName@gmail.com",
+  "firstName": "string",
+  "lastName": "string",
+  "ssoEnabled": true
+}' 'https://api.dome9.com/v2/user'
 
 ```
 
@@ -927,8 +929,8 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
 
 ```json
 {
-  "id": 12041,
-  "name": "arik+kk@gmail.com",
+  "id": 11111,
+  "name": "myEmail@gmail.com",
   "isSuspended": false,
   "isOwner": false,
   "isSuperUser": false,
@@ -949,16 +951,19 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
 }
 ```
 
-* id (integer): The Security Group ID in Dome9.
-* externalId (string): The Security Group ID in AWS.
-* isProtected (boolean, optional): will appear as "true" if the group is in "Full Protection" mode, or will appear as "false" if the group is in "Read Only" mode.
-* securityGroupName (string, optional): The name of the Security Group.
-* description (string, optional): The description of the Security Group.
-* vpcId (string, optional): The VPC id of the Security Group.
-* regionId (string, optional): Can be one of the following regions - 'us_east_1', 'us_west_1', 'eu_west_1', 'ap_southeast_1', 'ap_northeast_1', 'us_west_2', 'sa_east_1', 'az_1_region_a_geo_1', 'az_2_region_a_geo_1', 'az_3_region_a_geo_1', 'ap_southeast_2', 'mellanox_region', 'us_gov_west_1', 'eu_central_1', 'ap_northeast_2'
-* cloudAccountId (string, optional): Dome9 Cloud Account ID.
-* services (object, optional) - The security group's inbound and outbound services.
-* tags (object, optional) - The security group's tags.
+* id (integer): The User ID in Dome9.
+* name (string): The user Email.
+* isSuspended (boolean): will appear as "true" if the user is in "suspended" mode, or will appear as "false" if the user is in "active" mode.
+* isOwner (boolean): Will appear as "true" if the user is owner.
+* isSuperUser (boolean): (boolean): Will appear as "true" if the user is Super User.
+* hasApiKey (boolean): Will appear as true if the user created an API key.
+* isMfaEnabled (boolean): Will appear as true if the user has IAM Safe.
+* ssoEnabled (boolean): Will appear as true if the user is created as SSO user.
+* roleIds (object): List the attached roles.
+* iamSafe (object): IAM Safe object of the user.
+* iamSafe (object): IAM Safe object of the user.
+* permissions (object): The permissions of the user
+
 
 <h3><a name="users-delete">Delete User</a></h3>
 
@@ -972,10 +977,30 @@ METHOD: DELETE <br \>
 **Example:**
 ```bash
 
-curl -X DELETE 'https://secure.dome9.com/api/user/12041'
+curl -u your-api-key-id:your-api-key-secret -X DELETE 'https://api.dome9.com/v2/user/{id number}'
 
 ```
 
 ####Response:
 
 When successful the response is null.
+
+<h3><a name="users-get">Get Users</a></h3>
+
+Get the entire users in your Dome9 account
+
+URL: /user <br \>
+METHOD: GET <br \>
+ 
+
+**Example:**
+```bash
+
+curl -u your-api-key-id:your-api-key-secret -X GET 'https://api.dome9.com/v2/user/'
+
+```
+
+####Response:
+
+Array of users as detailed in <a name="users-create">create new user</a> response.
+
