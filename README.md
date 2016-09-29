@@ -1002,5 +1002,5 @@ curl -u your-api-key-id:your-api-key-secret -X GET 'https://api.dome9.com/v2/use
 
 ####Response:
 
-Array of users as detailed in <a name="users-create">create new user</a> response.
+Array of users as detailed in <a href="users-create">create new user</a> response.
 
