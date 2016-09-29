@@ -1,0 +1,13 @@
+{
+  "apiKey":{
+    "id":"1ec17c81-a91b-4b1f-9a89-24d17d9faec5",
+    "secret":"ffp3c6wqj1swmz8wa4q7pxdb"
+  },
+  "message":"",
+  "sgId":"sg-e0b5d588",
+  "serviceId":"6-21",
+  "experation":"1d",
+  "leaseTimeInMin":90,
+  "duration": "0.1:0:0",
+  "users":["arik@dome9.com","arik+1@dome9.com","arik+2@dome9.com","arik+3@dome9.com"]
+}
