@@ -1028,18 +1028,15 @@ BODY:
   "name": "string",
   "description": "string",
   "rules": [
-    {{
+    {
          "name": "string",
          "description": "string",
          "severity": "string",
          "logic": "string",
          "remediation": "string",
          "complianceTag": "string"
-       }}
-  ],
-  "id": 0,
-  "hideInCompliance": true,
-  "minFeatureTier": "Trial"
+       }
+  ]
 }
 ```
 
@@ -1079,7 +1076,7 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
   "id": 0,
   "name": "string",
   "description": "string",
-  "isTemplate": true,
+  "isTemplate": boolean,
   "rules": [
     {}
   ],
@@ -1131,18 +1128,16 @@ BODY:
   "name": "string",
   "description": "string",
   "rules": [
-    {{
+    {
          "name": "string",
          "description": "string",
          "severity": "string",
          "logic": "string",
          "remediation": "string",
          "complianceTag": "string"
-       }}
+     }
   ],
-  "id": 0,
-  "hideInCompliance": true,
-  "minFeatureTier": "Trial"
+  "id": int
 }
 ```
 
@@ -1160,12 +1155,12 @@ BODY:
 **Example:**
 ```bash
 curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
- "name": "bundle_name",
+   "name": "string",
    "description": "string",
    "rules": [ \ 
           { \ 
             "name": "", \ 
-            "severity": "Low", \ 
+            "severity": "Low/Medium/High", \ 
             "logic": "", \ 
             "description": "", \ 
             "remediation": "", \ 
@@ -1183,7 +1178,7 @@ curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Acc
   "id": 0,
   "name": "string",
   "description": "string",
-  "isTemplate": true,
+  "isTemplate": boolean,
   "rules": [
     {}
   ],
@@ -1205,7 +1200,7 @@ curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Acc
 
 <h3><a name="delete-bundles">Delete Bundles</a></h3>
 
-Get all custom and template bundles
+Delete a bundle by ID
 
 URL: /SecurityPolicy/{id} <br \>
 METHOD: DELETE <br \>
@@ -1233,13 +1228,13 @@ METHOD: POST <br \>
 BODY:
 ```json
 {
-  "id": 0,
+  "id": "integer",
   "name": "string",
   "description": "string",
   "cloudAccountId": "string",
   "region": "string",
   "cloudNetwork": "string",
-  "cloudAccountType": "Aws"
+  "cloudAccountType": "Aws/Azure/Google"
 }
 ```
 
@@ -1255,7 +1250,7 @@ BODY:
 **Example:**
 ```bash
 curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
-     "id": 0,  
+     "id": "integer",  
      "name": "string",  
      "description": "string",  
      "cloudAccountId": "string",  
@@ -1280,36 +1275,33 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
     "tests": [
       {
         "error": "string",
-        "testedCount": 0,
-        "relevantCount": 0,
-        "nonComplyingCount": 0,
+        "testedCount": "integer",
+        "relevantCount": "integer",
+        "nonComplyingCount": "integer",
         "entityResults": [
           {
-            "isRelevant": true,
-            "isValid": true,
+            "isRelevant": "boolean",
+            "isValid": "boolean",
             "error": "string",
             "testObj": {}
           }
         ],
         "rule": {},
-        "testPassed": true
+        "testPassed": "boolean"
       }
     ],
     "locationMetadata": {
       "account": {
-        "srl": "string",
         "name": "string",
         "id": "string",
         "externalId": "string"
       },
       "region": {
-        "srl": "string",
         "name": "string",
         "id": "string",
         "externalId": "string"
       },
       "cloudNetwork": {
-        "srl": "string",
         "name": "string",
         "id": "string",
         "externalId": "string"
@@ -1322,15 +1314,15 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 ```
 
 * request(object): 
-   * id(string, required):  Bundle ID.
+   * id(string):  Bundle ID.
    * name(string): Bundle name (default is the original bundle name).
    * description(string): Bundle description (default is the original bundle description).
-   * cloudAccountId(string, required): Dome9 Cloud Account ID.
+   * cloudAccountId(string): Dome9 Cloud Account ID.
    * region(string): Run the bundle on specific region.
    * cloudNetwork(string): Run the bundle on specific cloud network(VPC/VNET), could not filter by cloudNetwork with out filtering by region.
    * cloudAccountType(string): Aws/Azure/Google.
 * tests(Array[test]): 
-      * error ("string"): Error in case of failure.
+      * error (string): Error in case of failure.
       * testedCount (integer): Number of tested entities ,
       * relevantCount (integer): Number of relevant entities from tested entities ,
       * nonComplyingCount (integer): Number of non complying entities from relevant entities,
@@ -1351,6 +1343,7 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
     * account (object): 
         * name (string): cloud account name.
         * id (string): cloud account id.
+        * externalId (string): Cloud external ID.
     * region (object):
         * name (string); Region name.
         * id (string): Region ID.
@@ -1378,16 +1371,16 @@ BODY:
   "cloudAccountId": "string",
   "region": "string",
   "cloudNetwork": "string",
-  "cloudAccountType": "Aws"
+  "cloudAccountType": "Aws/Azure/Google"
 }
 ```
 
 ####Request Parameters
-* rules (Array[string]): rules logics for example ["Instance should have vpc"].
+* rules (Array[string], required): rules logics for example ["Instance should have vpc"].
 * cloudAccountId(string, required): Dome9 Cloud Account ID.
 * region(string): Run the bundle on specific region.
 * cloudNetwork(string): Run the bundle on specific cloud network(VPC/VNET), could not filter by cloudNetwork with out filtering by region.
-* cloudAccountType(string): Aws/Azure/Google
+* cloudAccountType(string, required): Aws/Azure/Google
 
 **Example:**
 ```bash
@@ -1396,7 +1389,7 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
     "externalAcountId": "string", 
     "region": "string", 
     "cloudNetwork": "string", 
-    "cloudAccountType": "Aws" 
+    "cloudAccountType": "Aws/Azure/Google" 
 }' 'https://api.dome9.com/v2/Assessment'
 
 ```
@@ -1415,19 +1408,19 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
     "tests": [
       {
         "error": "string",
-        "testedCount": 0,
-        "relevantCount": 0,
-        "nonComplyingCount": 0,
+        "testedCount": "integer",
+        "relevantCount": "integer",
+        "nonComplyingCount": "integer",
         "entityResults": [
           {
-            "isRelevant": true,
-            "isValid": true,
+            "isRelevant": "boolean",
+            "isValid": "boolean",
             "error": "string",
             "testObj": {}
           }
         ],
         "rule": {},
-        "testPassed": true
+        "testPassed": "boolean"
       }
     ],
     "locationMetadata": {
@@ -1450,20 +1443,20 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
         "externalId": "string"
       }
     },
-    "assessmentPassed": true,
-    "hasErrors": true
+    "assessmentPassed": "boolean",
+    "hasErrors": "boolean"
   }
 }
 ```
 
 * request(object): 
    * rules (Array[string]): rules logics for example ["Instance should have vpc"].
-   * cloudAccountId(string, required): Dome9 Cloud Account ID.
+   * cloudAccountId(string): Dome9 Cloud Account ID.
    * region(string): Run the bundle on specific region.
    * cloudNetwork(string): Run the bundle on specific cloud network(VPC/VNET), could not filter by cloudNetwork with out filtering by region.
    * cloudAccountType(string): Aws/Azure/Google.
 * tests(Array[test]): 
-      * error ("string"): Error in case of failure.
+      * error (string): Error in case of failure.
       * testedCount (integer): Number of tested entities ,
       * relevantCount (integer): Number of relevant entities from tested entities ,
       * nonComplyingCount (integer): Number of non complying entities from relevant entities,
@@ -1484,6 +1477,7 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
     * account (object): 
         * name (string): cloud account name.
         * id (string): cloud account id.
+        * externalId (string): Cloud external ID.
     * region (object):
         * name (string); Region name.
         * id (string): Region ID.
