@@ -55,6 +55,10 @@ me$ curl -u your-api-key-id:your-api-key-secret https://api.dome9.com/v2/CloudAc
 
 5. [Users](#users)
 
+6. [Security Policy](#securitypolicy)
+
+7. [Assessment](#assessment)
+
 ##<a name="aws-security-groups">AWS Security Groups</a>
 1. [GET](#aws-security-groups-get)
 2. [Change Protection Mode](#aws-security-groups-protection-mode)
@@ -1004,3 +1008,489 @@ curl -u your-api-key-id:your-api-key-secret -X GET 'https://api.dome9.com/v2/use
 
 Array of users as detailed in <a href="https://github.com/Dome9/V2_API#users-create">create new user</a> response.
 
+##<a name="securitypolicy">Security Policy</a>
+
+1. [Create Bundle](#create-bundle)
+2. [Delete Bundle](#delete-bundles)
+3. [Get Bundles](#get-bundles)
+3. [Update Bundles](#update-bundle)
+
+<h3><a name="create-bundle">Create Bundle</a></h3>
+
+Create new bundle
+
+URL: /SecurityPolicy <br \>
+METHOD: POST <br \>
+
+BODY:
+```json
+{
+  "name": "string",
+  "description": "string",
+  "rules": [
+    {{
+         "name": "string",
+         "description": "string",
+         "severity": "string",
+         "logic": "string",
+         "remediation": "string",
+         "complianceTag": "string"
+       }}
+  ],
+  "id": 0,
+  "hideInCompliance": true,
+  "minFeatureTier": "Trial"
+}
+```
+
+####Request Parameters
+* name(string, required):  bundle name.
+* description(string, required): Bundle description.
+* rules(Array[rule], required):
+    * name(string, required): Rule name.
+    * description(string, required): Rule description.
+    * severity(string, required): Rule severity (high, medium, low). 
+    * logic(string, required): Rule logic, for example "Instance should have vpc".
+    * complianceTag(string): Rule tag.
+
+**Example:**
+```bash
+curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+  "name": "bundle_name",
+  "description": "string",
+  "rules": [ \ 
+       { \ 
+         "name": "", \ 
+         "severity": "Low", \ 
+         "logic": "", \ 
+         "description": "", \ 
+         "remediation": "", \ 
+         "complianceTag": "" \ 
+       } \ 
+     ]
+}' 'https://api.dome9.com/v2/SecurityPolicy'
+
+```
+
+####Response:
+
+```json
+{
+  "id": 0,
+  "name": "string",
+  "description": "string",
+  "isTemplate": true,
+  "rules": [
+    {}
+  ],
+  "_created": "2016-12-18T13:03:02.998Z",
+  "_updated": "2016-12-18T13:03:02.998Z"
+}
+```
+
+* id(integer):  Bundle ID.
+* name(string):  bundle name.
+* description(string): Bundle description.
+* rules(Array[rule]):
+    * name(string): Rule name.
+    * description(string): Rule description.
+    * severity(string): Rule severity (high, medium, low). 
+    * logic(string): Rule logic, for example "Instance should have vpc".
+    * complianceTag(string): Rule tag.
+* isTemplate(boolean): returns true if bundle is Dome9 template.
+
+<h3><a name="get-bundles">Get Bundles</a></h3>
+
+Get all custom and template bundles
+
+URL: /SecurityPolicy <br \>
+METHOD: GET <br \>
+ 
+
+**Example:**
+```bash
+
+curl -u your-api-key-id:your-api-key-secret -X GET 'https://api.dome9.com/v2/SecurityPolicy/'
+
+```
+
+####Response:
+
+Array of bundles as detailed in <a href="https://github.com/Dome9/V2_API#create-bundle">create new bundle</a> response.
+
+<h3><a name="update-bundle">Update Bundle</a></h3>
+
+Update existing bundle
+
+URL: /SecurityPolicy <br \>
+METHOD: PUT <br \>
+
+BODY:
+```json
+{
+  "name": "string",
+  "description": "string",
+  "rules": [
+    {{
+         "name": "string",
+         "description": "string",
+         "severity": "string",
+         "logic": "string",
+         "remediation": "string",
+         "complianceTag": "string"
+       }}
+  ],
+  "id": 0,
+  "hideInCompliance": true,
+  "minFeatureTier": "Trial"
+}
+```
+
+####Request Parameters
+* id(integer, required): Bundle ID.
+* name(string, required):  bundle name.
+* description(string, required): Bundle description.
+* rules(Array[rule], required):
+    * name(string, required): Rule name.
+    * description(string, required): Rule description.
+    * severity(string, required): Rule severity (high, medium, low). 
+    * logic(string, required): Rule logic, for example "Instance should have vpc".
+    * complianceTag(string): Rule tag.
+
+**Example:**
+```bash
+curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+ "name": "bundle_name",
+   "description": "string",
+   "rules": [ \ 
+          { \ 
+            "name": "", \ 
+            "severity": "Low", \ 
+            "logic": "", \ 
+            "description": "", \ 
+            "remediation": "", \ 
+            "complianceTag": "" \ 
+          } \ 
+        ]\
+}' 'https://api.dome9.com/v2/SecurityPolicy'
+
+```
+
+####Response:
+
+```json
+{
+  "id": 0,
+  "name": "string",
+  "description": "string",
+  "isTemplate": true,
+  "rules": [
+    {}
+  ],
+  "_created": "2016-12-18T13:03:02.998Z",
+  "_updated": "2016-12-18T13:03:02.998Z"
+}
+```
+
+* id(integer):  Bundle ID.
+* name(string):  bundle name.
+* description(string): Bundle description.
+* rules(Array[rule]):
+    * name(string): Rule name.
+    * description(string): Rule description.
+    * severity(string): Rule severity (high, medium, low). 
+    * logic(string): Rule logic, for example "Instance should have vpc".
+    * complianceTag(string): Rule tag.
+* isTemplate(boolean): returns true if bundle is Dome9 template.
+
+<h3><a name="delete-bundles">Delete Bundles</a></h3>
+
+Get all custom and template bundles
+
+URL: /SecurityPolicy/{id} <br \>
+METHOD: DELETE <br \>
+ 
+
+**Example:**
+```bash
+
+curl -u your-api-key-id:your-api-key-secret -X DELETE 'https://api.dome9.com/v2/SecurityPolicy/{id}'
+
+```
+
+##<a name="assessment">Assessment</a>
+
+1. [Run Bundle](#run-bundle)
+2. [Run-Assessment](#run-assessment)
+
+<h3><a name="run-bundle">Run Bundle</a></h3>
+
+Run existing bundle
+
+URL: /Assessment/bundle <br \>
+METHOD: POST <br \>
+
+BODY:
+```json
+{
+  "id": 0,
+  "name": "string",
+  "description": "string",
+  "cloudAccountId": "string",
+  "region": "string",
+  "cloudNetwork": "string",
+  "cloudAccountType": "Aws"
+}
+```
+
+####Request Parameters
+* id(string, required):  Bundle ID.
+* name(string): Bundle name (default is the original bundle name).
+* description(string): Bundle description (default is the original bundle description).
+* cloudAccountId(string, required): Dome9 Cloud Account ID.
+* region(string): Run the bundle on specific region.
+* cloudNetwork(string): Run the bundle on specific cloud network(VPC/VNET), could not filter by cloudNetwork with out filtering by region.
+* cloudAccountType(string): Aws/Azure/Google
+
+**Example:**
+```bash
+curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+     "id": 0,  
+     "name": "string",  
+     "description": "string",  
+     "cloudAccountId": "string",  
+     "region": "string", 
+     "cloudNetwork": "string", 
+     "cloudAccountType": "Aws" 
+}' 'https://api.dome9.com/v2/assessment/bundle'
+
+```
+
+####Response:
+
+```json
+{
+  {
+    "request": {
+      "cloudAccountId": "string",
+      "region": "string",
+      "cloudNetwork": "string",
+      "cloudAccountType": "string"
+    },
+    "tests": [
+      {
+        "error": "string",
+        "testedCount": 0,
+        "relevantCount": 0,
+        "nonComplyingCount": 0,
+        "entityResults": [
+          {
+            "isRelevant": true,
+            "isValid": true,
+            "error": "string",
+            "testObj": {}
+          }
+        ],
+        "rule": {},
+        "testPassed": true
+      }
+    ],
+    "locationMetadata": {
+      "account": {
+        "srl": "string",
+        "name": "string",
+        "id": "string",
+        "externalId": "string"
+      },
+      "region": {
+        "srl": "string",
+        "name": "string",
+        "id": "string",
+        "externalId": "string"
+      },
+      "cloudNetwork": {
+        "srl": "string",
+        "name": "string",
+        "id": "string",
+        "externalId": "string"
+      }
+    },
+    "assessmentPassed": true,
+    "hasErrors": true
+  }
+}
+```
+
+* request(object): 
+   * id(string, required):  Bundle ID.
+   * name(string): Bundle name (default is the original bundle name).
+   * description(string): Bundle description (default is the original bundle description).
+   * cloudAccountId(string, required): Dome9 Cloud Account ID.
+   * region(string): Run the bundle on specific region.
+   * cloudNetwork(string): Run the bundle on specific cloud network(VPC/VNET), could not filter by cloudNetwork with out filtering by region.
+   * cloudAccountType(string): Aws/Azure/Google.
+* tests(Array[test]): 
+      * error ("string"): Error in case of failure.
+      * testedCount (integer): Number of tested entities ,
+      * relevantCount (integer): Number of relevant entities from tested entities ,
+      * nonComplyingCount (integer): Number of non complying entities from relevant entities,
+      * entityResults (Array[validationResult]):
+        * isRelevant (boolean): Return true if validation result is relevant.
+        * isValid (boolean): Return true if validation result is valid.
+        * error (string): if validation result failed, it will contain error description.
+        * testObj (object): The entity the is tested, for example (Instance, SecurityGroup, RDS , etc.).
+      * rule (object):
+        * name(string): Rule name.
+        * description(string): Rule description.
+        * severity(string): Rule severity (high, medium, low). 
+        * logic(string): Rule logic, for example "Instance should have vpc".
+        * complianceTag(string): Rule tag.
+      * testPassed (boolean): Return true if the test is passed.
+    
+* locationMetadata (object): 
+    * account (object): 
+        * name (string): cloud account name.
+        * id (string): cloud account id.
+    * region (object):
+        * name (string); Region name.
+        * id (string): Region ID.
+        * externalId (string): Region external ID.
+    * cloudNetwork": {
+        * name (string): VPC/VNET Name.
+        * id (string): Cloud network ID.
+        * externalId (string): Cloud Network external ID.
+* assessmentPassed (boolean): return true if the assessment passed.
+* hasErrors (boolean): Return true if assessment has error.
+
+<h3><a name="run-assessment">Run Assessment (playground)</a></h3>
+
+Create and run assessment.
+
+URL: /Assessment <br \>
+METHOD: POST <br \>
+
+BODY:
+```json
+{
+    "rules": [
+      "string"
+    ],
+  "cloudAccountId": "string",
+  "region": "string",
+  "cloudNetwork": "string",
+  "cloudAccountType": "Aws"
+}
+```
+
+####Request Parameters
+* rules (Array[string]): rules logics for example ["Instance should have vpc"].
+* cloudAccountId(string, required): Dome9 Cloud Account ID.
+* region(string): Run the bundle on specific region.
+* cloudNetwork(string): Run the bundle on specific cloud network(VPC/VNET), could not filter by cloudNetwork with out filtering by region.
+* cloudAccountType(string): Aws/Azure/Google
+
+**Example:**
+```bash
+curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+    "cloudAccountId": "string", 
+    "externalAcountId": "string", 
+    "region": "string", 
+    "cloudNetwork": "string", 
+    "cloudAccountType": "Aws" 
+}' 'https://api.dome9.com/v2/Assessment'
+
+```
+
+####Response:
+
+```json
+{
+  {
+    "request": {
+      "cloudAccountId": "string",
+      "region": "string",
+      "cloudNetwork": "string",
+      "cloudAccountType": "string"
+    },
+    "tests": [
+      {
+        "error": "string",
+        "testedCount": 0,
+        "relevantCount": 0,
+        "nonComplyingCount": 0,
+        "entityResults": [
+          {
+            "isRelevant": true,
+            "isValid": true,
+            "error": "string",
+            "testObj": {}
+          }
+        ],
+        "rule": {},
+        "testPassed": true
+      }
+    ],
+    "locationMetadata": {
+      "account": {
+        "srl": "string",
+        "name": "string",
+        "id": "string",
+        "externalId": "string"
+      },
+      "region": {
+        "srl": "string",
+        "name": "string",
+        "id": "string",
+        "externalId": "string"
+      },
+      "cloudNetwork": {
+        "srl": "string",
+        "name": "string",
+        "id": "string",
+        "externalId": "string"
+      }
+    },
+    "assessmentPassed": true,
+    "hasErrors": true
+  }
+}
+```
+
+* request(object): 
+   * rules (Array[string]): rules logics for example ["Instance should have vpc"].
+   * cloudAccountId(string, required): Dome9 Cloud Account ID.
+   * region(string): Run the bundle on specific region.
+   * cloudNetwork(string): Run the bundle on specific cloud network(VPC/VNET), could not filter by cloudNetwork with out filtering by region.
+   * cloudAccountType(string): Aws/Azure/Google.
+* tests(Array[test]): 
+      * error ("string"): Error in case of failure.
+      * testedCount (integer): Number of tested entities ,
+      * relevantCount (integer): Number of relevant entities from tested entities ,
+      * nonComplyingCount (integer): Number of non complying entities from relevant entities,
+      * entityResults (Array[validationResult]):
+        * isRelevant (boolean): Return true if validation result is relevant.
+        * isValid (boolean): Return true if validation result is valid.
+        * error (string): if validation result failed, it will contain error description.
+        * testObj (object): The entity the is tested, for example (Instance, SecurityGroup, RDS , etc.).
+      * rule (object):
+        * name(string): Rule name.
+        * description(string): Rule description.
+        * severity(string): Rule severity (high, medium, low). 
+        * logic(string): Rule logic, for example "Instance should have vpc".
+        * complianceTag(string): Rule tag.
+      * testPassed (boolean): Return true if the test is passed.
+    
+* locationMetadata (object): 
+    * account (object): 
+        * name (string): cloud account name.
+        * id (string): cloud account id.
+    * region (object):
+        * name (string); Region name.
+        * id (string): Region ID.
+        * externalId (string): Region external ID.
+    * cloudNetwork": {
+        * name (string): VPC/VNET Name.
+        * id (string): Cloud network ID.
+        * externalId (string): Cloud Network external ID.
+* assessmentPassed (boolean): return true if the assessment passed.
+* hasErrors (boolean): Return true if assessment has error.
