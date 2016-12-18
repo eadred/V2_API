@@ -1076,7 +1076,7 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
   "id": 0,
   "name": "string",
   "description": "string",
-  "isTemplate": boolean,
+  "isTemplate": "boolean",
   "rules": [
     {}
   ],
@@ -1137,7 +1137,7 @@ BODY:
          "complianceTag": "string"
      }
   ],
-  "id": int
+  "id": "integer"
 }
 ```
 
@@ -1178,7 +1178,7 @@ curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Acc
   "id": 0,
   "name": "string",
   "description": "string",
-  "isTemplate": boolean,
+  "isTemplate": "boolean",
   "rules": [
     {}
   ],
@@ -1307,8 +1307,8 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
         "externalId": "string"
       }
     },
-    "assessmentPassed": true,
-    "hasErrors": true
+    "assessmentPassed": "boolean",
+    "hasErrors": "boolean"
   }
 }
 ```
