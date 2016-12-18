@@ -1264,53 +1264,47 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 ####Response:
 
 ```json
-{
-  {
-    "request": {
-      "cloudAccountId": "string",
-      "region": "string",
-      "cloudNetwork": "string",
-      "cloudAccountType": "string"
-    },
-    "tests": [
-      {
-        "error": "string",
-        "testedCount": "integer",
-        "relevantCount": "integer",
-        "nonComplyingCount": "integer",
-        "entityResults": [
-          {
-            "isRelevant": "boolean",
-            "isValid": "boolean",
-            "error": "string",
-            "testObj": {}
-          }
-        ],
-        "rule": {},
-        "testPassed": "boolean"
-      }
-    ],
-    "locationMetadata": {
-      "account": {
-        "name": "string",
-        "id": "string",
-        "externalId": "string"
-      },
-      "region": {
-        "name": "string",
-        "id": "string",
-        "externalId": "string"
-      },
-      "cloudNetwork": {
-        "name": "string",
-        "id": "string",
-        "externalId": "string"
-      }
-    },
-    "assessmentPassed": "boolean",
-    "hasErrors": "boolean"
-  }
-}
+	{
+		"request": {
+			"cloudAccountId": "string",
+			"region": "string",
+			"cloudNetwork": "string",
+			"cloudAccountType": "string"
+		},
+		"tests": [{
+			"error": "string",
+			"testedCount": "integer",
+			"relevantCount": "integer",
+			"nonComplyingCount": "integer",
+			"entityResults": [{
+				"isRelevant": "boolean",
+				"isValid": "boolean",
+				"error": "string",
+				"testObj": {}
+			}],
+			"rule": {},
+			"testPassed": "boolean"
+		}],
+		"locationMetadata": {
+			"account": {
+				"name": "string",
+				"id": "string",
+				"externalId": "string"
+			},
+			"region": {
+				"name": "string",
+				"id": "string",
+				"externalId": "string"
+			},
+			"cloudNetwork": {
+				"name": "string",
+				"id": "string",
+				"externalId": "string"
+			}
+		},
+		"assessmentPassed": "boolean",
+		"hasErrors": "boolean"
+	}
 ```
 
 * request(object): 
@@ -1397,57 +1391,51 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 ####Response:
 
 ```json
-{
-  {
-    "request": {
-      "cloudAccountId": "string",
-      "region": "string",
-      "cloudNetwork": "string",
-      "cloudAccountType": "string"
-    },
-    "tests": [
-      {
-        "error": "string",
-        "testedCount": "integer",
-        "relevantCount": "integer",
-        "nonComplyingCount": "integer",
-        "entityResults": [
-          {
-            "isRelevant": "boolean",
-            "isValid": "boolean",
-            "error": "string",
-            "testObj": {}
-          }
-        ],
-        "rule": {},
-        "testPassed": "boolean"
-      }
-    ],
-    "locationMetadata": {
-      "account": {
-        "srl": "string",
-        "name": "string",
-        "id": "string",
-        "externalId": "string"
-      },
-      "region": {
-        "srl": "string",
-        "name": "string",
-        "id": "string",
-        "externalId": "string"
-      },
-      "cloudNetwork": {
-        "srl": "string",
-        "name": "string",
-        "id": "string",
-        "externalId": "string"
-      }
-    },
-    "assessmentPassed": "boolean",
-    "hasErrors": "boolean"
-  }
-}
-```
+	{
+		"request": {
+			"cloudAccountId": "string",
+			"region": "string",
+			"cloudNetwork": "string",
+			"cloudAccountType": "string"
+		},
+		"tests": [{
+			"error": "string",
+			"testedCount": "integer",
+			"relevantCount": "integer",
+			"nonComplyingCount": "integer",
+			"entityResults": [{
+				"isRelevant": "boolean",
+				"isValid": "boolean",
+				"error": "string",
+				"testObj": {}
+			}],
+			"rule": {},
+			"testPassed": "boolean"
+		}],
+		"locationMetadata": {
+			"account": {
+				"srl": "string",
+				"name": "string",
+				"id": "string",
+				"externalId": "string"
+			},
+			"region": {
+				"srl": "string",
+				"name": "string",
+				"id": "string",
+				"externalId": "string"
+			},
+			"cloudNetwork": {
+				"srl": "string",
+				"name": "string",
+				"id": "string",
+				"externalId": "string"
+			}
+		},
+		"assessmentPassed": "boolean",
+		"hasErrors": "boolean"
+	}
+ ```
 
 * request(object): 
    * rules (Array[string]): rules logics for example ["Instance should have vpc"].
