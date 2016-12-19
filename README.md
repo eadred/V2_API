@@ -5,6 +5,22 @@ This is a **public preview** of the next generation Dome9 V2 api.
 While there are many more resources already implemented, the resources below are documented and validated for external usage.  
 If there are any other api use-case - *please contact us* at support@dome9.com. We'll then verify and document these resources / actions.
 
+##Supported Resources / Actions 
+ 
+1. [AWS Security Groups](#aws-security-groups)
+
+2. [AWS Accounts](#aws-accounts)
+
+3. [IP Lists](#ip-lists)
+
+4. [Dome9 Agents](#dome9-agents)
+
+5. [Users](#users)
+
+6. [Security Policy](#securitypolicy)
+
+7. [Assessment](#assessment)
+
 ## Getting Started
 
 ### Create and Manage V2 API keys
@@ -42,22 +58,6 @@ me$ curl -u your-api-key-id:your-api-key-secret https://api.dome9.com/v2/CloudAc
 ... redacted ...
 
 ```
-
-##Supported Resources / Actions 
- 
-1. [AWS Security Groups](#aws-security-groups)
-
-2. [AWS Accounts](#aws-accounts)
-
-3. [IP Lists](#ip-lists)
-
-4. [Dome9 Agents](#dome9-agents)
-
-5. [Users](#users)
-
-6. [Security Policy](#securitypolicy)
-
-7. [Assessment](#assessment)
 
 ##<a name="aws-security-groups">AWS Security Groups</a>
 1. [GET](#aws-security-groups-get)
