@@ -21,6 +21,8 @@ If there are any other api use-case - *please contact us* at support@dome9.com. 
 
 7. [Assessment](#assessment)
 
+8. [Access Lease](#access-lease)
+
 ## Getting Started
 
 ### Create and Manage V2 API keys
