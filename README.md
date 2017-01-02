@@ -1479,6 +1479,7 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 
 ##<a name="access-lease">Access Lease</a>
 1. [GET](#access-lease-get)
+2. [Create lease for AWS server](#aws-lease-create)
 
 <h3><a name="access-lease-get">GET</a></h3> 
 
@@ -1537,6 +1538,86 @@ curl -u id:secret -X GET --header 'Accept: application/json' 'https://api.dome9.
 * aws(array) - array of open leases for aws services.
 * agents(array) - array of open leases for agent services.
 * agentId: Dome9 Agent ID.
+* cloudAccountId (string): Dome9 Cloud Account ID.
+* region (string): Can be one of the following regions - 'us_east_1', 'us_west_1', 'eu_west_1', 'ap_southeast_1', 'ap_northeast_1', 'us_west_2', 'sa_east_1', 'az_1_region_a_geo_1', 'az_2_region_a_geo_1', 'az_3_region_a_geo_1', 'ap_southeast_2', 'mellanox_region', 'us_gov_west_1', 'eu_central_1', 'ap_northeast_2'
+* securityGroupId (integer): The Security Group ID in Dome9.
+* id(string): Lease ID.
+* accountId (integer): Dome9 account ID.
+* name(string): The lease name/ service name.
+* ip (string): The target ip of the lease.
+* note (string): A comment for the lease.
+* created (string): Creation time, in UTC format.
+* user (string): Dome9 user.
+* length (string): Lease duration time in Timespan format.
+* protocol (string): Internet protocol suite: 'HOPOPT', 'ICMP', 'IGMP', 'GGP', 'IPV4', 'ST', 'TCP', 'CBT', 'EGP', 'IGP', 'BBN_RCC_MON', 'NVP2', 'PUP', 'ARGUS', 'EMCON', 'XNET', 'CHAOS', 'UDP', 'MUX', 'DCN_MEAS', 'HMP', 'PRM', 'XNS_IDP', 'TRUNK1', 'TRUNK2', 'LEAF1', 'LEAF2', 'RDP', 'IRTP', 'ISO_TP4', 'NETBLT', 'MFE_NSP', 'MERIT_INP', 'DCCP', 'ThreePC', 'IDPR', 'XTP', 'DDP', 'IDPR_CMTP', 'TPplusplus', 'IL', 'IPV6', 'SDRP', 'IPV6_ROUTE', 'IPV6_FRAG', 'IDRP', 'RSVP', 'GRE', 'DSR', 'BNA', 'ESP', 'AH', 'I_NLSP', 'SWIPE', 'NARP', 'MOBILE', 'TLSP', 'SKIP', 'IPV6_ICMP', 'IPV6_NONXT', 'IPV6_OPTS', 'CFTP', 'SAT_EXPAK', 'KRYPTOLAN', 'RVD', 'IPPC', 'SAT_MON', 'VISA', 'IPCV', 'CPNX', 'CPHB', 'WSN', 'PVP', 'BR_SAT_MON', 'SUN_ND', 'WB_MON', 'WB_EXPAK', 'ISO_IP', 'VMTP', 'SECURE_VMTP', 'VINES', 'TTP', 'NSFNET_IGP', 'DGP', 'TCF', 'EIGRP', 'OSPFIGP', 'SPRITE_RPC', 'LARP', 'MTP', 'AX25', 'IPIP', 'MICP', 'SCC_SP', 'ETHERIP', 'ENCAP', 'GMTP', 'IFMP', 'PNNI', 'PIM', 'ARIS', 'SCPS', 'QNX', 'AN', 'IPCOMP', 'SNP', 'COMPAQ_PEER', 'IPX_IN_IP', 'VRRP', 'PGM', 'L2TP', 'DDX', 'IATP', 'STP', 'SRP', 'UTI', 'SMP', 'SM', 'PTP', 'ISIS', 'FIRE', 'CRTP', 'CRUDP', 'SSCOPMCE', 'IPLT', 'SPS', 'PIPE', 'SCTP', 'FC', 'RSVP_E2E_IGNORE', 'MOBILITY_HEADER', 'UDPLITE', 'MPLS_IN_IP', 'MANET', 'HIP', 'SHIM6', 'WESP', 'ROHC', 'ALL'.
+* portfrom and portTo: Port range.
+
+<h3><a name="aws-lease-create">Create Lease for AWS server</a></h3>
+
+Create a new lease for an AWS service.
+
+URL: /accesslease/aws <br \>
+METHOD: POST <br \>
+
+BODY:
+```json
+ {
+      "region": "string",
+      "securityGroupId": "integer",
+      "ip": "string",
+      "length": "string",
+      "protocol": "string",
+      "portFrom":"integer",
+      "portTo":"integer",
+	note:"string"
+    }
+```
+
+####Request Parameters 
+
+
+
+* region (string): Can be one of the following regions - 'us_east_1', 'us_west_1', 'eu_west_1', 'ap_southeast_1', 'ap_northeast_1', 'us_west_2', 'sa_east_1', 'az_1_region_a_geo_1', 'az_2_region_a_geo_1', 'az_3_region_a_geo_1', 'ap_southeast_2', 'mellanox_region', 'us_gov_west_1', 'eu_central_1', 'ap_northeast_2'
+* securityGroupId (integer): The Security Group ID in Dome9.
+* ip (string,optional): The target ip of the lease, default is machine IP.
+* note (string,optional): A comment for the lease.
+* length (string): Lease duration time in Timespan format, for example for 5 hours "5:0:0".
+* protocol (string): Internet protocol suite: 'HOPOPT', 'ICMP', 'IGMP', 'GGP', 'IPV4', 'ST', 'TCP', 'CBT', 'EGP', 'IGP', 'BBN_RCC_MON', 'NVP2', 'PUP', 'ARGUS', 'EMCON', 'XNET', 'CHAOS', 'UDP', 'MUX', 'DCN_MEAS', 'HMP', 'PRM', 'XNS_IDP', 'TRUNK1', 'TRUNK2', 'LEAF1', 'LEAF2', 'RDP', 'IRTP', 'ISO_TP4', 'NETBLT', 'MFE_NSP', 'MERIT_INP', 'DCCP', 'ThreePC', 'IDPR', 'XTP', 'DDP', 'IDPR_CMTP', 'TPplusplus', 'IL', 'IPV6', 'SDRP', 'IPV6_ROUTE', 'IPV6_FRAG', 'IDRP', 'RSVP', 'GRE', 'DSR', 'BNA', 'ESP', 'AH', 'I_NLSP', 'SWIPE', 'NARP', 'MOBILE', 'TLSP', 'SKIP', 'IPV6_ICMP', 'IPV6_NONXT', 'IPV6_OPTS', 'CFTP', 'SAT_EXPAK', 'KRYPTOLAN', 'RVD', 'IPPC', 'SAT_MON', 'VISA', 'IPCV', 'CPNX', 'CPHB', 'WSN', 'PVP', 'BR_SAT_MON', 'SUN_ND', 'WB_MON', 'WB_EXPAK', 'ISO_IP', 'VMTP', 'SECURE_VMTP', 'VINES', 'TTP', 'NSFNET_IGP', 'DGP', 'TCF', 'EIGRP', 'OSPFIGP', 'SPRITE_RPC', 'LARP', 'MTP', 'AX25', 'IPIP', 'MICP', 'SCC_SP', 'ETHERIP', 'ENCAP', 'GMTP', 'IFMP', 'PNNI', 'PIM', 'ARIS', 'SCPS', 'QNX', 'AN', 'IPCOMP', 'SNP', 'COMPAQ_PEER', 'IPX_IN_IP', 'VRRP', 'PGM', 'L2TP', 'DDX', 'IATP', 'STP', 'SRP', 'UTI', 'SMP', 'SM', 'PTP', 'ISIS', 'FIRE', 'CRTP', 'CRUDP', 'SSCOPMCE', 'IPLT', 'SPS', 'PIPE', 'SCTP', 'FC', 'RSVP_E2E_IGNORE', 'MOBILITY_HEADER', 'UDPLITE', 'MPLS_IN_IP', 'MANET', 'HIP', 'SHIM6', 'WESP', 'ROHC', 'ALL'.
+* portfrom and portTo (string): Port range.
+**Example**:
+```bash
+curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{ \ 
+       "region": "eu_west_1",  
+       "securityGroupId": 338, 
+       "length": "5:0:0",  
+       "protocol": "TCP", 
+       "portFrom":18444, 
+ 	note:"example", 
+ "ip": "127.0.0.1/32", \ 
+     }' 'https://api.dome9.com/v2/accesslease/aws'
+```
+####Response
+
+```json
+ {
+      "cloudAccountId": "string",
+      "region": "string",
+      "securityGroupId": "integer",
+      "id": "string",
+      "accountId": "integer,
+      "name": "string",
+      "ip": "string",
+      "note": "string",
+      "created": "string",
+      "user": "string",
+      "length": "string",
+      "protocol": "string",
+      "portFrom": "integer",
+      "portTo": "integer",
+      "srl": "string"
+    }
+```
+
 * cloudAccountId (string): Dome9 Cloud Account ID.
 * region (string): Can be one of the following regions - 'us_east_1', 'us_west_1', 'eu_west_1', 'ap_southeast_1', 'ap_northeast_1', 'us_west_2', 'sa_east_1', 'az_1_region_a_geo_1', 'az_2_region_a_geo_1', 'az_3_region_a_geo_1', 'ap_southeast_2', 'mellanox_region', 'us_gov_west_1', 'eu_central_1', 'ap_northeast_2'
 * securityGroupId (integer): The Security Group ID in Dome9.
