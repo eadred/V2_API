@@ -1507,7 +1507,7 @@ curl -u id:secret -X GET --header 'Accept: application/json' 'https://api.dome9.
       "region": "string",
       "securityGroupId": "integer",
       "id": "string",
-      "accountId": "integer,
+      "accountId": "integer",
       "name": "string",
       "ip": "string",
       "note": "string",
@@ -1573,7 +1573,7 @@ BODY:
       "protocol": "string",
       "portFrom":"integer",
       "portTo":"integer",
-	note:"string"
+	"note":"string"
     }
 ```
 
@@ -1608,7 +1608,7 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
       "region": "string",
       "securityGroupId": "integer",
       "id": "string",
-      "accountId": "integer,
+      "accountId": "integer",
       "name": "string",
       "ip": "string",
       "note": "string",
