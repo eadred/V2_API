@@ -1480,6 +1480,8 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 ##<a name="access-lease">Access Lease</a>
 1. [GET](#access-lease-get)
 2. [Create lease for AWS server](#aws-lease-create)
+3. [Create lease for Dome9 agent](#agents-lease-create)
+4. [Terminate open lease](#agents-lease-delete)
 
 <h3><a name="access-lease-get">GET</a></h3> 
 
@@ -1706,3 +1708,21 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 * name(string): The lease name/ service name.
 * created (string): Creation time, in UTC format.
 * user (string): Dome9 user.
+
+
+<h3><a name="agents-lease-delete">Terminate lease</a></h3>
+
+Terminate an open lease.
+
+URL: /AccessLease/{leaseId}<br \>
+METHOD: DELETE <br \>
+* leaseId: The lease ID, which return once a lease is created or on get request,
+
+**Example:**
+```bash
+curl -X DELETE --header 'Accept: application/json' 'http://127.0.0.1/api/AccessLease/{leaseId}'
+```
+
+####Response
+
+If successful the response is null.
