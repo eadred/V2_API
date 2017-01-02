@@ -1476,3 +1476,77 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
         * externalId (string): Cloud Network external ID.
 * assessmentPassed (boolean): return true if the assessment passed.
 * hasErrors (boolean): Return true if assessment has error.
+
+##<a name="access-lease">Access Lease</a>
+1. [GET](#access-lease-get)
+
+<h3><a name="access-lease-get">GET</a></h3> 
+
+The GET request returns all open leases, which are took by the user.
+
+URL: /AccessLease <br \>
+METHOD: GET <br \> <br \>
+
+**Example:**
+```bash
+curl -u id:secret -X GET --header 'Accept: application/json' 'https://api.dome9.com/v2/AccessLease'
+```
+
+####Response:
+
+```json
+ {
+  "aws": [
+    {
+      "cloudAccountId": "string",
+      "region": "string",
+      "securityGroupId": "integer",
+      "id": "string",
+      "accountId": "integer,
+      "name": "string",
+      "ip": "string",
+      "note": "string",
+      "created": "string",
+      "user": "string",
+      "length": "string",
+      "protocol": "string",
+      "portFrom": "integer",
+      "portTo": "integer",
+      "srl": "string"
+    }
+  ],
+  "agents": [
+    {
+      "agentId": "integer",
+      "id": "string",
+      "accountId": "integer",
+      "name": "string",
+      "ip": "string",
+      "note": "string",
+      "created": "string",
+      "user": "string",
+      "length": "string",
+      "protocol": "string",
+      "portFrom": "integer",
+      "portTo": "integer",
+      "srl": "string"
+    }
+  ]
+}
+```
+* aws(array) - array of open leases for aws services.
+* agents(array) - array of open leases for agent services.
+* agentId: Dome9 Agent ID.
+* cloudAccountId (string): Dome9 Cloud Account ID.
+* region (string): Can be one of the following regions - 'us_east_1', 'us_west_1', 'eu_west_1', 'ap_southeast_1', 'ap_northeast_1', 'us_west_2', 'sa_east_1', 'az_1_region_a_geo_1', 'az_2_region_a_geo_1', 'az_3_region_a_geo_1', 'ap_southeast_2', 'mellanox_region', 'us_gov_west_1', 'eu_central_1', 'ap_northeast_2'
+* securityGroupId (integer): The Security Group ID in Dome9.
+* id(string): Lease ID.
+* accountId (integer): Dome9 account ID.
+* name(string): The lease name/ service name.
+* ip (string): The target ip of the lease.
+* note (string): A comment for the lease.
+* created (string): Creation time, in UTC format.
+* user (string): Dome9 user.
+* length (string): Lease duration time in Timespan format.
+* protocol (string): Internet protocol suite: 'HOPOPT', 'ICMP', 'IGMP', 'GGP', 'IPV4', 'ST', 'TCP', 'CBT', 'EGP', 'IGP', 'BBN_RCC_MON', 'NVP2', 'PUP', 'ARGUS', 'EMCON', 'XNET', 'CHAOS', 'UDP', 'MUX', 'DCN_MEAS', 'HMP', 'PRM', 'XNS_IDP', 'TRUNK1', 'TRUNK2', 'LEAF1', 'LEAF2', 'RDP', 'IRTP', 'ISO_TP4', 'NETBLT', 'MFE_NSP', 'MERIT_INP', 'DCCP', 'ThreePC', 'IDPR', 'XTP', 'DDP', 'IDPR_CMTP', 'TPplusplus', 'IL', 'IPV6', 'SDRP', 'IPV6_ROUTE', 'IPV6_FRAG', 'IDRP', 'RSVP', 'GRE', 'DSR', 'BNA', 'ESP', 'AH', 'I_NLSP', 'SWIPE', 'NARP', 'MOBILE', 'TLSP', 'SKIP', 'IPV6_ICMP', 'IPV6_NONXT', 'IPV6_OPTS', 'CFTP', 'SAT_EXPAK', 'KRYPTOLAN', 'RVD', 'IPPC', 'SAT_MON', 'VISA', 'IPCV', 'CPNX', 'CPHB', 'WSN', 'PVP', 'BR_SAT_MON', 'SUN_ND', 'WB_MON', 'WB_EXPAK', 'ISO_IP', 'VMTP', 'SECURE_VMTP', 'VINES', 'TTP', 'NSFNET_IGP', 'DGP', 'TCF', 'EIGRP', 'OSPFIGP', 'SPRITE_RPC', 'LARP', 'MTP', 'AX25', 'IPIP', 'MICP', 'SCC_SP', 'ETHERIP', 'ENCAP', 'GMTP', 'IFMP', 'PNNI', 'PIM', 'ARIS', 'SCPS', 'QNX', 'AN', 'IPCOMP', 'SNP', 'COMPAQ_PEER', 'IPX_IN_IP', 'VRRP', 'PGM', 'L2TP', 'DDX', 'IATP', 'STP', 'SRP', 'UTI', 'SMP', 'SM', 'PTP', 'ISIS', 'FIRE', 'CRTP', 'CRUDP', 'SSCOPMCE', 'IPLT', 'SPS', 'PIPE', 'SCTP', 'FC', 'RSVP_E2E_IGNORE', 'MOBILITY_HEADER', 'UDPLITE', 'MPLS_IN_IP', 'MANET', 'HIP', 'SHIM6', 'WESP', 'ROHC', 'ALL'.
+* portfrom and portTo: Port range.
