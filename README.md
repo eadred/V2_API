@@ -17,7 +17,7 @@ If there are any other api use-case - *please contact us* at support@dome9.com. 
 
 5. [Users](#users)
 
-6. [Security Policy](#securitypolicy)
+6. [Compliance Policy](#compliancepolicy)
 
 7. [Assessment](#assessment)
 
@@ -1010,7 +1010,7 @@ curl -u your-api-key-id:your-api-key-secret -X GET 'https://api.dome9.com/v2/use
 
 Array of users as detailed in <a href="https://github.com/Dome9/V2_API#users-create">create new user</a> response.
 
-##<a name="securitypolicy">Security Policy</a>
+##<a name="compliancepolicy">Compliance Policy</a>
 
 1. [Create Bundle](#create-bundle)
 2. [Delete Bundle](#delete-bundles)
