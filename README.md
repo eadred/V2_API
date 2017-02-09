@@ -1021,7 +1021,7 @@ Array of users as detailed in <a href="https://github.com/Dome9/V2_API#users-cre
 
 Create new bundle
 
-URL: /SecurityPolicy <br \>
+URL: /CompliancePolicy <br \>
 METHOD: POST <br \>
 
 BODY:
@@ -1067,7 +1067,7 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
          "complianceTag": "" \ 
        } \ 
      ]
-}' 'https://api.dome9.com/v2/SecurityPolicy'
+}' 'https://api.dome9.com/v2/CompliancePolicy'
 
 ```
 
@@ -1102,14 +1102,14 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 
 Get all custom and template bundles
 
-URL: /SecurityPolicy <br \>
+URL: /CompliancePolicy <br \>
 METHOD: GET <br \>
  
 
 **Example:**
 ```bash
 
-curl -u your-api-key-id:your-api-key-secret -X GET 'https://api.dome9.com/v2/SecurityPolicy/'
+curl -u your-api-key-id:your-api-key-secret -X GET 'https://api.dome9.com/v2/CompliancePolicy/'
 
 ```
 
@@ -1121,7 +1121,7 @@ Array of bundles as detailed in <a href="https://github.com/Dome9/V2_API#create-
 
 Update existing bundle
 
-URL: /SecurityPolicy <br \>
+URL: /CompliancePolicy <br \>
 METHOD: PUT <br \>
 
 BODY:
@@ -1169,7 +1169,7 @@ curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Acc
             "complianceTag": "" \ 
           } \ 
         ]\
-}' 'https://api.dome9.com/v2/SecurityPolicy'
+}' 'https://api.dome9.com/v2/CompliancePolicy'
 
 ```
 
@@ -1204,14 +1204,14 @@ curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Acc
 
 Delete a bundle by ID
 
-URL: /SecurityPolicy/{id} <br \>
+URL: /CompliancePolicy/{id} <br \>
 METHOD: DELETE <br \>
  
 
 **Example:**
 ```bash
 
-curl -u your-api-key-id:your-api-key-secret -X DELETE 'https://api.dome9.com/v2/SecurityPolicy/{id}'
+curl -u your-api-key-id:your-api-key-secret -X DELETE 'https://api.dome9.com/v2/CompliancePolicy/{id}'
 
 ```
 
