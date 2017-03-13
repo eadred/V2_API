@@ -14,6 +14,27 @@ function loadFromFile(filename) {
   return newdata;
 };
 
+function simpleReq(requestOptions,auth){
+  var re = null;
+  var auth = "Basic " + new Buffer(auth.username + ":" + auth.password).toString("base64");
+  requestOptions.headers['Authorization'] = auth;
+  // replace the url in case of v2 api.
+
+  return insertNewReq(requestOptions).then(function (data) {
+    return data;
+  }, function (reason) {
+    if (reason.statusCode == 504) {
+      requestOptions.resolveWithFullResponse = false;
+      logger.warn('got error trying to perform request: ' + JSON.stringify(requestOptions));
+      logger.warn('error was: ' + JSON.stringify(reason));
+      logger.warn('retrying request');
+      return insertNewReq(requestOptions);
+    } else {
+      throw reason;
+    }
+  })
+}
+
 function sendRequest (requestOptions,target){
   var re = null;
   var auth = "Basic " + new Buffer(template.apiKey.id + ":" + template.apiKey.secret).toString("base64");
@@ -107,6 +128,15 @@ function regionMap(region){
     }
 }
 
+function clone(obj) {
+  if (null == obj || "object" != typeof obj) return obj;
+  var copy = obj.constructor();
+  for (var attr in obj) {
+    if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+  }
+  return copy;
+}
+
 var intervalID = global.setInterval(function () {
   var currentReq = reqList.shift();
   if(currentReq){
@@ -125,5 +155,7 @@ var intervalID = global.setInterval(function () {
 module.exports ={
   sendRequest:sendRequest,
   loadFromFile:loadFromFile,
-  buildSrl:buildSrl
+  buildSrl:buildSrl,
+  simpleReq:simpleReq,
+  clone:clone
 }
