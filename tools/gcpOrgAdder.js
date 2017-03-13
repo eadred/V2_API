@@ -3,7 +3,7 @@ var program = require('commander');
 program
   .option('-p, --path <path>', 'service account key path for google cloud account')
   .option('-i, --id <id>', 'API key ID for Dome9')
-  .option('-s, --secret <secret>', 'API key ID for Dome9')
+  .option('-s, --secret <secret>', 'API key secret for Dome9')
   .parse(process.argv);
 
 console.log(program.path)

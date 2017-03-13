@@ -1,3 +1,57 @@
+# **GCP adder for multiples projects under one organization** #
+A command line tool to add multiple projects under one organization based on V2 API.
+
+
+## Requirements ##
+* NodeJs stable version 4.3.2 or later.
+( Can be Download <a href="https://nodejs.org">here</a> )
+
+## Installation ##
+1 Clone this repo into your local machine
+
+```git clone https://github.com/Dome9/V2_API.git```
+
+2 Navigate to the tools folder:
+
+```cd tools```
+
+3 Install the tool's dependencies and register it:
+
+```npm install -g```
+
+NOTE: This will also register the tool so it is accessible globally.
+it is possible to run the tool without globally registering it.
+In this case just omit the ```-g``` param and run the tool with ```node```:
+```node gcpOrgAdder --help```
+
+
+## How to run ##
+### If the tool is *not* globally installed ###
+1.  Using console, navigate to  tools directory.
+2. run the command ```node gcpOrgAdder.js --help``` to understand the command line arguments.
+
+### If the tool is globally installed ###
+run the command ```gcpOrgAdder --help``` to understand the command line arguments, and for each command run ```lease <command> --help``` for example - ```lease invite --help```
+
+
+### Command Line arguments ###
+* -p or --path : Path to the JSON file with the service account key (**required**).
+* -i or --id : The id of Dome9 API key (**required**).
+* -s or --secret : The secret of Dome9 API key (**required**).
+
+ 
+    
+
+
+An example of how to make an invitation:
+```node gcpOrgAdder.js -p ./myProjectKeyFile.json -i <keyId> -s <keySecret>```
+
+
+
+
+
+
+
 # **ACCESS LEASE INVITATION TOOL FOR MULTIPLE USERS** #
 A tool to send lease invitation for multiple users based on V2 API.
 

@@ -15,6 +15,7 @@
     "winston": "^2.2.0"
   },
   "bin": {
-    "snippet": "./lease.js"
+    "snippet": "./lease.js",
+    "gcpOrgAdder": "./gcpOrgAdder.js"
   }
 }
