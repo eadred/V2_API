@@ -5,6 +5,8 @@ A command line tool to add multiple projects under one organization based on V2 
 ## Requirements ##
 * NodeJs stable version 4.3.2 or later.
 ( Can be Download <a href="https://nodejs.org">here</a> )
+* GCP service Account key with permissions for the relevant projects.
+* <a href="https://github.com/Dome9/V2_API/blob/master/README.md">Dome9 V2 API key</a>.
 
 ## Installation ##
 1 Clone this repo into your local machine
