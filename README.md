@@ -77,8 +77,8 @@ me$ curl -u your-api-key-id:your-api-key-secret https://api.dome9.com/v2/CloudAc
 
 The GET request returns all cloud security groups, which are protected by Dome9.
 
-URL: /CloudSecurityGroup/{groupid} <br \>
-METHOD: GET <br \> <br \>
+URL: /CloudSecurityGroup/{groupid} <br>
+METHOD: GET <br> <br>
 groupid: if the request is made without the security group id, then all security groups protected by Dome9 will be returned.
 
 **Example:**
@@ -120,9 +120,9 @@ curl -u id:secret -X GET --header 'Accept: application/json' 'https://api.dome9.
 
 Change the protection mode to "Read Only" or "Full Protection".
 
-URL: /CloudSecurityGroup/{groupId}/protection-mode <br \>
-METHOD: POST <br \>
-groupid: The groupid can be either the group's Dome9 internal ID or the group's AWS ID (externalId). <br \>
+URL: /CloudSecurityGroup/{groupId}/protection-mode <br>
+METHOD: POST <br>
+groupid: The groupid can be either the group's Dome9 internal ID or the group's AWS ID (externalId). <br>
 
 BODY:
 ```json
@@ -174,8 +174,8 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 <h3><a name="aws-security-groups-create">Create Security Groups</a></h3>
 Create a new Security Group on AWS.
 
-URL: /CloudSecurityGroup <br \>
-METHOD: POST <br \>
+URL: /CloudSecurityGroup <br>
+METHOD: POST <br>
 BODY:
 ```json
 {
@@ -285,10 +285,10 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 
 Create a new service for an AWS security group.
 
-URL: /cloudsecuritygroup/{groupid}/services/{policyType} <br \>
-METHOD: POST <br \>
+URL: /cloudsecuritygroup/{groupid}/services/{policyType} <br>
+METHOD: POST <br>
 policyType: if set as "Inbound" the service will be created in the group's inbound services and if set as "Outbound" it will be created in the group's outbound services.
-groupid: The groupid in the URL can be either the internal id or the external id. <br \>
+groupid: The groupid in the URL can be either the internal id or the external id. <br>
 
 BODY:
 ```json
@@ -352,9 +352,9 @@ Similar to the request parameters.
 
 Overwrite an existing Security Group, overwrite tags and services.
 
-URL: /CloudSecurityGroup/{groupid} <br \>
-METHOD: PUT <br \>
-groupid: the security group id, can be both of AWS and Dome9. <br \>
+URL: /CloudSecurityGroup/{groupid} <br>
+METHOD: PUT <br>
+groupid: the security group id, can be both of AWS and Dome9. <br>
 BODY:
 ```json
 {
@@ -490,10 +490,10 @@ Similar to the request parameters.
 Update an existing security group's service.
 note: the service will be fully overwritten.
 
-URL: /cloudsecuritygroup/{groupid}/services/{policyType} <br \>
-METHOD: PUT <br \>
+URL: /cloudsecuritygroup/{groupid}/services/{policyType} <br>
+METHOD: PUT <br>
 policyType: if set as "Inbound" it will overwrite the service in the group's inbound policy, and if set as "Outbound" it will overwrite the service in the group's outbound policy.
-groupid: The groupid in the URL can be either the group's Dome9 internal id or the group's AWS external id. <br \>
+groupid: The groupid in the URL can be either the group's Dome9 internal id or the group's AWS external id. <br>
 
 BODY:
 ```json
@@ -560,8 +560,8 @@ Similar to the request parameters.
 
 Delete an existing service from a security group's policy.
 
-URL: /cloudsecuritygroup/{groupid}/services/{policyType}/{serviceid} <br \>
-METHOD: DELETE <br \>
+URL: /cloudsecuritygroup/{groupid}/services/{policyType}/{serviceid} <br>
+METHOD: DELETE <br>
 * serviceid: composed of the port and protocol type with the following structure "{port}-{protocol type}",for example in ssh case it will be "6-22".
 * groupid: The groupid in the URL can be either the internal id or the external id.
 policyType: if set as "Inbound" it will delete the service in the security group's inbound policy and if set as "Outbound" it will delete the service in the security group's outbound policy.
@@ -579,10 +579,10 @@ If successful the response is null.
 
 Delete an existing security group.
 
-URL: /cloudsecuritygroup/{groupid} <br \>
-METHOD: DELETE <br \>
+URL: /cloudsecuritygroup/{groupid} <br>
+METHOD: DELETE <br>
 
-* groupid: The groupid in the URL can be either the security group's Dome9 internal Id or the AWS external Id. <br \>
+* groupid: The groupid in the URL can be either the security group's Dome9 internal Id or the AWS external Id. <br>
 
 **Example:**
 ```bash
@@ -600,8 +600,8 @@ When successful the response is null.
 
 Adding a new AWS account to your Dome9 account.
 
-URL: /CloudAccounts <br \>
-METHOD: POST <br \>
+URL: /CloudAccounts <br>
+METHOD: POST <br>
 BODY:
 ```json
 {
@@ -644,9 +644,9 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 
 Updating an existing attached AWS account.
 
-URL: /CloudAccounts/{id} <br \>
-METHOD: PATCH <br \>
-id: The Dome9 cloud account ID <br \>
+URL: /CloudAccounts/{id} <br>
+METHOD: PATCH <br>
+id: The Dome9 cloud account ID <br>
 
 BODY:
 ```json
@@ -718,8 +718,8 @@ BODY:
 
 Delete an existing AWS Account. (Disconnect it from the Dome9 system)
 
-URL: /CloudAccounts/{cloudAccountId} <br \>
-METHOD: DELETE <br \>
+URL: /CloudAccounts/{cloudAccountId} <br>
+METHOD: DELETE <br>
 
 cloudAccountId: The Dome9 cloudAccountId. 
 
@@ -735,8 +735,8 @@ curl -u id:secret -X DELETE 'https://api.dome9.com/v2/CloudAccounts/************
 The get request fetches all IP Lists, which are configured in the Dome9 account.
 ID: If the request is made without the IP List id then all IP Lists will be fetched.
 
-URL: /IpList/{id} <br \>
-METHOD: GET <br \>
+URL: /IpList/{id} <br>
+METHOD: GET <br>
 
 #### Response
 ```json
@@ -771,8 +771,8 @@ curl -u id:secret -X GET --header 'Accept: application/json' 'https://api.dome9.
 ### Create IP List
 Create a new IP List.
 
-URL: /IpList <br \>
-METHOD: POST <br \>
+URL: /IpList <br>
+METHOD: POST <br>
 BODY:
 ```json
 {
@@ -816,8 +816,8 @@ Update an existing IP List.
 The Update is relevant for the data and the description.
 It will overwrite the existing IP List.
 
-URL: /IpList/{id} <br \>
-METHOD: PUT <br \>
+URL: /IpList/{id} <br>
+METHOD: PUT <br>
 
 BODY:
 ```json
@@ -860,8 +860,8 @@ BODY:
 
 Delete an existing IP List.
 
-URL: /IpList/{id} <br \>
-METHOD: DELETE <br \>
+URL: /IpList/{id} <br>
+METHOD: DELETE <br>
 
 * id: The IP List's Id.
 
@@ -878,10 +878,10 @@ curl -u id:secret -X DELETE 'https://api.dome9.com/v2/IpList/2841'
 
 Delete an existing Dome9 Agent.
 
-URL: /api/Agent/{id} <br \>
-METHOD: DELETE <br \>
+URL: /api/Agent/{id} <br>
+METHOD: DELETE <br>
 
-* id: The id in the URL is the Dome9 internal Id of the agent (server) in question. <br \>
+* id: The id in the URL is the Dome9 internal Id of the agent (server) in question. <br>
 
 **Example:**
 ```bash
@@ -903,8 +903,8 @@ When successful the response is null.
 
 Create new user
 
-URL: /user <br \>
-METHOD: POST <br \>
+URL: /user <br>
+METHOD: POST <br>
 
 BODY:
 ```json
@@ -977,8 +977,8 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 
 Delete user
 
-URL: /user/{id} <br \>
-METHOD: DELETE <br \>
+URL: /user/{id} <br>
+METHOD: DELETE <br>
  
  * id: The user ID 
 
@@ -997,8 +997,8 @@ When successful the response is null.
 
 Get the entire users in your Dome9 account
 
-URL: /user <br \>
-METHOD: GET <br \>
+URL: /user <br>
+METHOD: GET <br>
  
 
 **Example:**
@@ -1023,8 +1023,8 @@ Array of users as detailed in <a href="https://github.com/Dome9/V2_API#users-cre
 
 Create new bundle
 
-URL: /CompliancePolicy <br \>
-METHOD: POST <br \>
+URL: /CompliancePolicy <br>
+METHOD: POST <br>
 
 BODY:
 ```json
@@ -1104,8 +1104,8 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 
 Get all custom and template bundles
 
-URL: /CompliancePolicy <br \>
-METHOD: GET <br \>
+URL: /CompliancePolicy <br>
+METHOD: GET <br>
  
 
 **Example:**
@@ -1123,8 +1123,8 @@ Array of bundles as detailed in <a href="https://github.com/Dome9/V2_API#create-
 
 Update existing bundle
 
-URL: /CompliancePolicy <br \>
-METHOD: PUT <br \>
+URL: /CompliancePolicy <br>
+METHOD: PUT <br>
 
 BODY:
 ```json
@@ -1206,8 +1206,8 @@ curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Acc
 
 Delete a bundle by ID
 
-URL: /CompliancePolicy/{id} <br \>
-METHOD: DELETE <br \>
+URL: /CompliancePolicy/{id} <br>
+METHOD: DELETE <br>
  
 
 **Example:**
@@ -1226,8 +1226,8 @@ curl -u your-api-key-id:your-api-key-secret -X DELETE 'https://api.dome9.com/v2/
 
 Run existing bundle
 
-URL: /Assessment/bundle <br \>
-METHOD: POST <br \>
+URL: /Assessment/bundle <br>
+METHOD: POST <br>
 
 BODY:
 ```json
@@ -1357,8 +1357,8 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 
 Create and run assessment.
 
-URL: /Assessment <br \>
-METHOD: POST <br \>
+URL: /Assessment <br>
+METHOD: POST <br>
 
 BODY:
 ```json
@@ -1491,8 +1491,8 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 
 The GET request returns all open leases, which are took by the user.
 
-URL: /AccessLease <br \>
-METHOD: GET <br \> <br \>
+URL: /AccessLease <br>
+METHOD: GET <br> <br>
 
 **Example:**
 ```bash
@@ -1562,8 +1562,8 @@ curl -u id:secret -X GET --header 'Accept: application/json' 'https://api.dome9.
 
 Create a new lease for an AWS service.
 
-URL: /accesslease/aws <br \>
-METHOD: POST <br \>
+URL: /accesslease/aws <br>
+METHOD: POST <br>
 
 BODY:
 ```json
@@ -1642,8 +1642,8 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 
 Create a new lease for an agent.
 
-URL: /accesslease/agents <br \>
-METHOD: POST <br \>
+URL: /accesslease/agents <br>
+METHOD: POST <br>
 
 BODY:
 ```json
@@ -1718,8 +1718,8 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 
 Terminate an open lease.
 
-URL: /AccessLease/{leaseId}<br \>
-METHOD: DELETE <br \>
+URL: /AccessLease/{leaseId}<br>
+METHOD: DELETE <br>
 * leaseId: The lease ID, which return once a lease is created or on get request,
 
 **Example:**
