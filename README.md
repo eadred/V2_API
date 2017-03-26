@@ -61,7 +61,7 @@ me$ curl -u your-api-key-id:your-api-key-secret https://api.dome9.com/v2/CloudAc
 
 ```
 
-##<a name="aws-security-groups">AWS Security Groups</a>
+## <a name="aws-security-groups">AWS Security Groups</a>
 1. [GET](#aws-security-groups-get)
 2. [Change Protection Mode](#aws-security-groups-protection-mode)
 3. [Create Security Groups](#aws-security-groups-create)
@@ -84,7 +84,7 @@ groupid: if the request is made without the security group id, then all security
 curl -u id:secret -X GET --header 'Accept: application/json' 'https://api.dome9.com/v2/cloudsecuritygroup/529900'
 ```
 
-####Response:
+#### Response:
 
 ```json
  {
@@ -129,7 +129,7 @@ BODY:
 }
 ```
 
-####Request Parameters
+#### Request Parameters
 * protectionMode(string):  can be either 'FullManage' or 'ReadOnly'
 
 **Example:**
@@ -141,7 +141,7 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 
 ```
 
-####Response:
+#### Response:
 
 ```json
  {
@@ -229,7 +229,7 @@ BODY:
 }
 ```
 
-####Request Parameters
+#### Request Parameters
 
 * securityGroupName (string, optional): The name of the Security Group.
 * description (string, optional): The description of the Security Group.
@@ -265,7 +265,7 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 }' 'https://api.dome9.com/v2/CloudSecurityGroup'
 ```
 
-####Response 
+#### Response 
 
 
 * securityGroupId (integer): The Security Group ID in Dome9.
@@ -307,7 +307,7 @@ BODY:
 }
 ```
 
-####Request Parameters 
+#### Request Parameters 
 
 * name (string): The service name.
 * id (string): The service id.
@@ -342,7 +342,7 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 "icmpType":null
 }' 'https://api.dome9.com/v2/cloudsecuritygroup/543921/services/Inbound'
 ```
-####Response
+#### Response
 
 Similar to the request parameters.
 
@@ -403,7 +403,7 @@ BODY:
 }
 ```
 
-####Request Parameters
+#### Request Parameters
 
 * name (string): The service name.
 * id (string): The service id.
@@ -478,7 +478,7 @@ curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Acc
 }' 'https://api.dome9.com/v2/cloudsecuritygroup/543921'
 ```
 
-####Response
+#### Response
 
 Similar to the request parameters.
 
@@ -512,7 +512,7 @@ BODY:
 }
 ```
 
-####Request Parameters
+#### Request Parameters
 
 * name (string): The service name.
 * id (string): The service id.
@@ -550,7 +550,7 @@ curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Acc
 
 ```
 
-####Response
+#### Response
 
 Similar to the request parameters.
 
@@ -569,7 +569,7 @@ policyType: if set as "Inbound" it will delete the service in the security group
 https://api.dome9.com/v2/cloudsecuritygroup/*****/services/Inbound/6-22
 ```
 
-####Response
+#### Response
 
 If successful the response is null.
 
@@ -588,13 +588,13 @@ curl -u id:secret -X DELETE 'https://api.dome9.com/v2/cloudsecuritygroup/******'
 
 ```
 
-####Response
+#### Response
 
 When successful the response is null.
 
-##<a name="aws-accounts">AWS Accounts</a>
+## <a name="aws-accounts">AWS Accounts</a>
 
-###Add AWS Account.
+### Add AWS Account.
 
 Adding a new AWS account to your Dome9 account.
 
@@ -614,7 +614,7 @@ BODY:
 }
 ```
 
-####Request Parameters
+#### Request Parameters
 
 * name (string, optional): the account name in Dome9.
 * credentials (object, required): AWS account credentials.
@@ -638,7 +638,7 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 }' 'https://api.dome9.com/v2/CloudAccounts'
 ```
 
-###Update AWS Account
+### Update AWS Account
 
 Updating an existing attached AWS account.
 
@@ -669,7 +669,7 @@ BODY:
 }
 ```
 
-####Request Parameters
+#### Request Parameters
 
 * name (string, optional): the account name on Dome9.
 * credentials (object, required): AWS account credentials.
@@ -712,7 +712,7 @@ BODY:
     "allowReadOnly": false
   }' 'https://api.dome9.com/v2/CloudAccounts/*****************************'
 ```
-###Delete AWS Account -
+### Delete AWS Account -
 
 Delete an existing AWS Account. (Disconnect it from the Dome9 system)
 
@@ -728,7 +728,7 @@ curl -u id:secret -X DELETE 'https://api.dome9.com/v2/CloudAccounts/************
 
 ##<a name="ip-lists">IP Lists </a>
 
-###GET
+### GET
 
 The get request fetches all IP Lists, which are configured in the Dome9 account.
 ID: If the request is made without the IP List id then all IP Lists will be fetched.
@@ -736,7 +736,7 @@ ID: If the request is made without the IP List id then all IP Lists will be fetc
 URL: /IpList/{id} <br \>
 METHOD: GET <br \>
 
-####Response
+#### Response
 ```json
 [
   {
@@ -766,7 +766,7 @@ curl -u id:secret -X GET --header 'Accept: application/json' 'https://api.dome9.
 ```
 
 
-###Create IP List
+### Create IP List
 Create a new IP List.
 
 URL: /IpList <br \>
@@ -798,8 +798,8 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
   ]
 }' 'https://api.dome9.com/v2/IpList'
 ```
-
-####Request Parameters 
+ 
+#### Request Parameters 
 
 * name (string): the IP List's name.
 * description (string): the IP List's description.
@@ -808,7 +808,7 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
   * comment (string): a comment on the IP address.
 
 
-###Update IP List
+### Update IP List
 
 Update an existing IP List.
 The Update is relevant for the data and the description.
@@ -831,7 +831,7 @@ BODY:
 }
 ```
 
-####Request Parameters
+#### Request Parameters
 * id (in the URL): the IP List's ID.
 * name (string): the IP List's name.
 * description (string): the IP List's description.
@@ -854,7 +854,7 @@ BODY:
  }' 'https://api.dome9.com/v2/IpList'
  ```
 
-###Delete IP List
+### Delete IP List
 
 Delete an existing IP List.
 
@@ -868,7 +868,7 @@ METHOD: DELETE <br \>
 curl -u id:secret -X DELETE 'https://api.dome9.com/v2/IpList/2841'
 ```
 
-##<a name="dome9-agents">Dome9 Agents</a>
+## <a name="dome9-agents">Dome9 Agents</a>
 
 1. [Delete Dome9 agent](#dome9-agent-delete)
 
@@ -887,11 +887,11 @@ curl -u id:secret -X DELETE 'https://api.dome9.com/v2/api/Agent/******'
 
 ```
 
-####Response
+#### Response
 
 When successful the response is null.
 
-##<a name="users">Users</a>
+## <a name="users">Users</a>
 
 1. [Create User](#users-create)
 2. [Delete User](#users-delete)
@@ -914,7 +914,7 @@ BODY:
 }
 ```
 
-####Request Parameters
+#### Request Parameters
 * email(string, required):  The user email.
 * firstName(string, required): First name
 * lastName(string, required): Last name
@@ -931,7 +931,7 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 
 ```
 
-####Response:
+#### Response:
 
 ```json
 {
@@ -987,7 +987,7 @@ curl -u your-api-key-id:your-api-key-secret -X DELETE 'https://api.dome9.com/v2/
 
 ```
 
-####Response:
+#### Response:
 
 When successful the response is null.
 
@@ -1006,11 +1006,11 @@ curl -u your-api-key-id:your-api-key-secret -X GET 'https://api.dome9.com/v2/use
 
 ```
 
-####Response:
+#### Response:
 
 Array of users as detailed in <a href="https://github.com/Dome9/V2_API#users-create">create new user</a> response.
 
-##<a name="compliancepolicy">Compliance Policy</a>
+## <a name="compliancepolicy">Compliance Policy</a>
 
 1. [Create Bundle](#create-bundle)
 2. [Delete Bundle](#delete-bundles)
@@ -1042,7 +1042,7 @@ BODY:
 }
 ```
 
-####Request Parameters
+#### Request Parameters
 * name(string, required):  bundle name.
 * description(string, required): Bundle description.
 * rules(Array[rule], required):
@@ -1071,7 +1071,7 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 
 ```
 
-####Response:
+#### Response:
 
 ```json
 {
@@ -1113,7 +1113,7 @@ curl -u your-api-key-id:your-api-key-secret -X GET 'https://api.dome9.com/v2/Com
 
 ```
 
-####Response:
+#### Response:
 
 Array of bundles as detailed in <a href="https://github.com/Dome9/V2_API#create-bundle">create new bundle</a> response.
 
@@ -1143,7 +1143,7 @@ BODY:
 }
 ```
 
-####Request Parameters
+#### Request Parameters
 * id(integer, required): Bundle ID.
 * name(string, required):  bundle name.
 * description(string, required): Bundle description.
@@ -1173,7 +1173,7 @@ curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Acc
 
 ```
 
-####Response:
+#### Response:
 
 ```json
 {
@@ -1215,7 +1215,7 @@ curl -u your-api-key-id:your-api-key-secret -X DELETE 'https://api.dome9.com/v2/
 
 ```
 
-##<a name="assessment">Assessment</a>
+## <a name="assessment">Assessment</a>
 
 1. [Run Bundle](#run-bundle)
 2. [Run-Assessment](#run-assessment)
@@ -1240,7 +1240,7 @@ BODY:
 }
 ```
 
-####Request Parameters
+#### Request Parameters
 * id(string, required):  Bundle ID.
 * name(string): Bundle name (default is the original bundle name).
 * description(string): Bundle description (default is the original bundle description).
@@ -1263,7 +1263,7 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 
 ```
 
-####Response:
+#### Response:
 
 ```json
 	{
@@ -1371,7 +1371,7 @@ BODY:
 }
 ```
 
-####Request Parameters
+#### Request Parameters
 * rules (Array[string], required): rules logics for example ["Instance should have vpc"].
 * cloudAccountId(string, required): Dome9 Cloud Account ID.
 * region(string): Run the bundle on specific region.
@@ -1390,7 +1390,7 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 
 ```
 
-####Response:
+#### Response:
 
 ```json
 	{
@@ -1479,7 +1479,7 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 * assessmentPassed (boolean): return true if the assessment passed.
 * hasErrors (boolean): Return true if assessment has error.
 
-##<a name="access-lease">Access Lease</a>
+## <a name="access-lease">Access Lease</a>
 1. [GET](#access-lease-get)
 2. [Create lease for AWS server](#aws-lease-create)
 3. [Create lease for Dome9 agent](#agents-lease-create)
@@ -1497,7 +1497,7 @@ METHOD: GET <br \> <br \>
 curl -u id:secret -X GET --header 'Accept: application/json' 'https://api.dome9.com/v2/AccessLease'
 ```
 
-####Response:
+#### Response:
 
 ```json
  {
@@ -1577,7 +1577,7 @@ BODY:
     }
 ```
 
-####Request Parameters 
+#### Request Parameters 
 
 
 
@@ -1600,7 +1600,7 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
  "ip": "127.0.0.1/32", \ 
      }' 'https://api.dome9.com/v2/accesslease/aws'
 ```
-####Response
+#### Response
 
 ```json
  {
@@ -1656,7 +1656,7 @@ BODY:
    }
 ```
 
-####Request Parameters 
+#### Request Parameters 
 
 
 
@@ -1679,7 +1679,7 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
  "ip": "127.0.0.1/32", \ 
      }' 'https://api.dome9.com/v2/accesslease/agents'
 ```
-####Response
+#### Response
 
 ```json
 {
@@ -1725,6 +1725,6 @@ METHOD: DELETE <br \>
 curl -X DELETE --header 'Accept: application/json' 'http://127.0.0.1/api/AccessLease/{leaseId}'
 ```
 
-####Response
+#### Response
 
 If successful the response is null.
