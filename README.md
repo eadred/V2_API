@@ -23,6 +23,8 @@ If there are any other api use-case - *please contact us* at support@dome9.com. 
 
 8. [Access Lease](#access-lease)
 
+9. [Azure Accounts](#azure-accounts)
+
 ## Getting Started
 
 ### Create and Manage V2 API keys
@@ -1728,3 +1730,47 @@ curl -X DELETE --header 'Accept: application/json' 'http://127.0.0.1/api/AccessL
 #### Response
 
 If successful the response is null.
+
+## <a name="azure-accounts">Azure Accounts</a>
+
+### Add Azure Account.
+
+Adding a new Azure account to your Dome9 account.
+
+URL: /AzureCloudAccount <br \>
+METHOD: POST <br \>
+BODY:
+```json
+{
+      "name": "string", /*required*/
+      "subscriptionId": "string", /*required*/
+      "tenantId": "string", /*required*/
+      "credentials": {
+        "clientId": "string", /*required*/
+        "clientPassword": "string" /*required*/
+      }
+}
+```
+
+#### Request Parameters
+To get more information of how to get the values for the parameters below, follow the instructions <a href="https://secure.dome9.com/v2/cloud-add/azure/prepare"> here</a>.
+
+* name (string, optional): Account name in Dome9.
+* subscriptionId (string, required): Azure subscription ID.
+* tenantId (string, required): Azure tenant ID.
+* credentials (object, required): Azure account credentials.
+  * clientId (string, required): Azure client Id
+  * clientPassword (string, required): Azure Client password.
+
+**Example:**
+```bash
+curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+      "name":"azure account",
+      "subscriptionId": "*********-****-****-****-**********",
+      "tenantId": "*********-****-****-****-**********",
+      "credentials": {
+        "clientId": "*********-****-****-****-**********",
+        "clientPassword": "*********-****-****-****-**********"
+      }
+}' 'https://api.dome9.com/v2/AzureCloudAccount'
+```
