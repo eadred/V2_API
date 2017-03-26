@@ -1,11 +1,11 @@
-#DOME9 V2 API #
+# DOME9 V2 API #
 
 The Dome9 API enables developers to access Dome9 functionality by using an API key.  
 This is a **public preview** of the next generation Dome9 V2 api.  
 While there are many more resources already implemented, the resources below are documented and validated for external usage.  
 If there are any other api use-case - *please contact us* at support@dome9.com. We'll then verify and document these resources / actions.
 
-##Supported Resources / Actions 
+## Supported Resources / Actions 
  
 1. [AWS Security Groups](#aws-security-groups)
 
