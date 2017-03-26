@@ -1737,8 +1737,8 @@ If successful the response is null.
 
 Adding a new Azure account to your Dome9 account.
 
-URL: /AzureCloudAccount <br\>
-METHOD: POST <br\>
+URL: /AzureCloudAccount <br>
+METHOD: POST <br>
 BODY:
 ```json
 {
