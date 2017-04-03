@@ -17,13 +17,15 @@ If there are any other api use-case - *please contact us* at support@dome9.com. 
 
 5. [Users](#users)
 
-6. [Compliance Policy](#compliancepolicy)
+6. [Roles](#roles)
 
-7. [Assessment](#assessment)
+7. [Compliance Policy](#compliancepolicy)
 
-8. [Access Lease](#access-lease)
+8. [Assessment](#assessment)
 
-9. [Azure Accounts](#azure-accounts)
+9. [Access Lease](#access-lease)
+
+10. [Azure Accounts](#azure-accounts)
 
 ## Getting Started
 
@@ -1127,6 +1129,56 @@ curl -u your-api-key-id:your-api-key-secret -X GET 'https://api.dome9.com/v2/use
 #### Response:
 
 Array of users as detailed in <a href="https://github.com/Dome9/V2_API#users-create">create new user</a> response.
+
+## <a name="roles">Roles</a>
+
+<h3><a name="roles-get">Get Roles</a></h3>
+
+Get the entire roles in your Dome9 account
+
+URL: /role <br>
+METHOD: GET <br>
+ 
+
+**Example:**
+```bash
+
+curl -u your-api-key-id:your-api-key-secret -X GET 'https://api.dome9.com/v2/role/'
+
+```
+
+#### Response:
+
+Array of roles as That have defined Users permissions.
+```json
+{
+    "id": 441,
+    "name": "Auditor",
+    "description": "Auditor Role, Views all system resources",
+    "permissions": {
+      "access": [],
+      "manage": [],
+      "create": [],
+      "view": [
+        ""
+      ],
+      "crossAccountAccess": []
+    }
+  },
+  {
+    "id": 1701,
+    "name": "new11",
+    "description": "",
+    "permissions": {
+      "access": [],
+      "manage": [],
+      "create": [],
+      "view": [],
+      "crossAccountAccess": []
+    }
+  }
+}
+```
 
 ## <a name="compliancepolicy">Compliance Policy</a>
 
