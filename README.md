@@ -896,8 +896,9 @@ When successful the response is null.
 ## <a name="users">Users</a>
 
 1. [Create User](#users-create)
-2. [Delete User](#users-delete)
-3. [Get Users](#users-get)
+2. [Update User](#users-update)
+3. [Delete User](#users-delete)
+4. [Get Users](#users-get)
 
 <h3><a name="users-create">Create User</a></h3>
 
@@ -972,6 +973,121 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 * iamSafe (object): IAM Safe object of the user.
 * permissions (object): The permissions of the user
 
+<h3><a name="users-update">Update Users</a></h3>
+
+Update existing user
+
+URL: /user <br>
+METHOD: PUT <br>
+
+BODY:
+```json
+{
+  "id": 0,
+  "name": "string",
+  "isSuspended": true,
+  "isOwner": true,
+  "isSuperUser": true,
+  "hasApiKey": true,
+  "isMfaEnabled": true,
+  "ssoEnabled": true,
+  "roleIds": [
+    0
+  ],
+  "iamSafe": {
+    "cloudAccounts": [
+      {
+        "cloudAccountId": "string",
+        "name": "string",
+        "externalAccountNumber": "string",
+        "lastLeaseTime": "2017-04-03T08:34:51.363Z",
+        "state": "Pending",
+        "iamEntity": "string"
+      }
+    ]
+  },
+  "permissions": {
+    "access": [
+      "string"
+    ],
+    "manage": [
+      "string"
+    ],
+    "create": [
+      "string"
+    ],
+    "view": [
+      "string"
+    ],
+    "crossAccountAccess": [
+      "string"
+    ]
+  }
+}
+```
+
+#### Required Request Parameters
+* id(integer, required):  The User ID in Dome9.
+* permissions(object, required): The permissions of the user.
+
+**Example:**
+```bash
+curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+   "id": 1981,
+  "roleIds": [
+    441
+  ],
+  "permissions": {
+    "access": [],
+    "manage": [],
+    "create": [],
+    "view": [],
+    "crossAccountAccess": []
+  }
+}' 'https://api.dome9.com/v2/user'
+
+```
+
+#### Response:
+
+```json
+{
+  "id": 1981,
+  "name": "myEmail@gmail.com",
+  "isSuspended": false,
+  "isOwner": false,
+  "isSuperUser": false,
+  "hasApiKey": false,
+  "isMfaEnabled": false,
+  "ssoEnabled": false,
+  "roleIds": [
+    441
+  ],
+  "iamSafe": {
+    "cloudAccounts": []
+  },
+  "permissions": {
+    "access": [],
+    "manage": [],
+    "create": [],
+    "view": [],
+    "crossAccountAccess": []
+  }
+}
+```
+
+* id (integer): The User ID in Dome9.
+* name (string): The user Email.
+* isSuspended (boolean): will appear as "true" if the user is in "suspended" mode, or will appear as "false" if the user is in "active" mode.
+* isOwner (boolean): Will appear as "true" if the user is owner.
+* isSuperUser (boolean): (boolean): Will appear as "true" if the user is Super User.
+* hasApiKey (boolean): Will appear as true if the user created an API key.
+* isMfaEnabled (boolean): Will appear as true if the user has IAM Safe.
+* ssoEnabled (boolean): Will appear as true if the user is created as SSO user.
+* roleIds (object): List the attached roles.
+* iamSafe (object): IAM Safe object of the user.
+* iamSafe (object): IAM Safe object of the user.
+* permissions (object): The permissions of the user
 
 <h3><a name="users-delete">Delete User</a></h3>
 
