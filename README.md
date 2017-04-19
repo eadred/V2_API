@@ -845,7 +845,7 @@ BODY:
 
 **Example:**
  ```bash
- curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+ curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
    "id":121
    "name": "string",
    "description": "string",
