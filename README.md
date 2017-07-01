@@ -979,7 +979,7 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 
 Update existing user
 
-URL: /user <br>
+URL: /user/${id} <br>
 METHOD: PUT <br>
 
 BODY:
@@ -1046,7 +1046,7 @@ curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Acc
     "view": [],
     "crossAccountAccess": []
   }
-}' 'https://api.dome9.com/v2/user'
+}' 'https://api.dome9.com/v2/user/1981'
 
 ```
 
