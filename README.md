@@ -1942,3 +1942,407 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
       }
 }' 'https://api.dome9.com/v2/AzureCloudAccount'
 ```
+
+## <a name="agent-security-groups">Agent Security Groups</a>
+1. [GET](#agent-security-groups-get)
+2. [Create Agent Security Groups](#agent-security-groups-create)
+3. [Create Service](#agent-security-groups-create-service)
+4. [Overwrite service](#agent-security-groups-overwrite-security-service)
+5. [Delete service](#agent-security-groups-delete-service)
+6. [Create FIM Policy](#agent-security-groups-create-fim-policy)
+7. [Disable FIM Policy](#agent-security-groups-disable-fim-policy)
+8. [Change Logging Policy](#agent-security-groups-change-logging-policy)
+9. [Delete Agent Security Groups](#agent-security-groups-delete)
+
+<h3><a name=agent-security-groups-get">GET</a></h3>
+
+The GET request returns all Dome9 agent security groups, 
+
+URL: /securityGroup/{groupid} <br>
+METHOD: GET <br> <br>
+groupid: if the request is made without the security group id, then all Dome9 agent security groups will be returned.
+
+**Example:**
+```bash
+curl -u id:secret -X GET --header 'Accept: application/json' 'https://api.dome9.com/v2/Securitygroup/22661
+```
+
+#### Response:
+
+```json
+{
+    "securityGroupId": 22661,
+    "securityGroupName": "Alerts-Demo",
+    "securityGroupDescription": "string",
+    "loggingPolicy": "NoLogging",
+    "fimPolicy": {
+      "frequency": "Every6Hours",
+      "enabled": true,
+      "rules": [
+        {
+          "include": true,
+          "value": "string",
+          "comment": "string"
+        }
+      ],
+      "excludedFileTypes": [
+        "string"
+      ]
+    },
+    "whitelist": {
+      "inbound": [
+        {},
+    "services": {}
+      ]
+    }
+  }
+```
+
+* securityGroupId (integer): The Security Group ID in Dome9.
+* securityGroupName (string): The name of the Security Group.
+* securityGroupDescription(string, optional): The description of the Security Group.
+* loggingPolicy(string, optional): The logging policy of the Security Group.
+* fimPolicy(object, optional): The File Integrity monitoring policy of the Security Group.
+* services (object, optional) - The inbound and outbound services of the security group.
+
+<h3><a name="agent-security-groups-create">Create Agent Security Group</a></h3>
+Create a new Agent Security Group.
+
+URL: /SecurityGroup <br>
+METHOD: POST <br>
+BODY:
+```json
+{
+  "name": "string",
+  "description": "string"
+}
+```
+
+#### Request Parameters
+
+* Name (string): The name of the Agent Security Group.
+* description (string, optional): The description of the Agent Security Group.
+
+**Example:**
+```bash
+curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+
+
+  "name": "string",
+  "description": "string"
+  
+}' 'https://api.dome9.com/v2/SecurityGroup'
+```
+
+#### Response
+
+
+* securityGroupId (integer): The Agent Security Group ID in Dome9.
+* securityGroupName (string): The name of the Agent Security Group.
+* securityGroupDescription (string, optional): The description of the Agent Security Group.
+* loggingPolicy(string, optional): The logging policy of the Security Group.
+* fimPolicy(object, optional): The File Integrity monitoring policy of the Security Group.
+* services (object, optional) - The inbound and outbound services of the security group.
+
+<h3><a name="agent-security-groups-create-service">Create Agent Security Group Service</a></h3>
+
+Create a new service for an Agent security group.
+
+URL: /securitygroup/{groupid}/services/{policyType} <br>
+METHOD: POST <br>
+policyType: if set as "Inbound" the service will be created in the group's inbound services and if set as "Outbound" it will be created in the group's outbound services.
+groupid: The groupid in the URL is the internal id of the agent security group. <br>
+
+BODY:
+```json
+{
+  "name": "string",
+  "description": "string",
+  "portRange": {
+    "portFrom": 0,
+    "portTo": 0
+  },
+  "protocol": "string",
+  "normallyOpen": true,
+  "scope": [
+    {
+      "type": "CIDR",
+      "data": {}
+    }
+  ],
+  "icmpType": "string"
+}
+```
+
+#### Request Parameters
+
+* name (string): The service name.
+* description (string, optional): The service description.
+* protocolType (string): Can be one of the following protocols - 'HOPOPT', 'ICMP', 'IGMP', 'GGP', 'IPV4', 'ST', 'TCP', 'CBT', 'EGP', 'IGP', 'BBN_RCC_MON', 'NVP2', 'PUP', 'ARGUS', 'EMCON', 'XNET', 'CHAOS', 'UDP', 'MUX', 'DCN_MEAS', 'HMP', 'PRM', 'XNS_IDP', 'TRUNK1', 'TRUNK2', 'LEAF1', 'LEAF2', 'RDP', 'IRTP', 'ISO_TP4', 'NETBLT', 'MFE_NSP', 'MERIT_INP', 'DCCP', 'ThreePC', 'IDPR', 'XTP', 'DDP', 'IDPR_CMTP', 'TPplusplus', 'IL', 'SDRP', 'IDRP', 'RSVP', 'GRE', 'DSR', 'BNA', 'ESP', 'AH', 'I_NLSP', 'SWIPE', 'NARP', 'MOBILE', 'TLSP', 'SKIP', 'CFTP', 'SAT_EXPAK', 'KRYPTOLAN', 'RVD', 'IPPC', 'SAT_MON', 'VISA', 'IPCV', 'CPNX', 'CPHB', 'WSN', 'PVP', 'BR_SAT_MON', 'SUN_ND', 'WB_MON', 'WB_EXPAK', 'ISO_IP', 'VMTP', 'SECURE_VMTP', 'VINES', 'TTP', 'NSFNET_IGP', 'DGP', 'TCF', 'EIGRP', 'OSPFIGP', 'SPRITE_RPC', 'LARP', 'MTP', 'AX25', 'IPIP', 'MICP', 'SCC_SP', 'ETHERIP', 'ENCAP', 'GMTP', 'IFMP', 'PNNI', 'PIM', 'ARIS', 'SCPS', 'QNX', 'AN', 'IPCOMP', 'SNP', 'COMPAQ_PEER', 'IPX_IN_IP', 'VRRP', 'PGM', 'L2TP', 'DDX', 'IATP', 'STP', 'SRP', 'UTI', 'SMP', 'SM', 'PTP', 'ISIS', 'FIRE', 'CRTP', 'CRUDP', 'SSCOPMCE', 'IPLT', 'SPS', 'PIPE', 'SCTP', 'FC', 'RSVP_E2E_IGNORE', 'MOBILITY_HEADER', 'UDPLITE', 'MPLS_IN_IP', 'MANET', 'HIP', 'SHIM6', 'WESP', 'ROHC'.
+* port (string, optional): The port (can be a port range).
+* normallyOpen (boolean): if "true", the service will be open for the entire internet, otherwise it will be open according to the given scope parameter.
+* scope (Array[ScopeElementViewModel], optional): The service scope. If the service is "closed" then the scope isn't necessary.
+  * type (string): Can be one of the following - ['CIDR', 'DNS', 'IPList', 'MagicIP', 'AWS'],
+  * data (object): For CIDR - "cidr":'IP', For IP-List - "id":"IP-LIST ID","name":"IP-LIST NAME"}, for Magic IP - {"type": "MagicIP","data": {"name": "Magic IP Name"}, for DNS - {"type": "DNS","data": {"dns": "DNS ADDRESS","note": 'optional comment'}}
+* icmpType (string, optional): In case of ICMP - 'EchoReply', 'DestinationUnreachable', 'SourceQuench', 'Redirect', 'AlternateHostAddress', 'Echo', 'RouterAdvertisement', 'RouterSelection', 'TimeExceeded', 'ParameterProblem', 'Timestamp', 'TimestampReply', 'InformationRequest', 'InformationReply', 'AddressMaskRequest', 'AddressMaskReply', 'Traceroute', 'DatagramConversionError', 'MobileHostRedirect', 'MobileRegistrationRequest', 'MobileRegistrationReply', 'DomainNameRequest', 'DomainNameReply', 'SKIP', 'Photuris', 'All'
+
+**Example**:
+```bash
+curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+{
+  "name": "SSH",
+  "description": "Secure Shell access",
+  "portRange": {
+    "portFrom": 22,
+    "portTo": 22
+  },
+  "protocol": "TCP",
+  "normallyOpen": false,
+  "scope": [
+    {
+      "type": "CIDR",
+      "data": {
+"cidr":"10.0.0.1/32",
+"Note":null
+}
+  ],
+  "icmpType": null
+}' 'https://api.dome9.com/v2/securitygroup/543921/services/Inbound'
+```
+#### Response
+
+Similar to the request parameters.
+
+<h3><a name="agent-security-groups-overwrite-service">Overwrite Agent Security Group Service</a></h3>
+
+Update an existing Agent security group service.
+
+URL: /securitygroup/{groupid}/services/{policyType} <br>
+METHOD: PUT <br>
+policyType: if set as "Inbound" the service will be updated for the group's inbound services and if set as "Outbound" it will be updated for the group's outbound services.
+groupid: The groupid in the URL is the internal id of the agent security group. <br>
+
+BODY:
+```json
+{
+  "name": "string",
+  "description": "string",
+  "portRange": {
+    "portFrom": 0,
+    "portTo": 0
+  },
+  "protocol": "string",
+  "normallyOpen": true,
+  "scope": [
+    {
+      "type": "CIDR",
+      "data": {}
+    }
+  ],
+  "icmpType": "string"
+}
+```
+
+#### Request Parameters
+
+* name (string): The service name.
+* description (string, optional): The service description.
+* protocolType (string):According to the protocol need to be updated.
+* port (string, optional): The port (can be a port range).
+* normallyOpen (boolean): if "true", the service will be open for the entire internet, otherwise it will be open according to the given scope parameter.
+* scope (Array[ScopeElementViewModel], optional): The service scope. If the service is "closed" then the scope isn't necessary.
+  * type (string): Can be one of the following - ['CIDR', 'DNS', 'IPList', 'MagicIP', 'AWS'],
+  * data (object): For CIDR - "cidr":'IP', For IP-List - "id":"IP-LIST ID","name":"IP-LIST NAME"}, for Magic IP - {"type": "MagicIP","data": {"name": "Magic IP Name"}, for DNS - {"type": "DNS","data": {"dns": "DNS ADDRESS","note": 'optional comment'}}
+* icmpType (string, optional): In case of ICMP - 'EchoReply', 'DestinationUnreachable', 'SourceQuench', 'Redirect', 'AlternateHostAddress', 'Echo', 'RouterAdvertisement', 'RouterSelection', 'TimeExceeded', 'ParameterProblem', 'Timestamp', 'TimestampReply', 'InformationRequest', 'InformationReply', 'AddressMaskRequest', 'AddressMaskReply', 'Traceroute', 'DatagramConversionError', 'MobileHostRedirect', 'MobileRegistrationRequest', 'MobileRegistrationReply', 'DomainNameRequest', 'DomainNameReply', 'SKIP', 'Photuris', 'All'
+
+**Example**:
+```bash
+curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+{
+  "name": "SSH",
+  "description": "Secure Shell access",
+  "portRange": {
+    "portFrom": 22,
+    "portTo": 22
+  },
+  "protocol": "TCP",
+  "normallyOpen": false,
+  "scope": [
+    {
+      "type": "CIDR",
+      "data": {
+"cidr":"10.0.0.1/32",
+"Note":null
+}
+  ],
+  "icmpType": null
+}' 'https://api.dome9.com/v2/securitygroup/23681/services/Inbound'
+```
+#### Response
+
+Similar to the request parameters.
+
+
+
+
+<h3><a name="agent-security-groups-delete-service">Delete Agent Security Group Service</a></h3>
+
+Delete an Agent security group service.
+
+URL: /securitygroup/{groupid}/services/{policyType} <br>
+METHOD: DELETE <br>
+* groupid: The groupid in the URL can be either the internal id or the external id.
+policyType: if set as "Inbound" it will delete the service in the security group's inbound policy and if set as "Outbound" it will delete the service in the security group's outbound policy.
+Protocol: The service protocol going to be deleted.
+fromPort: The service ports going to be deleted.
+toPort: The service ports going to be deleted.
+
+
+**Example**:
+```bash
+curl -X DELETE 'https://api.dome9.com/v2/SecurityGroup/23681/service/outbound?protocol=TCP&fromPort=389&toPort=389'
+```
+#### Response
+
+No content 204 code. 
+
+<h3><a name="agent-security-groups-create-fim-policy">Update FIM Policy for Agent Security Groups</a></h3>
+
+Update a FIM Policy for Agent security group.
+Calling this action will also enable the FIM Policy 
+
+URL: /securitygroup/fim-policy <br>
+METHOD: PUT <br>
+
+BODY:
+```json
+{
+  "sgId": 0,
+  "fimPolicy": {
+    "frequency": "Every6Hours",
+    "enabled": true,
+    "rules": [
+      {
+        "include": true,
+        "value": "string",
+        "comment": "string"
+      }
+    ],
+    "excludedFileTypes": [
+      "string"
+    ]
+  }
+}
+```
+
+#### Request Parameters
+
+* sgId: The groupid in the URL is the internal id of the agent security group
+* frequency(string): Every6Hours, Every12Hours, OnceADay, OnceAWeek
+* enabled(boolean): if true it will enable the policy, if false it means the policy is disabled.
+* rules(Array): 
+* Include(boolean): If true the rule will be included in the fim policy, if false it would be excluded from the scan
+* Value(string): the path to the file or directory 
+* comment(string, optional): comment for this path.
+
+**Example**:
+```bash
+curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+{
+  "name": "SSH",
+  "description": "Secure Shell access",
+  "portRange": {
+    "portFrom": 22,
+    "portTo": 22
+  },
+  "protocol": "TCP",
+  "normallyOpen": false,
+  "scope": [
+    {
+      "type": "CIDR",
+      "data": {
+"cidr":"10.0.0.1/32",
+"Note":null
+}
+  ],
+  "icmpType": null
+}' 'https://api.dome9.com/v2/securitygroup/23681/services/Inbound'
+```
+#### Response
+
+Similar to the request parameters.
+
+
+ 
+<h3><a name="agent-security-groups-disable-fim-policy">Disable FIM Policy for Agent Security Groups</a></h3>
+
+Disable a FIM Policy for Agent security group.
+
+URL:/SecurityGroup/{groupId}/fim-policy/disable
+ <br>
+METHOD: PUT <br>
+
+
+
+#### Request Parameters
+
+* groupId: The groupid in the URL is the internal id of the agent security group
+
+**Example**:
+```bash
+curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' -d 
+'https://dome9-api/SecurityGroup/663/fim-policy/disable'
+```
+#### Response
+
+Message:  "Fim-policy disabled successfully"
+
+
+<h3><a name="agent-security-groups-change-logging-policy">Change Logging Policy for Agent Security Groups</a></h3>
+
+Change Logging Policy for Agent security group.
+
+URL:/SecurityGroup/{groupId}/fim-policy/logging-policy
+ <br>
+METHOD: PUT <br>
+BODY:
+```json
+{
+  "loggingPolicy": "String"
+}
+
+```
+
+#### Request Parameters
+
+* groupId: The groupid in the URL is the internal id of the agent security group
+* loggingPolicy: "NoLogging", "LogSuccess", "LogDeny", "LogBoth"
+
+**Example**:
+```bash
+curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+{
+  "loggingPolicy": "LogSuccess"
+}
+' 'https://api.dome9.com/v2/securitygroup/23681/fim-policy/logging-policy
+'
+
+```
+#### Response
+Similar to the request parameters.
+
+
+<h3><a name="agent-security-groups-delete">Delete Agent Security Group</a></h3>
+
+Delete an Agent security group.
+
+URL: /securitygroup/{groupid} <br>
+METHOD: DELETE <br>
+* groupid: The groupid in the URL can be either the internal id or the external id.
+
+**Example**:
+```bash
+curl -X DELETE ''https://api.dome9.com/v2/SecurityGroup/23681'
+```
+#### Response
+no content 204 code. 
