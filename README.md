@@ -27,6 +27,8 @@ If there are any other api use-case - *please contact us* at support@dome9.com. 
 
 10. [Azure Accounts](#azure-accounts)
 
+11. [Agent Security Groups](#agent-security-groups)
+
 ## Getting Started
 
 ### Create and Manage V2 API keys
