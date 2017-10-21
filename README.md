@@ -29,6 +29,8 @@ If there are any other api use-case - *please contact us* at support@dome9.com. 
 
 11. [Agent Security Groups](#agent-security-groups)
 
+12. [Agent IP Blacklist](#agent-ip-blacklist)
+
 ## Getting Started
 
 ### Create and Manage V2 API keys
@@ -2348,3 +2350,99 @@ curl -X DELETE ''https://api.dome9.com/v2/SecurityGroup/23681'
 ```
 #### Response
 no content 204 code. 
+
+
+
+12. [Agent IP Blacklist](#agent-ip-blacklist)
+
+## <a name="agent-ip-blacklist">Agent IP Blacklist</a>
+1. [GET](#agent-ip-blacklist-get)
+2. [Modify Agent IP Blacklist](#agent-ip-blacklist-modify)
+
+
+<h3><a name=agent-ip-blacklist-get">GET</a></h3>
+
+The GET request returns all Dome9 agent IP Blacklist items, 
+
+URL: /Blacklist/ <br>
+METHOD: GET <br> <br>
+
+
+**Example:**
+```bash
+curl -u id:secret -X GET --header 'Accept: application/json' 'https://api.dome9.com/v2/Blacklist'
+```
+
+#### Response:
+
+```json
+{
+  "entries": [
+    {
+      "expiration": null,
+      "comment": "Lab",
+      "ip": "192.168.4.5/32"
+    },
+    {
+      "expiration": null,
+      "comment": "",
+      "ip": "11.25.3.3/32"
+    },
+    {
+      "expiration": null,
+      "comment": "",
+      "ip": "45.66.36.25/32"
+    }
+  ]
+}
+```
+
+* expiration (string, optional): The IP Blacklisted expiration time.
+* comment (string, optional): Comment for the Blaclisted item.
+* ip(string): The IP required to Blacklist.
+
+
+<h3><a name="agent-ip-blacklist-modify">Modify Agent IP Blacklist</a></h3>
+Add, remove or modify Agent IP Blacklist.
+
+URL: /Blacklist <br>
+METHOD: PUT <br>
+BODY:
+```json
+{
+  "name": "string",
+  "description": "string"
+}
+```
+
+#### Request Parameters
+
+* entries (array) The collection of the Blacklisted IP's.
+* expiration (string, optional): The IP Blacklisted expiration time.
+* comment (string, optional): Comment for the Blaclisted item.
+* ip(string): The IP required to Blacklist.
+
+**Example:**
+```bash
+curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+{
+  "entries": [
+    {
+      "expiration": "string",
+      "comment": "string",
+      "ip": "string"
+    },
+    {
+      "expiration": "string",
+      "comment": "string",
+      "ip": "string"
+    }
+  ]
+}
+ 
+}' 'https://api.dome9.com/v2/Blacklist'
+```
+
+#### Response
+
+Similar to the request parameters.
