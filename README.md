@@ -2052,7 +2052,7 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 
 Create a new service for an Agent security group.
 
-URL: /securitygroup/{groupid}/services/{policyType} <br>
+URL: /securityGroup/{groupid}/service/{policyType} <br>
 METHOD: POST <br>
 policyType: if set as "Inbound" the service will be created in the group's inbound services and if set as "Outbound" it will be created in the group's outbound services.
 groupid: The groupid in the URL is the internal id of the agent security group. <br>
@@ -2111,7 +2111,7 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 }
   ],
   "icmpType": null
-}' 'https://api.dome9.com/v2/securitygroup/543921/services/Inbound'
+}' 'https://api.dome9.com/v2/securitygroup/543921/service/Inbound'
 ```
 #### Response
 
@@ -2121,7 +2121,7 @@ Similar to the request parameters.
 
 Update an existing Agent security group service.
 
-URL: /securitygroup/{groupid}/services/{policyType} <br>
+URL: /securityGroup/{groupid}/service/{policyType} <br>
 METHOD: PUT <br>
 policyType: if set as "Inbound" the service will be updated for the group's inbound services and if set as "Outbound" it will be updated for the group's outbound services.
 groupid: The groupid in the URL is the internal id of the agent security group. <br>
@@ -2180,7 +2180,7 @@ curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Acc
 }
   ],
   "icmpType": null
-}' 'https://api.dome9.com/v2/securitygroup/23681/services/Inbound'
+}' 'https://api.dome9.com/v2/securityGroup/23681/service/Inbound'
 ```
 #### Response
 
@@ -2193,7 +2193,7 @@ Similar to the request parameters.
 
 Delete an Agent security group service.
 
-URL: /securitygroup/{groupid}/services/{policyType} <br>
+URL: /securityGroup/{groupid}/service/{policyType} <br>
 METHOD: DELETE <br>
 * groupid: The groupid in the URL can be either the internal id or the external id.
 policyType: if set as "Inbound" it will delete the service in the security group's inbound policy and if set as "Outbound" it will delete the service in the security group's outbound policy.
@@ -2215,7 +2215,7 @@ No content 204 code.
 Update a FIM Policy for Agent security group.
 Calling this action will also enable the FIM Policy 
 
-URL: /securitygroup/fim-policy <br>
+URL: /securityGroup/fim-policy <br>
 METHOD: PUT <br>
 
 BODY:
@@ -2244,7 +2244,7 @@ BODY:
 * sgId: The groupid in the URL is the internal id of the agent security group
 * frequency(string): Every6Hours, Every12Hours, OnceADay, OnceAWeek
 * enabled(boolean): if true it will enable the policy, if false it means the policy is disabled.
-* rules(Array): 
+* rules(Array): Array of rules
 * Include(boolean): If true the rule will be included in the fim policy, if false it would be excluded from the scan
 * Value(string): the path to the file or directory 
 * comment(string, optional): comment for this path.
@@ -2253,24 +2253,45 @@ BODY:
 ```bash
 curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
 {
-  "name": "SSH",
-  "description": "Secure Shell access",
-  "portRange": {
-    "portFrom": 22,
-    "portTo": 22
+  "securityGroupId": 3781,
+  "securityGroupName": "Dome9Default",
+  "securityGroupDescription": "",
+  "loggingPolicy": "LogDeny",
+  "fimPolicy": {
+    "frequency": "OnceADay",
+    "enabled": true,
+    "rules": [
+      {
+        "include": true,
+        "value": "/var/tmp",
+        "comment": null
+      },
+      {
+        "include": false,
+        "value": "/var/tmp/listl1.txt",
+        "comment": "Excluded by X@dome9.com"
+      },
+      {
+        "include": false,
+        "value": "/var/tmp/listl22.txt",
+        "comment": "Excluded by X@dome9.com"
+      }
+    ],
+    "excludedFileTypes": []
   },
-  "protocol": "TCP",
-  "normallyOpen": false,
-  "scope": [
-    {
-      "type": "CIDR",
-      "data": {
-"cidr":"10.0.0.1/32",
-"Note":null
-}
-  ],
-  "icmpType": null
-}' 'https://api.dome9.com/v2/securitygroup/23681/services/Inbound'
+  "whitelist": {
+    "inbound": [],
+    "outbound": [
+      {
+        "type": "CIDR",
+        "data": {
+          "cidr": "0.0.0.0/0",
+          "note": "Allow All Outbound Traffic"
+        }
+      }
+    ]
+  }
+}' 'https://api.dome9.com/v2/securityGroup/fim-policy'
 ```
 #### Response
 
@@ -2328,7 +2349,7 @@ curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Acc
 {
   "loggingPolicy": "LogSuccess"
 }
-' 'https://api.dome9.com/v2/securitygroup/23681/fim-policy/logging-policy
+' 'https://api.dome9.com/v2/securityGroup/23681/fim-policy/logging-policy
 '
 
 ```
