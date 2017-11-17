@@ -1957,6 +1957,7 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
 7. [Disable FIM Policy](#agent-security-groups-disable-fim-policy)
 8. [Change Logging Policy](#agent-security-groups-change-logging-policy)
 9. [Delete Agent Security Groups](#agent-security-groups-delete)
+10. [Create Whitelist](#agent-security-groups-whitelist)
 
 <h3><a name=agent-security-groups-get">GET</a></h3>
 
@@ -2371,6 +2372,35 @@ curl -X DELETE ''https://api.dome9.com/v2/SecurityGroup/23681'
 ```
 #### Response
 no content 204 code. 
+
+<h3><a name="agent-security-groups-whitelist">Create Agent Security Group Whitelist</a></h3>
+
+Create an Agent security group whitelist
+
+URL: /SecurityGroup/{groupId}/whitelist/{policyType} <br>
+METHOD: POST <br>
+policyType: if set as "Inbound" the service will be created in the group's inbound Whitelist and if set as "Outbound" it will be created in the group's outbound whitelist.
+groupid: The groupid in the URL is the internal id of the agent security group. <br>
+
+BODY:
+```json
+[
+  {
+    "type": "CIDR",
+    "data": {
+	     "cidr": "1.2.1.2/32",
+	     "note": "test"
+	    }
+  }
+]
+```
+
+#### Request Parameters
+
+* type (string): The whitelist type CIDR/IPList/MagicIP.
+* data (string): The whitelist content according to the selected type.
+* cidr (string): The desired CIDR.
+* note (string, optional): note for the CIDR.
 
 
 
