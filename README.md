@@ -2317,7 +2317,7 @@ METHOD: PUT <br>
 **Example**:
 ```bash
 curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' -d 
-'https://dome9-api/SecurityGroup/663/fim-policy/disable'
+'https://api.dome9.com/v2/SecurityGroup/663/fim-policy/disable'
 ```
 #### Response
 
@@ -2436,7 +2436,7 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
         }
       }
 ]
-}' 'https://api.dome9.com/v2/securityGroup/23681whitelist/inbound'
+}' 'https://api.dome9.com/v2/securityGroup/23681/whitelist/inbound'
 ```
 
 12. [Agent IP Blacklist](#agent-ip-blacklist)
