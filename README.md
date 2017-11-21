@@ -2385,13 +2385,26 @@ groupid: The groupid in the URL is the internal id of the agent security group. 
 BODY:
 ```json
 [
-  {
-    "type": "CIDR",
-    "data": {
-	     "cidr": "1.2.1.2/32",
-	     "note": "test"
-	    }
-  }
+      {
+        "type": "CIDR",
+        "data": {
+          "cidr": "1.2.3.4/32",
+          "note": ""
+        }
+      },
+      {
+        "type": "IPList",
+        "data": {
+          "id": "2261",
+          "name": "arik"
+        }
+      },
+      {
+        "type": "MagicIP",
+        "data": {
+          "name": "incapsula"
+        }
+      }
 ]
 ```
 
@@ -2401,8 +2414,30 @@ BODY:
 * data (string): The whitelist content according to the selected type.
 * cidr (string): The desired CIDR.
 * note (string, optional): note for the CIDR.
+* id (string, optional): The IPList ID.
+* name (string): The IPList name, or if MagicIP selected then the service name.
 
-
+**Example**:
+```bash
+curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+[
+      {
+        "type": "CIDR",
+        "data": {
+          "cidr": "10.22.31.4/32",
+          "note": ""
+        }
+      },
+      {
+        "type": "IPList",
+        "data": {
+          "id": "2261",
+          "name": "Production-Servers"
+        }
+      }
+]
+}' 'https://api.dome9.com/v2/securityGroup/23681whitelist/inbound'
+```
 
 12. [Agent IP Blacklist](#agent-ip-blacklist)
 
