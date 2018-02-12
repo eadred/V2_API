@@ -1136,6 +1136,98 @@ Array of users as detailed in <a href="https://github.com/Dome9/V2_API#users-cre
 
 ## <a name="roles">Roles</a>
 
+1. [Create Role](#roles-create)
+2. [Delete Role](#roles-delete)
+3. [Get Role](#roles-get)
+
+<h3><a name="roles-create">Create Role</a></h3>
+
+Create new role
+
+URL: /role <br>
+METHOD: POST <br>
+
+BODY:
+```json
+{
+    "id": null,
+    "name": "Auditor",
+    "description": "Auditor Role, Views all system resources",
+    "permissions": {
+      "access": [],
+      "manage": [],
+      "create": [],
+      "view": [""],
+      "crossAccountAccess": []
+    }
+}
+```
+
+#### Request Parameters
+* id(int):  The role id - will be created with the role.
+* Name(string, required): Role name
+* description(string): Role description
+* permissions(object): Will contain the Role permissions
+ 
+
+**Example:**
+```bash
+curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+  "name": "MyRoleName",
+  "description": "CreateRoletest",
+  "permissions": {
+	  "access": [],
+      "manage": [],
+      "create": [],
+      "view": [""],
+      "crossAccountAccess": []
+	}
+}' 'https://api.dome9.com/v2/role'
+
+```
+
+#### Response:
+
+```json
+{
+  "id": 11111,
+  "name": "MyRoleName",
+  "description": CreateRoletest,
+  "permissions": {
+    "access": [],
+    "manage": [],
+    "create": [],
+    "view": [],
+    "crossAccountAccess": []
+  }
+}
+```
+
+* id (integer): The Role ID in Dome9.
+* name (string): The Role name.
+* description(string): The Role description.
+* permissions (object): The permissions of the user
+
+<h3><a name="roles-delete">Delete Role</a></h3>
+
+Delete Role
+
+URL: /role/{id} <br>
+METHOD: DELETE <br>
+ 
+ * id: The role ID 
+
+**Example:**
+```bash
+
+curl -u your-api-key-id:your-api-key-secret -X DELETE 'https://api.dome9.com/v2/role/{id number}'
+
+```
+
+#### Response:
+
+When successful the response is null.
+
 <h3><a name="roles-get">Get Roles</a></h3>
 
 Get the entire roles in your Dome9 account
