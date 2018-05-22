@@ -2038,6 +2038,84 @@ curl -u id:secret -X POST --header 'Content-Type: application/json' --header 'Ac
       }
 }' 'https://api.dome9.com/v2/AzureCloudAccount'
 ```
+### Modify Operation mode for Azure cloud Account.
+
+Modify Azure account operation mode on your Dome9 account.
+
+URL: /AzureCloudAccount/{id}/OperationMode <br>
+METHOD: PUT <br>
+BODY:
+```json
+{
+    "operationMode": "Read"
+}
+```
+
+#### Request Parameters
+To get more information of how to get the values for the parameters below, follow the instructions <a href="https://secure.dome9.com/v2/cloud-add/azure/prepare"> here</a>.
+
+* operationMode (string): "Read" or "Manage".
+
+**Example:**
+```bash
+curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+    "operationMode": "Manage"
+}
+}' 'https://api.dome9.com/v2/AzureCloudAccount/{id}/OperationMode'
+```
+### Modify Account name for Azure cloud Account.
+
+Modify Azure account name on your Dome9 account.
+
+URL: /AzureCloudAccount/{id}/AccountName <br>
+METHOD: PUT <br>
+BODY:
+```json
+{
+	"name": "String"
+}
+```
+
+#### Request Parameters
+
+* name (string, optional): The desired cloud account name.
+
+**Example:**
+```bash
+curl -u id:secret -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+    "name": "String"
+}
+}' 'https://api.dome9.com/v2/AzureCloudAccount/{id}/AccountName'
+```
+### GET Azure cloud Account.
+
+Return Azure accounts on your Dome9 account.
+
+URL: /AzureCloudAccount <br>
+METHOD: GET <br>
+
+**Example:**
+```bash
+curl -u id:secret -X GET --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+    
+}
+}' 'https://api.dome9.com/v2/AzureCloudAccount'
+```
+
+### Remove Azure cloud Account from Dome9.
+
+Remove Azure account from your Dome9 account.
+
+URL: /AzureCloudAccount/{id} <br>
+METHOD: DELETE <br>
+
+**Example:**
+```bash
+curl -u id:secret -X DELETE --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+    
+}
+}' 'https://api.dome9.com/v2/AzureCloudAccount/{id}'
+```
 
 ## <a name="agent-security-groups">Agent Security Groups</a>
 1. [GET](#agent-security-groups-get)
