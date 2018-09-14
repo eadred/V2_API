@@ -1,3 +1,10 @@
+# Moved...
+## This documentation site is now deprecated and will be completely removed in the future
+## It is replaced by the new Dome9 API documentation site which can be found at:
+## https://api-v2-docs.dome9.com/
+
+<hr/>
+
 # DOME9 V2 API #
 
 The Dome9 API enables developers to access Dome9 functionality by using an API key.  
