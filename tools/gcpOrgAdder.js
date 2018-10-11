@@ -68,7 +68,7 @@ jwtClient.authorize(function (err, tokens) {
           .catch(function(err){
             counter++;
             withFailure = true;
-            console.error(err);
+            console.error(err.error);
           })
           .finally(function(){
             if(counter == result.projects.length && !withFailure){
