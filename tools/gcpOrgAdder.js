@@ -1,5 +1,6 @@
 var utils = require('./utils')
 var program = require('commander');
+var Q = require('q');
 program
   .option('-p, --path <path>', 'service account key path for google cloud account')
   .option('-i, --id <id>', 'API key ID for Dome9')
@@ -88,41 +89,82 @@ jwtClient.authorize(function (err, tokens) {
                                   console.error(`project:${acc.projectId} failed`, res.errors[0].message)
                               }
                               else {
+                                  //here
                                   console.log(`project:${acc.projectId} - ${requestForService.serviceName} enabled`);
-                                  var currentKey = utils.clone(key);
-                                  currentKey.project_id = acc.projectId;
-                                  console.log('adding project: ',currentKey.project_id);
-                                  var options = {
-                                      url: d9Url,
-                                      method: 'POST',
-                                      body: {
-                                          name:currentKey.project_id,
-                                          serviceAccountCredentials: currentKey
-                                      },
-                                      headers: {
-                                          'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36',
-                                          'Content-Type': 'application/json; charset=UTF-8',
-                                          'Accept': 'application/json, text/plain, */*'
-                                      },
-                                      json: true
-                                  };
-                                  utils.simpleReq(options,auth).then(function(res){
-                                      counter++;
-                                      console.log('Project added successfully',res);
+                                  requestForService.serviceName = 'compute.googleapis.com';
+                                  serviceusage.services.enable(requestForService, function(res) {
+                                      if (res && res.errors && res.errors.length) {
+                                          console.error(`project:${acc.projectId} failed`, res.errors[0].message)
+                                      }
+                                      else{
+                                          console.log(`project:${acc.projectId} - ${requestForService.serviceName} enabled`);
+                                          requestForService.serviceName = 'container.googleapis.com';
+                                          serviceusage.services.enable(requestForService, function(res) {
+                                              if (res && res.errors && res.errors.length) {
+                                                  console.error(`project:${acc.projectId} failed`, res.errors[0].message)
+                                              }
+                                              else {
+                                                  console.log(`project:${acc.projectId} - ${requestForService.serviceName} enabled`);
+                                                  requestForService.serviceName = 'bigquery-json.googleapis.com';
+                                                  serviceusage.services.enable(requestForService, function(res) {
+                                                      if (res && res.errors && res.errors.length) {
+                                                          console.error(`project:${acc.projectId} failed`, res.errors[0].message)
+                                                      }
+                                                      else {
+                                                          console.log('waiting 1 min to enable apis');
+                                                          Q.delay(1000*60).then(function(){
+                                                              console.log(`project:${acc.projectId} - ${requestForService.serviceName} enabled`);
+                                                              requestForService.serviceName = 'admin.googleapis.com';
+                                                              serviceusage.services.enable(requestForService, function(res) {
+                                                                  if (res && res.errors && res.errors.length) {
+                                                                      console.error(`project:${acc.projectId} failed`, res.errors[0].message)
+                                                                  }
+                                                                  else{
+                                                                      console.log(`project:${acc.projectId} - ${requestForService.serviceName} enabled`);
+                                                                      var currentKey = utils.clone(key);
+                                                                      currentKey.project_id = acc.projectId;
+                                                                      console.log('adding project: ',currentKey.project_id);
+                                                                      var options = {
+                                                                          url: d9Url,
+                                                                          method: 'POST',
+                                                                          body: {
+                                                                              name:currentKey.project_id,
+                                                                              serviceAccountCredentials: currentKey
+                                                                          },
+                                                                          headers: {
+                                                                              'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36',
+                                                                              'Content-Type': 'application/json; charset=UTF-8',
+                                                                              'Accept': 'application/json, text/plain, */*'
+                                                                          },
+                                                                          json: true
+                                                                      };
+                                                                      utils.simpleReq(options,auth).then(function(res){
+                                                                          counter++;
+                                                                          console.log('Project added successfully',res);
+                                                                      })
+                                                                          .catch(function(err){
+                                                                              counter++;
+                                                                              withFailure = true;
+                                                                              console.error(err.error);
+                                                                          })
+                                                                          .finally(function(){
+                                                                              if(counter == result.projects.length && !withFailure){
+                                                                                  process.exit(0)
+                                                                              }
+                                                                              else if(counter == result.projects.length && withFailure){
+                                                                                  process.exit(1)
+                                                                              }
+                                                                          })
+                                                                  }
+                                                              })
+                                                          })
+                                                      }
+                                                  })
+
+                                              }
+                                          })
+                                      }
                                   })
-                                      .catch(function(err){
-                                          counter++;
-                                          withFailure = true;
-                                          console.error(err.error);
-                                      })
-                                      .finally(function(){
-                                          if(counter == result.projects.length && !withFailure){
-                                              process.exit(0)
-                                          }
-                                          else if(counter == result.projects.length && withFailure){
-                                              process.exit(1)
-                                          }
-                                      })
                               }
                           })
                       }
