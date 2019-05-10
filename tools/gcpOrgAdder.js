@@ -225,6 +225,7 @@ jwtClient.authorize(function (err, tokens) {
     serviceusage.services.enable(mainRequestForService, function (res) {
         if (res && res.errors && res.errors.length) {
             console.error(`on-boarding failed project:${key.project_id}`, res.errors[0].message);
+            process.exit(1);
         }
         else cloudresourcemanager.projects.list(request, recur);
     });
