@@ -41,7 +41,7 @@ var d9Url = `https://api.dome9.com/v2/GoogleCloudAccount?skipComputeValidation=$
 jwtClient.authorize(function (err, tokens) {
     if (err) {
         console.log(err);
-        return;
+        process.exit(1)
     }
     var request = {
         // TODO: Change placeholders below to appropriate parameter values for the 'list' method:
@@ -63,7 +63,9 @@ jwtClient.authorize(function (err, tokens) {
             var counter = 0;
             var withFailure = false;
             let readyToOnboardList = [];
+            console.log(`start to enable ${result.projects.length} GCP accounts`);
             for (let i = 0; i < result.projects.length; i++) {
+                console.log(`start to enable ${i + 1} / ${result.projects.length}.`);
                 let acc = result.projects[i];
                 let promises = [];
                 let requestForService = {
@@ -122,7 +124,8 @@ jwtClient.authorize(function (err, tokens) {
                         await Q.delay(20 * 1000);
                         //first try
                         let retryAccounts = [];
-                        _.forEach(readyToOnboardList, function (account) {
+                        console.log(`start to do DOME9 on-boarding ${readyToOnboardList.length} GCP accounts`);
+                        _.forEach(readyToOnboardList, function (account, idx) {
                             var currentKey = utils.clone(key);
                             currentKey.project_id = account.projectId;
                             console.log('adding project: ', currentKey.project_id);
@@ -151,6 +154,7 @@ jwtClient.authorize(function (err, tokens) {
                                     console.error(err.error);
                                 })
                                 .finally(function () {
+                                    console.log(`finished DOME9 on-boarding ${idx+1} / ${readyToOnboardList.length}`);
                                     if (counter == readyToOnboardList.length && !withFailure) {
                                         process.exit(0)
                                     }
