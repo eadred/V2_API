@@ -64,7 +64,6 @@ jwtClient.authorize(function (err, tokens) {
             var withFailure = false;
             let readyToOnboardList = [];
             console.log(`start to enable ${result.projects.length} GCP accounts`);
-            let lastEndTime = new Date(0);
             for (let i = 0; i < result.projects.length; i++) {
                 console.log(`start to enable ${i + 1} / ${result.projects.length}.`);
                 let acc = result.projects[i];
@@ -76,10 +75,7 @@ jwtClient.authorize(function (err, tokens) {
                 };
 
                 try {
-                    const differneceInTime = new Date().getTime() - lastEndTime.getTime();
-                    if(differneceInTime < 1000) {
-                        await new Promise(resolve => setTimeout(resolve, 1000 - differneceInTime));
-                    }
+                    await new Promise(resolve => setTimeout(resolve, 1000));
 
                     requestForService.serviceName = 'cloudresourcemanager.googleapis.com';
                     requestForService.consumerId = `project:${acc.projectId}`;
@@ -110,7 +106,6 @@ jwtClient.authorize(function (err, tokens) {
                     promises.push(utils.enableService(_.cloneDeep(requestForService)));
 
                     await Q.all(promises);
-                    lastEndTime = new Date();
                     console.log(`enabled all apis successfully for project: ${acc.projectId}`);
                     readyToOnboardList.push(acc);
                 }
