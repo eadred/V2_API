@@ -226,6 +226,7 @@ jwtClient.authorize(function (err, tokens) {
 
     console.log('calling serviceusage.services.enable');
     serviceusage.services.enable(mainRequestForService, function (res) {
+        console.log('callback of serviceusage.services.enable called');
         if (res && res.errors && res.errors.length) {
             console.error(`on-boarding failed project:${key.project_id}`, res.errors[0].message);
             process.exit(1);
