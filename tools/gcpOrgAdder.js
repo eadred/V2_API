@@ -112,6 +112,8 @@ jwtClient.authorize(function (err, tokens) {
                     if (e && e.message) {
                         console.error(`project:${acc.projectId} failed`, e.message)
                     }
+
+                    continue;
                 }
                 finally {
                     if (i === result.projects.length - 1) {
@@ -230,7 +232,7 @@ jwtClient.authorize(function (err, tokens) {
             process.exit(1);
         }
         else {
-            console.log('calling cloudresourcemanager.projects.list(');
+            console.log('calling cloudresourcemanager.projects.list');
             cloudresourcemanager.projects.list(request, recur);
         }
     });
