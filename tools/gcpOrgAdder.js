@@ -67,7 +67,6 @@ jwtClient.authorize(function (err, tokens) {
             for (let i = 0; i < result.projects.length; i++) {
                 console.log(`start to enable ${i + 1} / ${result.projects.length}.`);
                 let acc = result.projects[i];
-                let promises = [];
                 let requestForService = {
                     // TODO: Change placeholders below to appropriate parameter values for the 'list' method:
                     // Auth client
@@ -79,33 +78,32 @@ jwtClient.authorize(function (err, tokens) {
 
                     requestForService.serviceName = 'cloudresourcemanager.googleapis.com';
                     requestForService.consumerId = `project:${acc.projectId}`;
-                    promises.push(utils.enableService(_.cloneDeep(requestForService)));
+                    await utils.enableService(_.cloneDeep(requestForService));
 
                     // console.log(`project:${acc.projectId} - ${requestForService.serviceName} enabled`);
                     requestForService.serviceName = 'iam.googleapis.com';
-                    promises.push(utils.enableService(_.cloneDeep(requestForService)));
+                    await utils.enableService(_.cloneDeep(requestForService));
 
                     // console.log(`project:${acc.projectId} - ${requestForService.serviceName} enabled`);
                     requestForService.serviceName = 'cloudkms.googleapis.com';
-                    promises.push(utils.enableService(_.cloneDeep(requestForService)));
+                    await utils.enableService(_.cloneDeep(requestForService));
 
                     // console.log(`project:${acc.projectId} - ${requestForService.serviceName} enabled`);
                     requestForService.serviceName = 'compute.googleapis.com';
-                    promises.push(utils.enableService(_.cloneDeep(requestForService)));
+                    await utils.enableService(_.cloneDeep(requestForService));
 
                     // console.log(`project:${acc.projectId} - ${requestForService.serviceName} enabled`);
                     requestForService.serviceName = 'container.googleapis.com';
-                    promises.push(utils.enableService(_.cloneDeep(requestForService)));
+                    await utils.enableService(_.cloneDeep(requestForService));
 
                     // console.log(`project:${acc.projectId} - ${requestForService.serviceName} enabled`);
                     requestForService.serviceName = 'bigquery-json.googleapis.com';
-                    promises.push(utils.enableService(_.cloneDeep(requestForService)));
+                    await utils.enableService(_.cloneDeep(requestForService));
 
                     // console.log(`project:${acc.projectId} - ${requestForService.serviceName} enabled`);
                     requestForService.serviceName = 'admin.googleapis.com';
-                    promises.push(utils.enableService(_.cloneDeep(requestForService)));
+                    await utils.enableService(_.cloneDeep(requestForService));
 
-                    await Q.all(promises);
                     console.log(`enabled all apis successfully for project: ${acc.projectId}`);
                     readyToOnboardList.push(acc);
                 }
