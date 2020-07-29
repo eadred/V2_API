@@ -224,11 +224,15 @@ jwtClient.authorize(function (err, tokens) {
     mainRequestForService.consumerId = `project:${key.project_id}`;
 
 
+    console.log('calling serviceusage.services.enable');
     serviceusage.services.enable(mainRequestForService, function (res) {
         if (res && res.errors && res.errors.length) {
             console.error(`on-boarding failed project:${key.project_id}`, res.errors[0].message);
             process.exit(1);
         }
-        else cloudresourcemanager.projects.list(request, recur);
+        else {
+            console.log('calling cloudresourcemanager.projects.list(');
+            cloudresourcemanager.projects.list(request, recur);
+        }
     });
 });
