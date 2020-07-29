@@ -74,6 +74,7 @@ jwtClient.authorize(function (err, tokens) {
                 };
 
                 try {
+
                     await new Promise(resolve => setTimeout(resolve, 1000));
 
                     requestForService.serviceName = 'cloudresourcemanager.googleapis.com';
@@ -113,6 +114,7 @@ jwtClient.authorize(function (err, tokens) {
                         console.error(`project:${acc.projectId} failed`, e.message)
                     }
 
+                    await new Promise(resolve => setTimeout(resolve, 1000));
                     continue;
                 }
                 finally {
