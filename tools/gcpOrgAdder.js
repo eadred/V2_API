@@ -70,10 +70,12 @@ jwtClient.authorize(function (err, tokens) {
             var counter = 0;
             var withFailure = false;
             let readyToOnboardList = [];
-            console.log(`start to enable ${result.projects.length} GCP accounts`);
+            //console.log(`start to enable ${result.projects.length} GCP accounts`);
             for (let i = 0; i < result.projects.length; i++) {
-                console.log(`start to enable ${i + 1} / ${result.projects.length}.`);
+                //console.log(`start to enable ${i + 1} / ${result.projects.length}.`);
                 let acc = result.projects[i];
+                console.log(acc.projectId);
+                continue;
                 let requestForService = {
                     // TODO: Change placeholders below to appropriate parameter values for the 'list' method:
                     // Auth client
