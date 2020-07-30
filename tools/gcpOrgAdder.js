@@ -11,11 +11,6 @@ program
     .option('-s, --secret <secret>', 'API key secret for Dome9')
     .parse(process.argv);
 
-const buf = fs.readFileSync('projects.txt');
-const projectListText = buf.toString('utf-8');
-const projectList = projectListText.split('\n');
-const projectMap = new Set(projectList);
-
 var mustService = 'cloudresourcemanager.googleapis.com';
 
 const services = [
@@ -82,7 +77,7 @@ jwtClient.authorize(function (err, tokens) {
 
                 try {
 
-                    if(!projectMap.has(acc.projectId)) {
+                    if(acc.projectId.startsWith('sys-')) {
                         console.log(`skipping ${acc.projectId}`);
                         continue;
                     }
