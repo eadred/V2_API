@@ -72,8 +72,6 @@ jwtClient.authorize(function (err, tokens) {
                             process.exit(1)
 
                         }
-                        console.log('waiting 20 sec to onboard');
-                        await Q.delay(20 * 1000);
                         //first try
                         let retryAccounts = [];
                         console.log(`start to do DOME9 on-boarding ${readyToOnboardList.length} GCP accounts`);
