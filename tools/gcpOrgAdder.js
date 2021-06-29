@@ -36,7 +36,7 @@ var auth = {
     username: program.id,
     password: program.secret
 };
-var d9Url = `https://api.dome9.com/v2/GoogleCloudAccount?skipComputeValidation=${!program.compute}`;
+var d9Url = `https://api.eu1.dome9.com/v2/GoogleCloudAccount?skipComputeValidation=${!program.compute}`;
 
 jwtClient.authorize(function (err, tokens) {
     if (err) {
