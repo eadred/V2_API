@@ -49,11 +49,6 @@ jwtClient.authorize(function (err, tokens) {
         auth: jwtClient
     };
 
-    var mainRequestForService = {
-        // TODO: Change placeholders below to appropriate parameter values for the 'list' method:
-        // Auth client
-        auth: jwtClient
-    };
     // Make an authorized request to list Drive files.
     var recur = async function (err, result) {
         if (err) {
@@ -67,51 +62,8 @@ jwtClient.authorize(function (err, tokens) {
             for (let i = 0; i < result.projects.length; i++) {
                 console.log(`start to enable ${i + 1} / ${result.projects.length}.`);
                 let acc = result.projects[i];
-                let promises = [];
-                let requestForService = {
-                    // TODO: Change placeholders below to appropriate parameter values for the 'list' method:
-                    // Auth client
-                    auth: jwtClient
-                };
-
                 try {
-                    requestForService.serviceName = 'cloudresourcemanager.googleapis.com';
-                    requestForService.consumerId = `project:${acc.projectId}`;
-                    promises.push(utils.enableService(_.cloneDeep(requestForService)));
-
-                    // console.log(`project:${acc.projectId} - ${requestForService.serviceName} enabled`);
-                    requestForService.serviceName = 'iam.googleapis.com';
-                    promises.push(utils.enableService(_.cloneDeep(requestForService)));
-
-                    // console.log(`project:${acc.projectId} - ${requestForService.serviceName} enabled`);
-                    requestForService.serviceName = 'cloudkms.googleapis.com';
-                    promises.push(utils.enableService(_.cloneDeep(requestForService)));
-
-                    // console.log(`project:${acc.projectId} - ${requestForService.serviceName} enabled`);
-                    requestForService.serviceName = 'compute.googleapis.com';
-                    promises.push(utils.enableService(_.cloneDeep(requestForService)));
-
-                    // console.log(`project:${acc.projectId} - ${requestForService.serviceName} enabled`);
-                    requestForService.serviceName = 'container.googleapis.com';
-                    promises.push(utils.enableService(_.cloneDeep(requestForService)));
-
-                    // console.log(`project:${acc.projectId} - ${requestForService.serviceName} enabled`);
-                    requestForService.serviceName = 'bigquery-json.googleapis.com';
-                    promises.push(utils.enableService(_.cloneDeep(requestForService)));
-
-                    // console.log(`project:${acc.projectId} - ${requestForService.serviceName} enabled`);
-                    requestForService.serviceName = 'admin.googleapis.com';
-                    promises.push(utils.enableService(_.cloneDeep(requestForService)));
-
-                    await Q.all(promises);
-                    console.log(`enabled all apis successfully for project: ${acc.projectId}`);
                     readyToOnboardList.push(acc);
-                }
-
-                catch (e) {
-                    if (e && e.message) {
-                        console.error(`project:${acc.projectId} failed`, e.message)
-                    }
                 }
                 finally {
                     if (i === result.projects.length - 1) {
@@ -128,12 +80,12 @@ jwtClient.authorize(function (err, tokens) {
                         _.forEach(readyToOnboardList, function (account, idx) {
                             var currentKey = utils.clone(key);
                             currentKey.project_id = account.projectId;
-                            console.log('adding project: ', currentKey.project_id);
+                            console.log('adding project: ', account.projectId);
                             let options = {
                                 url: d9Url,
                                 method: 'POST',
                                 body: {
-                                    name: currentKey.project_id,
+                                    name: account.projectId,
                                     serviceAccountCredentials: currentKey
                                 },
                                 headers: {
@@ -171,12 +123,12 @@ jwtClient.authorize(function (err, tokens) {
                             _.forEach(retryAccounts, function (account) {
                                 var currentKey = utils.clone(key);
                                 currentKey.project_id = account.projectId;
-                                console.log('adding project: ', currentKey.project_id);
+                                console.log('adding project: ', account.projectId);
                                 let options = {
                                     url: d9Url,
                                     method: 'POST',
                                     body: {
-                                        name: currentKey.project_id,
+                                        name: account.projectId,
                                         serviceAccountCredentials: currentKey
                                     },
                                     headers: {
@@ -217,16 +169,5 @@ jwtClient.authorize(function (err, tokens) {
         }
     };
 
-
-    mainRequestForService.serviceName = 'cloudresourcemanager.googleapis.com';
-    mainRequestForService.consumerId = `project:${key.project_id}`;
-
-
-    serviceusage.services.enable(mainRequestForService, function (res) {
-        if (res && res.errors && res.errors.length) {
-            console.error(`on-boarding failed project:${key.project_id}`, res.errors[0].message);
-            process.exit(1);
-        }
-        else cloudresourcemanager.projects.list(request, recur);
-    });
+    cloudresourcemanager.projects.list(request, recur);
 });
